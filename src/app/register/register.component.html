@@ -1,0 +1,54 @@
+<div class="register-container">
+    <h2>Register</h2>
+   
+    <!-- Registration Form -->
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+   
+      <!-- Name -->
+      <label>Name:</label>
+  <input type="text" name="name" required [(ngModel)]="user.name" />
+      
+      <!-- Email -->
+      <label>Email:</label>
+  <input type="email? name="email? required [(ngModel)]="user.email" />
+   
+      <!-- Phone Number with Regex Validation -->
+      <label>Phone Number:</label>
+      <input
+        type="text"
+        name="phoneNumber"
+        required
+        pattern="^[0-9]{10}$"
+        [(ngModel)]="user.phoneNumber"
+        #phone="ngModel"
+      />
+      <div *ngIf="phone.invalid && phone.touched" style="color: red;">
+        Phone number must be exactly 10 digits.
+      </div>
+   
+      <!-- Password -->
+      <label>Password:</label>
+<input
+  type="password"
+  name="password"
+  required
+  minlength="6"
+  [(ngModel)]="user.password"
+  #pwd="ngModel"
+/>
+<!-- Show error if password is too short -->
+<div *ngIf="pwd.invalid && pwd.touched" style="color: red;">
+  Password must be at least 6 characters long.
+</div>
+   
+      <!-- Role -->
+      <label>Role:</label>
+      <select name="role" [(ngModel)]="user.role" required>
+        <option value="CUSTOMER">Customer</option>
+        <option value="AGENT">Agent</option>
+      </select>
+   
+      <!-- Submit -->
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </div>
