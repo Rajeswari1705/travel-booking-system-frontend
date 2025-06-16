@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr'; // ✅ Import the toast service
+import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-register',       // HTML tag to use this component
   standalone: true,               // ✅ Standalone mode (no app.module.ts needed)
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [FormsModule]          // ✅ Required to use [(ngModel)]
+  imports: [FormsModule, NgIf]          // ✅ Required to use [(ngModel)]
 })
 export class RegisterComponent {
  
@@ -16,7 +18,7 @@ export class RegisterComponent {
   user = {
     name: '',
     email: '',
-    phoneNumber: '',
+    contactNumber: '',
     password: '',
     role: 'CUSTOMER'              // Default role is CUSTOMER
   };
@@ -24,7 +26,8 @@ export class RegisterComponent {
   // ✅ Inject HttpClient to send requests & ToastrService for notifications
   constructor(
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
  
   // ✅ This runs when the user submits the form
@@ -35,6 +38,7 @@ this.http.post('http://localhost:8080/api/users/register', this.user)
         next: (response) => {
           // ✅ Show success toast if registration is successful
           this.toastr.success('✅ Registration successful!');
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error(err);

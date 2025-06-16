@@ -10,16 +10,16 @@
       
       <!-- Email -->
       <label>Email:</label>
-  <input type="email? name="email? required [(ngModel)]="user.email" />
+  <input type="email" name="email" required [(ngModel)]="user.email" />
    
       <!-- Phone Number with Regex Validation -->
       <label>Phone Number:</label>
       <input
         type="text"
-        name="phoneNumber"
+        name="contactNumber"
         required
         pattern="^[0-9]{10}$"
-        [(ngModel)]="user.phoneNumber"
+        [(ngModel)]="user.contactNumber"
         #phone="ngModel"
       />
       <div *ngIf="phone.invalid && phone.touched" style="color: red;">

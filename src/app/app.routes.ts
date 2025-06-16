@@ -1,17 +1,17 @@
 // Import Routes type from Angular Router
 import { Routes } from '@angular/router';
- 
-// Import Landing and Register components to associate with paths
+import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { RegisterComponent } from './register/register.component';
  
-// Define list of routes for the app
 export const routes: Routes = [
- 
-  // Default route (when visiting root URL) → shows LandingComponent
   { path: '', component: LandingComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
  
-  // /register route → shows the register form
-  { path: 'register', component: RegisterComponent }
- 
+  // Dashboard placeholders
+  { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
+  { path: 'agent-dashboard', loadComponent: () => import('./agent-dashboard/agent-dashboard.component').then(m => m.AgentDashboardComponent) },
+  { path: 'customer-dashboard', loadComponent: () => import('./customer-dashboard/customer-dashboard.component').then(m => m.CustomerDashboardComponent) }
 ];
+
