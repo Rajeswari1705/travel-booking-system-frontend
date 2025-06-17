@@ -1,0 +1,12 @@
+<div class="update-form">
+    <h2>Update Profile</h2>
+   
+    <label>Name: <input [(ngModel)]="user.name" /></label><br />
+    <label>Email: <input [(ngModel)]="user.email" /></label><br />
+    <label>Contact Number: <input [(ngModel)]="user.contactNumber" /></label><br />
+   
+    <label>Old Password: <input type="password" [(ngModel)]="oldPassword" /></label><br />
+    <label>New Password: <input type="password" [(ngModel)]="newPassword" /></label><br />
+   
+    <button (click)="updateProfile()">Submit</button>
+  </div>

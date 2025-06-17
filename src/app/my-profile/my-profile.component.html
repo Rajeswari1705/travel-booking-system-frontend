@@ -1,0 +1,14 @@
+<div class="profile-card">
+    <h2>My Profile</h2>
+   
+    <p><strong>Name: </strong>{{ user.name }}</p>
+    <p><strong>Email: </strong>{{ user.email }}</p>
+    <p><strong>Contact Number:</strong> {{ user.contactNumber }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+   
+    <div class="profile-buttons">
+      <button (click)="goToUpdate()">Update Profile</button>
+      <button (click)="deleteProfile()">Delete Profile</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
