@@ -8,7 +8,7 @@ import { routes } from './app/app.routes';
 // Import standard modules for forms and HTTP
 import { importProvidersFrom } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, withInterceptorsFromDi } from '@angular/common/http';
  
 // ✅ Toast + Animations
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { provideToastr } from 'ngx-toastr';  // ✅ Use provideToastr here
 
 //for interceptor for jwt token expiration
 import { provideHttpClient } from '@angular/common/http';
+import { AuthExpiredInterceptor } from './app/auth-expired.interceptor';
  
 bootstrapApplication(AppComponent, {
   providers: [
@@ -23,6 +24,12 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptorsFromDi()),
     
     provideRouter(routes),
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true
+    },
     
     // ✅ Correct usage of importProvidersFrom for standard modules
     importProvidersFrom(
