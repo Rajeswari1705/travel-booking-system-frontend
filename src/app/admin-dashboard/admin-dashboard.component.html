@@ -1,25 +1,15 @@
 <div class="dashboard">
   <h2>Admin Dashboard</h2>
-  <p>Welcome, Admin! Here you can manage users and monitor activity.</p>
+  <p>Welcome, Admin! Here's a summary of platform users:</p>
  
-  <button routerLink="/my-profile">Go to My Profile</button>
+  <div class="summary">
+    <p><strong>Total Users (excluding admin):</strong> {{ totalUsers }}</p>
+    <p><strong>Total Agents:</strong> {{ totalAgents }}</p>
+    <p><strong>Total Customers:</strong> {{ totalCustomers }}</p>
+  </div>
  
-  <h3>All Users:</h3>
-  <table border="1" *ngIf="users.length > 0">
-    <thead>
-      <tr>
-        <th>Name</th><th>Email</th><th>Phone</th><th>Role</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.contactNumber }}</td>
-        <td>{{ user.role }}</td>
-      </tr>
-    </tbody>
-  </table>
- 
-  <p *ngIf="users.length === 0">No users to display.</p>
+  <div class="buttons">
+    <button (click)="goToProfile()">Go to My Profile</button>
+    <button (click)="goToManageUsers()">Manage Users</button>
+  </div>
 </div>

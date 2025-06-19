@@ -1,44 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common'; // needed for *ngIf, *ngFor;
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+ 
+interface UserRoleCountResponse {
+  totalUsers: number;
+  agentCount: number;
+  customerCount: number;
+}
 
 
 @Component({
   selector: 'app-admin-dashboard',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  role: string = '';
-  users: any[] = [];
  
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  totalUsers: number = 0;
+  totalAgents: number = 0;
+  totalCustomers: number = 0;
+ 
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
  
   ngOnInit(): void {
-    this.role = localStorage.getItem('role') || '';
- 
-    if (this.role === 'ADMIN') {
-      this.fetchUsers();
-    } else {
-      this.toastr.warning('Access denied. Only admins can view users.');
-    }
+    this.fetchUserCounts();
   }
  
-  fetchUsers() {
+  fetchUserCounts() {
     const token = localStorage.getItem('token');
  
-this.http.get<any[]>('http://localhost:8080/api/users', {
+this.http.get<UserRoleCountResponse>('http://localhost:8080/api/users/counts', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
-      next: (res) => this.users = res,
-      error: (err) => {
-        this.toastr.error('Could not load users.');
-        console.error(err);
-      }
+      next: (res) => {
+        this.totalUsers = res.totalUsers;
+        this.totalAgents = res.agentCount;
+        this.totalCustomers = res.customerCount;
+      },
+      error: () => this.toastr.error('Failed to fetch user counts.')
     });
   }
+ 
+  goToProfile() {
+    this.router.navigate(['/my-profile']);
+  }
+
+  goToManageUsers() {
+    this.router.navigate(['/admin-user-manage']);
+  }
+
 }
