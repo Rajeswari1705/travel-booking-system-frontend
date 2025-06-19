@@ -49,4 +49,9 @@ this.http.get<UserRoleCountResponse>('http://localhost:8080/api/users/counts', {
   goToProfile() {
     this.router.navigate(['/my-profile']);
   }
+
+  goToManageUsers() {
+    this.router.navigate(['/admin-user-manage']);
+  }
+
 }

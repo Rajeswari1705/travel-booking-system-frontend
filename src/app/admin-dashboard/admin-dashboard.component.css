@@ -9,12 +9,20 @@
     line-height: 1.6;
   }
    
-  .buttons button {
+  .buttons {
+    display: flex;  /*Arrange buttons in a row*/
+    justify-content: center; /*Center the buttons horizontally*/
+    gap: 16px; /* Add spaCE BETWEEN the buttons*/
     margin-top: 20px;
+  }
+
+  .buttons button {
+    margin-top: 0 10px;
     padding: 10px 20px;
     font-weight: bold;
     background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   }
