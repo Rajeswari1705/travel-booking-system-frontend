@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-agent-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   templateUrl: './agent-dashboard.component.html',
   styleUrl: './agent-dashboard.component.css'
 })
