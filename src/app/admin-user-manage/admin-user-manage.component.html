@@ -1,4 +1,4 @@
-<div class="admin-users">
+<div class="manage-container">
     <h2>All Registered Users</h2>
    
     <table border="1">
@@ -10,16 +10,24 @@
           <th>Role</th>
           <th>Actions</th>
         </tr>
-      </thead>
+        </thead>
 
-      <tbody>
+        <tbody>
         <tr *ngFor="let user of users">
-          <td><input [(ngModel)]="user.name" /></td>
-          <td><input [(ngModel)]="user.email" /></td>
-          <td><input [(ngModel)]="user.contactNumber" /></td>
-          <td><input [(ngModel)]="user.role" /></td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.contactNumber }}</td>
+
           <td>
-            <button (click)="updateUser(user)">Update</button>
+            <select [value]="user.role"
+            (change)="onRoleChange(user, $event)">
+              <option value="CUSTOMER">CUSTOMER</option>
+              <option value="AGENT">AGENT</option>
+          </select>
+          </td>
+
+          
+          <td>
             <button (click)="deleteUser(user.id)">Delete</button>
           </td>
         </tr>

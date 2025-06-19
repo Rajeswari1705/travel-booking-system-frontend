@@ -1,0 +1,27 @@
+.manage-container {
+    padding: 20px;
+    font-family: Arial;
+  }
+   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+   
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+  }
+   
+  button {
+    padding: 4px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+   
+  select {
+    padding: 4px;
+  }
