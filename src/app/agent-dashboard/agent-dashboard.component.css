@@ -1,0 +1,31 @@
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+   
+  button {
+    margin: 5px;
+    padding: 8px 14px;
+    border: none;
+    background-color: #2196f3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+   
+  button:hover {
+    background-color: #0b7dda;
+  }
+   
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+   
+  li {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+   

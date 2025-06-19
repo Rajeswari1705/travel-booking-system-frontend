@@ -1,2 +1,102 @@
-<p>agent-dashboard works!</p>
-<a routerLink="/my-profile">My Profile</a>
+<div class="dashboard-container">
+    <h2>Welcome Agent!</h2>
+   
+    <button (click)="showCreateForm()">➕ Create New Package</button>
+    <button (click)="goToProfile()">👤 My Profile</button>
+   
+    <hr>
+
+
+    
+   
+    <div *ngIf="packages.length > 0; else noPackages">
+      <h3>Your Travel Packages:</h3>
+      <ul>
+        <li *ngFor="let pkg of packages">
+          <strong>{{ pkg.title }}</strong> – {{ pkg.destination }} (₹{{ pkg.price }})
+          <button (click)="editPackage(pkg)">✏️ Edit</button>
+          <button (click)="deletePackage(pkg.packageId)">🗑️ Delete</button>
+        </li>
+      </ul>
+    </div>
+   
+    <ng-template #noPackages>
+      <p>No packages found. Click "Create New Package" to add one!</p>
+    </ng-template>
+
+
+
+    <hr>
+ 
+  <!-- CREATE NEW PACKAGE FORM -->
+  <div *ngIf="formVisible">
+    <h3>Create New Travel Package</h3>
+ 
+    <form (ngSubmit)="submitPackage()" #pkgForm="ngForm">
+ 
+      <!-- Basic Info -->
+      <input type="text" placeholder="Title" [(ngModel)]="newPackage.title" name="title" required><br>
+      <textarea placeholder="Description" [(ngModel)]="newPackage.description" name="description" required></textarea><br>
+      <input type="number" placeholder="Duration (days)" [(ngModel)]="newPackage.duration" name="duration"><br>
+      <input type="number" placeholder="Price" [(ngModel)]="newPackage.price" name="price"><br>
+      <input type="number" placeholder="Max Capacity" [(ngModel)]="newPackage.maxCapacity" name="maxCapacity"><br>
+      <input type="text" placeholder="Country" [(ngModel)]="newPackage.country" name="country"><br>
+      <input type="text" placeholder="Destination" [(ngModel)]="newPackage.destination" name="destination"><br>
+      <input type="text" placeholder="Trip Type" [(ngModel)]="newPackage.tripType" name="tripType"><br>
+      <label>Trip Start Date:</label>
+      <input type="date" [(ngModel)]="newPackage.tripStartDate" name="tripStartDate"><br>
+      <label>Trip End Date:</label>
+      <input type="date" [(ngModel)]="newPackage.tripEndDate" name="tripEndDate"><br>
+
+      <!--Offer Section-->
+      <h4>Offer Details</h4>
+      <textarea placeholder="Offer Description" [(ngModel)]="newPackage.offer.description" name="offerDesc"></textarea><br>
+      <input type="text" placeholder="Coupon Code" [(ngModel)]="newPackage.offer.couponCode"><br>
+      <input type="number" placeholder="Discount (%)" [(ngModel)]="newPackage.offer.discountPercentage" name="discountPercentage"><br>
+      <label><input type="checkbox" [(ngModel)]="newPackage.offer.active" name="offerActive">Offer Active</label><br>
+
+
+      <!--Flights-->
+      <h4>Flight Details</h4>
+      <div *ngFor="let flight of newPackage.flights; let i=index">
+        <input type="text" placeholder="Airline" [(ngModel)]="flight.airline" [name]="'airline'+i"><br>
+        <input type="text" placeholder="From City" [(ngModel)]="flight.fromCity" [name]="'fromCity'+i"><br>
+        <input type="text" placeholder="To City" [(ngModel)]="flight.toCity" [name]="'toCity'+i"><br>
+        <input type="text" placeholder="Departure Time" [(ngModel)]="flight.departureTime" [name]="'departureTime'+i"><br>
+        <input type="text" placeholder="Arrival Time" [(ngModel)]="flight.arrivalTime" [name]="'arrivalTime'+i"><br>
+      </div>
+ 
+      <!-- Hotels -->
+      <h4>Hotel Details</h4>
+      <div *ngFor="let hotel of newPackage.hotels; let i=index">
+        <input type="text" placeholder="Hotel Name" [(ngModel)]="hotel.name" [name]="'hotelName'+i"><br>
+        <input type="text" placeholder="City" [(ngModel)]="hotel.city" [name]="'hotelCity'+i"><br>
+        <input type="number" placeholder="Rating" [(ngModel)]="hotel.rating" [name]="'hotelRating'+i"><br>
+        <input type="number" placeholder="Nights" [(ngModel)]="hotel.nights" [name]="'hotelNights'+i"><br>
+        <input type="number" placeholder="Cost/Night" [(ngModel)]="hotel.costPerNight" [name]="'hotelCost'+i"><br>
+      </div>
+ 
+      <!-- Sightseeing -->
+      <h4>Sightseeing</h4>
+      <div *ngFor="let sight of newPackage.sightseeingList; let i=index">
+        <input type="text" placeholder="Location" [(ngModel)]="sight.location" [name]="'sightLoc'+i"><br>
+        <input type="text" placeholder="Description" [(ngModel)]="sight.description" [name]="'sightDesc'+i"><br>
+      </div>
+ 
+      <!-- Itinerary -->
+      <h4>Itinerary</h4>
+      <div *ngFor="let item of newPackage.itinerary; let i=index">
+        <input type="number" placeholder="Day #" [(ngModel)]="item.dayNumber" [name]="'day'+i"><br>
+        <input type="text" placeholder="Activity Title" [(ngModel)]="item.activityTitle" [name]="'activityTitle'+i"><br>
+        <input type="text" placeholder="Activity Description" [(ngModel)]="item.activityDescription" [name]="'activityDesc'+i"><br>
+      </div>
+ 
+      <!-- Submit and Cancel -->
+      <br />
+      <button type="submit">Submit Package</button>
+      <button type="button" (click)="cancelForm()">Cancel</button>
+ 
+    </form>
+  </div>
+</div>
+   
