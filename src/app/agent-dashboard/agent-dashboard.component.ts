@@ -14,47 +14,8 @@ export class AgentDashboardComponent implements OnInit{
 
   packages: any[] = []; //store the list of travel packages
   formVisible: boolean = false;
-  agentId = 1;
+  agentId :number=0;
 
-  private http = inject(HttpClient);
-
-  ngOnInit(): void {
-    this.loadPackages();
-
-  }
-  //Get packages created by this agent
-  loadPackages(){
-    const url = `http://localhost:8080/api/packages/agent/${this.agentId}`;
-    this.http.get<any[]>(url).subscribe({
-      next: (data) => this.packages = data,
-      error: (err) => console.error('Error loading packages',err)
-    });
-  }
-
-  //Delete a package
-  deletePackage(id: number){
-    if(confirm('Are you sure you want to delete this package?')){
-      const url = `http://localhost:8080/api/packages/${id}`;
-      this.http.delete(url).subscribe({
-        next: () => this.loadPackages(),
-        error: (err) => console.error('Error deleting package', err)
-      });
-    }
-  }
-
-  //placeholder for edit
-  editPackage(pkg: any){
-    alert('Edit package: ${pkg.title} - feature coming soon!');
-  }
-
-  //placeholder for creating new package
-  // createPackage(){
-  //   alert('Cretae new Package feature coming soon!');
-  // }
-
-  
-
-  //New package object
 
   newPackage: any = {
     title:'',
@@ -89,6 +50,69 @@ export class AgentDashboardComponent implements OnInit{
 
   };
 
+  private http = inject(HttpClient);
+
+  ngOnInit(): void {
+    const storedId = localStorage.getItem('userId');
+    this.agentId = storedId ? parseInt(storedId, 10) : 0;
+   
+    if (this.agentId) {
+      this.loadPackages();
+    } else {
+      console.error('Agent ID not found in localStorage');
+      // optionally redirect to login page or show error
+    }
+  }
+
+
+  //Get packages created by this agent
+  loadPackages(){
+    const url = `http://localhost:8080/api/packages/agent/${this.agentId}`;
+    this.http.get<any>(url).subscribe({
+      next: (res) => this.packages = res.data,
+      error: (err) => console.error('Error loading packages', err)
+
+    });
+  }
+
+
+  //Submit new package to backend
+  submitPackage(){
+    const url= `http://localhost:8080/api/packages`;
+    const fullData = {
+      ...this.newPackage,
+      agentId: this.agentId
+    };
+    this.http.post(url, fullData).subscribe({
+      next: () => {
+        alert('Package created successfully!');
+        this.formVisible = false;
+        this.loadPackages();
+        this.resetForm();
+      },
+
+      error: (err) => {
+        console.error('Error correcting package', err);
+        alert('Failed to create package. Check your input.');
+      }
+    });
+
+
+  }
+
+
+  //Delete a package
+  deletePackage(id: number){
+    if(confirm('Are you sure you want to delete this package?')){
+      const url = `http://localhost:8080/api/packages/${id}`;
+      this.http.delete(url).subscribe({
+        next: () => this.loadPackages(),
+        error: (err) => console.error('Error deleting package', err)
+      });
+    }
+  }
+
+
   //show or hide create form
   showCreateForm(){
     this.formVisible = true;
@@ -98,6 +122,11 @@ export class AgentDashboardComponent implements OnInit{
     this.formVisible = false;
   }
 
+
+  //placeholder for edit
+  editPackage(pkg: any){
+    alert('Edit package: ${pkg.title} - feature coming soon!');
+  }
 
   //Reset form after success
   resetForm() {
@@ -136,29 +165,37 @@ export class AgentDashboardComponent implements OnInit{
     };
   }
 
-  //Submit new package to backend
-  submitPackage(){
-    const url= `http://localhost:8080/api/packages`;
-    const fullData = {
-      ...this.newPackage,
-      agentId: this.agentId
-    };
-    this.http.post(url, fullData).subscribe({
-      next: () => {
-        alert('Package created successfully!');
-        this.formVisible = false;
-        this.loadPackages();
-        this.resetForm();
-      },
 
-      error: (err) => {
-        console.error('Error correcting package', err);
-        alert('Failed to create package. Check your input.');
-      }
-    });
+  
+
+  // ngOnInit(): void {
+  //   this.loadPackages();
+
+  // }
 
 
-  }
+  
+
+
+
+
+
+  
+  
+
+  
+
+  //placeholder for creating new package
+  // createPackage(){
+  //   alert('Cretae new Package feature coming soon!');
+  // }
+
+  
+
+  //New package object
+
+  
+  
 
   //Go to my profile 
   goToProfile(){
