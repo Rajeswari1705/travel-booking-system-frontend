@@ -1,0 +1,20 @@
+.dashboard {
+    padding: 20px;
+    text-align: center;
+  }
+   
+  .summary {
+    margin: 20px auto;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+   
+  .buttons button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
