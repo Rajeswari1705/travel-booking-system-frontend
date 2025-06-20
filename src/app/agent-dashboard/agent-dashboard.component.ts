@@ -56,7 +56,7 @@ export class AgentDashboardComponent implements OnInit{
     const storedId = localStorage.getItem('userId');
     this.agentId = storedId ? parseInt(storedId, 10) : 0;
    
-    if (this.agentId) {
+    if (this.agentId>0) {
       this.loadPackages();
     } else {
       console.error('Agent ID not found in localStorage');
@@ -95,6 +95,8 @@ export class AgentDashboardComponent implements OnInit{
         console.error('Error correcting package', err);
         alert('Failed to create package. Check your input.');
       }
+
+      
     });
 
 
@@ -165,37 +167,24 @@ export class AgentDashboardComponent implements OnInit{
     };
   }
 
+  addItineraryDay(){
+    const newDay = this.newPackage.itinerary.length+1;
+    this.newPackage.itinerary.push({
+      dayNumber: newDay,
+      activityTitle: '',
+      activityDescription: ''
+    });
 
-  
+  }
 
-  // ngOnInit(): void {
-  //   this.loadPackages();
+  removeItineraryDay(index:number): void{
+    this.newPackage.itinerary.splice(index,1);
+    this.newPackage.itinerary.forEach((item: any, i: number) =>{
+      item.dayNumber = i+1;
+    });
 
-  // }
+  }
 
-
-  
-
-
-
-
-
-  
-  
-
-  
-
-  //placeholder for creating new package
-  // createPackage(){
-  //   alert('Cretae new Package feature coming soon!');
-  // }
-
-  
-
-  //New package object
-
-  
-  
 
   //Go to my profile 
   goToProfile(){
