@@ -70,7 +70,11 @@ export class AgentDashboardComponent implements OnInit{
   loadPackages(){
     const url = `http://localhost:8080/api/packages/agent/${this.agentId}`;
     this.http.get<any>(url).subscribe({
-      next: (res) => this.packages = res.data,
+      next: (res) =>{
+        this.packages = res.data;
+        console.log("Loaded packages:", this.packages);//optional debug
+      } ,
+
       error: (err) => console.error('Error loading packages', err)
 
     });
@@ -106,13 +110,21 @@ export class AgentDashboardComponent implements OnInit{
 
   //Delete a package
   deletePackage(id: number){
-    if(confirm('Are you sure you want to delete this package?')){
-      const url = `http://localhost:8080/api/packages/${id}`;
-      this.http.delete(url).subscribe({
-        next: () => this.loadPackages(),
-        error: (err) => console.error('Error deleting package', err)
-      });
-    }
+    const confirmDelete = confirm("ARe you sure you want to delete this package?");
+    if(!confirmDelete) return;
+
+    const url = `http://localhost:8080/api/packages/${id}`;
+
+    this.http.delete(url).subscribe({
+      next: () => {
+        alert('Package deleted successfully!');
+        this.loadPackages();
+      },
+      error: (err) => {
+        console.error('Error deleting package', err);
+        alert('Failed to delete Package.')
+      }
+    });
   }
 
 
