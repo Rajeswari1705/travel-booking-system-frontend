@@ -16,7 +16,7 @@
         <li *ngFor="let pkg of packages">
           <strong>{{ pkg.title }}</strong> – {{ pkg.destination }} (₹{{ pkg.price }})
           <button [routerLink]="['/edit-package', pkg.packageId]">Edit</button>
-          <button (click)="deletePackage(pkg.id)">🗑️ Delete</button>
+          <button (click)="deletePackage(pkg.packageId)">🗑️ Delete</button>
         </li>
       </ul>
     </div>

@@ -70,7 +70,11 @@ export class AgentDashboardComponent implements OnInit{
   loadPackages(){
     const url = `http://localhost:8080/api/packages/agent/${this.agentId}`;
     this.http.get<any>(url).subscribe({
-      next: (res) => this.packages = res.data,
+      next: (res) =>{
+        this.packages = res.data;
+        console.log("Loaded packages:", this.packages);//optional debug
+      } ,
+
       error: (err) => console.error('Error loading packages', err)
 
     });
