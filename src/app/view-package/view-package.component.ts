@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-view-package',
-  standalone: true;
+  standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './view-package.component.html',
   styleUrl: './view-package.component.css'
@@ -17,7 +17,7 @@ export class ViewPackageComponent implements OnInit {
   packageId!: number;
   packageData: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router){}
+  constructor(private route: ActivatedRoute, private http: HttpClient, public router: Router){}
 
   ngOnInit(): void {
     this.packageId = Number(this.route.snapshot.paramMap.get('id'));
