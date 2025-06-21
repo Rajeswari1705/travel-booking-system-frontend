@@ -1,0 +1,55 @@
+/* Center the profile content */
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+  }
+   
+  p {
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0;
+    color: #444;
+  }
+   
+  /* Button container */
+  .profile-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+   
+  /* Style the buttons */
+  .profile-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+   
+  /* Different colors for each button */
+  .profile-buttons button:nth-child(1) {
+    background-color: #007bff;
+    color: white;
+  }
+   
+  .profile-buttons button:nth-child(2) {
+    background-color: #dc3545;
+    color: white;
+  }
+   
+  .profile-buttons button:nth-child(3) {
+    background-color: #6c757d;
+    color: white;
+  }
+   
+  /* Hover effects */
+  .profile-buttons button:hover {
+    opacity: 0.9;
+  }

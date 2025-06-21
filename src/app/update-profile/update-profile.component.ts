@@ -9,7 +9,9 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-update-profile',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './update-profile.component.html'
+  templateUrl: './update-profile.component.html',
+  styleUrl: './update-profile.component.css'
+
 })
 export class UpdateProfileComponent implements OnInit {
   user: any = {};

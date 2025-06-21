@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Packages Listed by Agent #{{ agentId }}</h2>
+ 
+<!-- can add more data here to show in the frontend -->
+
+  <table *ngIf="packages.length > 0; else noPackages">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price (₹)</th>
+        <th>Duration (days)</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Max Capacity</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let pkg of packages">
+        <td>{{ pkg.title }}</td>
+        <td>{{ pkg.description }}</td>
+        <td>{{ pkg.price }}</td>
+        <td>{{ pkg.duration }}</td>
+        <td>{{ pkg.tripStartDate }}</td>
+        <td>{{ pkg.tripEndDate }}</td>
+        <td>{{ pkg.maxCapacity }}</td>
+      </tr>
+    </tbody>
+  </table>
+ 
+  <ng-template #noPackages>
+    <p>No packages found for this agent.</p>
+  </ng-template>
+</div>

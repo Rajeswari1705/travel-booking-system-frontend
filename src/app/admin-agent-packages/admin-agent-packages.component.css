@@ -1,0 +1,38 @@
+/* Center the heading and add spacing */
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+    font-size: 24px;
+  }
+   
+  /* Style the table */
+  table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    
+  }
+   
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+   
+  th {
+    background-color: #f8f8f8;
+    color: #444;
+  }
+   
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+   
+  /* Message if no packages found */
+  .no-packages {
+    text-align: center;
+    color: gray;
+    margin-top: 30px;
+    font-size: 18px;
+  }

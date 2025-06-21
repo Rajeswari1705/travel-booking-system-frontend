@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { NgForOf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
  
 @Component({
   selector: 'app-admin-user-manage',
   standalone: true,
-  imports: [NgForOf],
+  imports: [CommonModule, RouterModule, HttpClientModule],
   templateUrl: './admin-user-manage.component.html',
   styleUrls: ['./admin-user-manage.component.css']
 })
@@ -14,7 +16,7 @@ export class AdminUserManageComponent implements OnInit {
  
   users: any[] = [];
  
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService) {}
  
   ngOnInit(): void {
     this.fetchUsers();
@@ -92,6 +94,10 @@ this.http.put(`http://localhost:8080/api/users/${user.id}`, updatedUser, {
     });
   }
  
+  //view agent packages
+  viewAgentPackages(agentId: number) {
+    this.router.navigate(['/admin/agent-packages',agentId]);
+  }
  
  
  

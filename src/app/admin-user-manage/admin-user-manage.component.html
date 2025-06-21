@@ -7,6 +7,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>View</th>
           <th>Role</th>
           <th>Actions</th>
         </tr>
@@ -17,6 +18,11 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.contactNumber }}</td>
+          <td>
+            <a *ngIf="user.role === 'AGENT'"
+            [routerLink]="['/admin/agent-packages', user.id]">
+            <button>View Packages</button>
+            </a>
 
           <td>
             <select [value]="user.role"

@@ -1,27 +1,62 @@
-.manage-container {
-    padding: 20px;
-    font-family: Arial;
-  }
-   
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 16px;
-  }
-   
-  th, td {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-  }
-   
-  button {
-    padding: 4px 10px;
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-   
-  select {
-    padding: 4px;
-  }
+/* Container spacing */
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+ 
+/* Table layout */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+ 
+/* Table headers */
+th {
+  background-color: #f0f0f0;
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+ 
+/* Table rows */
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+ 
+/* Buttons in actions/view column */
+button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+ 
+button:hover {
+  background-color: #0056b3;
+}
+ 
+/* Align buttons in same row */
+td button + button {
+  margin-left: 5px;
+}
+ 
+/* Make select box look nicer */
+select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
