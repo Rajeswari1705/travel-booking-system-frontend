@@ -7,18 +7,25 @@
           
         <label>Title: </label>
         <input type="text" placeholder="Title" [(ngModel)]="newPackage.title" name="title" required><br>
+
         <label>Description: </label><br>
         <textarea placeholder="Description" [(ngModel)]="newPackage.description" name="description" required></textarea><br>
+
         <label>Duration: </label>
         <input type="number" placeholder="Duration (days)" [(ngModel)]="newPackage.duration" name="duration"><br>
+
         <label>Price: </label>
         <input type="number" placeholder="Price" [(ngModel)]="newPackage.price" name="price"><br>
+
         <label>Max Capacity: </label>
         <input type="number" placeholder="Max Capacity" [(ngModel)]="newPackage.maxCapacity" name="maxCapacity"><br>
+
         <label>Country: </label>
         <input type="text" placeholder="Country" [(ngModel)]="newPackage.country" name="country"><br>
+
         <label>Destination: </label>
         <input type="text" placeholder="Destination" [(ngModel)]="newPackage.destination" name="destination"><br>
+        
         <label>Trip Type: </label>
         
          <select [(ngModel)]="newPackage.tripType" name="tripType" required>

@@ -15,7 +15,42 @@ import { RouterModule } from '@angular/router';
 })
 export class EditPackageComponent implements OnInit {
   packageId!: number;
-  packageData: any = {};
+  // packageData: any = {};
+
+
+
+  newPackage: any = {
+    title:'',
+    description:'',
+    duration:'',
+    price:'',
+    maxCapacity:'',
+    country:'',
+    destination:'',
+    tripType:'',
+    tripStartDate:'',
+    tripEndDate:'',
+    active: true,
+
+    offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
+
+    flights: [
+      {airline: '', fromCity:'', toCity:'', departureTime:'', arrivalTime:''}
+    ],
+
+    hotels: [
+      {name:'', city:'', rating:'', nights:'', costPerNight:''}
+    ],
+
+    sightseeingList: [
+      {location:'', description:''}
+    ],
+
+    itinerary: [
+      {dayNumber:'', activityTitle:'', activityDescription:''}
+    ]
+
+  };
  
   constructor(
     private route: ActivatedRoute,
@@ -27,29 +62,52 @@ export class EditPackageComponent implements OnInit {
     // Capture ID from URL
     this.packageId = Number(this.route.snapshot.paramMap.get('id'));
     // Fetch existing package data
-    this.http
-      .get<any>(`http://localhost:8080/api/packages/${this.packageId}`)
-      .subscribe(res => {
-      this.packageData = res.data;
-      }, err => {
-        console.error('Error loading package', err);
-        alert('Could not load package details.');
-        this.router.navigate(['/agent-dashboard']);
+
+    const url=`http://localhost:8080/api/packages/${this.packageId}`;
+      this.http.get<any>(url).subscribe({
+        next: (res) => {
+          this.newPackage = res.data;
+        },
+        error: (err) => {
+          console.error('Failed to fetch package',err);
+          alert('Error loading package data.');
+        }
       });
   }
- 
-  onSubmit(): void {
-    this.http
-      .put(`http://localhost:8080/api/packages/${this.packageId}`, this.packageData)
-      .subscribe({
+
+  submitPackage(){
+    const url=`http://localhost:8080/api/packages/${this.packageId}`;
+      this.http.put(url, this.newPackage).subscribe({
         next: () => {
           alert('Package updated successfully!');
           this.router.navigate(['/agent-dashboard']);
         },
-        error: err => {
-          console.error('Update failed', err);
-          alert('Failed to update package. Check console for details.');
+        error: (err) => 
+        { console.error('Failed to update package',err);
+          alert('Error updating package');
         }
       });
+  }
+ 
+  addItineraryDay(){
+    const nextDay = this.newPackage.itinerary.length+1;
+    this.newPackage.itinerary.push({
+      dayNumber: nextDay,
+      activityTitle: '',
+      activityDescription: ''
+    });
+
+  }
+
+  removeItineraryDay(index:number): void{
+    this.newPackage.itinerary.splice(index,1);
+    this.newPackage.itinerary.forEach((item: any, i: number) =>{
+      item.dayNumber = i+1;
+    });
+
+  }
+
+  cancelForm(){
+    this.router.navigate(['/agent-dashboard']);
   }
 }
