@@ -1,0 +1,56 @@
+<div *ngIf="packageData">
+    <h2>{{ packageData.title }}</h2>
+    <p><strong>Description:</strong> {{ packageData.description }}</p>
+    <p><strong>Duration:</strong> {{ packageData.duration }} days</p>
+    <p><strong>Price:</strong> ₹{{ packageData.price }}</p>
+    <p><strong>Max Capacity:</strong> {{ packageData.maxCapacity }}</p>
+    <p><strong>Country:</strong> {{ packageData.country }}</p>
+    <p><strong>Destination:</strong> {{ packageData.destination }}</p>
+    <p><strong>Trip Type:</strong> {{ packageData.tripType }}</p>
+    <p><strong>Start Date:</strong> {{ packageData.tripStartDate }}</p>
+    <p><strong>End Date:</strong> {{ packageData.tripEndDate }}</p>
+   
+    <h3>Offer:</h3>
+    <p>Coupon Code: {{ packageData.offer?.couponCode }}</p>
+    <p>Description: {{ packageData.offer?.description }}</p>
+    <p>Discount: {{ packageData.offer?.discountPercentage }}%</p>
+   
+    <h3>Flights</h3>
+    <ul>
+        <li *ngFor="let f of packageData.flights">
+            <strong>{{ f.airline }}</strong><br>
+            From: {{ f.fromCity }} → To: {{ f.toCity }}<br>
+            Departure: {{ f.departureTime }} | Arrival: {{ f.arrivalTime }}
+        </li>
+    </ul>
+   
+
+    <h3>Hotels</h3>
+    <ul>
+        <li *ngFor="let h of packageData.hotels">
+            {{ h.name }} - {{ h.city }} ({{ h.rating }}★)<br>
+            Nights: {{ h.nights }}<br>
+            Cost per Night: ₹{{ h.costPerNight }}<br>
+            Total Cost: ₹{{ h.nights * h.costPerNight }}
+        </li>
+    </ul>
+
+
+
+    <h3>Sightseeing</h3>
+    <ul>
+      <li *ngFor="let s of packageData.sightseeingList">
+        {{ s.location }} - {{ s.description }}
+      </li>
+    </ul>
+   
+    <h3>Itinerary</h3>
+    <ul>
+      <li *ngFor="let i of packageData.itinerary">
+        Day {{ i.dayNumber }}: {{ i.activityTitle }} - {{ i.activityDescription }}
+      </li>
+    </ul>
+   
+    <br />
+    <button (click)="router.navigate(['/agent-dashboard'])">Back to Dashboard</button>
+</div>
