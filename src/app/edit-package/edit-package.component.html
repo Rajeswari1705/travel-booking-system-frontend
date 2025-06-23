@@ -81,13 +81,13 @@
    
         <!-- Sightseeing -->
         <h4>Sightseeing</h4>
-        <div *ngFor="let sight of newPackage.sightseeingList; let i=index">
+        <div *ngFor="let sight of newPackage.sightseeing; let i=index">
           <label>Location: </label>
           <input type="text" placeholder="Location" [(ngModel)]="sight.location" [name]="'sightLoc' +i"><br>
           <label>Sight Description: </label>
           <input type="text" placeholder="Description" [(ngModel)]="sight.description" [name]="'sightDesc' +i"><br>
 
-          <button type="button" (click)="removeSightseeing(i)" *ngIf="newPackage.sightseeingList.lenghth >1 ">
+          <button type="button" (click)="removeSightseeing(i)" *ngIf="newPackage.sightseeing.length >1 ">
             Remove Sightseeing
           </button>
 

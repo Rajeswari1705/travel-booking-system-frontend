@@ -109,11 +109,11 @@ export class EditPackageComponent implements OnInit {
 
   // for sight seeing
   addSightseeing(): void {
-    this.newPackage.sightseeingList.push({location:'', description:''});
+    this.newPackage.sightseeing.push({location:'', description:''});
   }
 
   removeSightseeing(index: number): void {
-    this.newPackage.sightseeingList.splice(index,1);
+    this.newPackage.sightseeing.splice(index,1);
   }
 
 
