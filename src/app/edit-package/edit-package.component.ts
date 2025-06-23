@@ -107,6 +107,16 @@ export class EditPackageComponent implements OnInit {
 
   }
 
+  // for sight seeing
+  addSightseeing(): void {
+    this.newPackage.sightseeingList.push({location:'', description:''});
+  }
+
+  removeSightseeing(index: number): void {
+    this.newPackage.sightseeingList.splice(index,1);
+  }
+
+
   cancelForm(){
     this.router.navigate(['/agent-dashboard']);
   }
