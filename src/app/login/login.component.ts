@@ -7,13 +7,14 @@ interface LoginResponse {
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
  
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -58,4 +59,10 @@ this.http.post<LoginResponse>('http://localhost:8080/api/auth/login', this.crede
         }
       });
   }
+
+  navigateToForgotPassword(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/forgot-password']);
+  }
+
 }
