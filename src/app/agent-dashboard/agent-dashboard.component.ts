@@ -41,7 +41,7 @@ export class AgentDashboardComponent implements OnInit{
       {name:'', city:'', rating:'', nights:'', costPerNight:''}
     ],
 
-    sightseeingList: [
+    sightseeing: [
       {location:'', description:''}
     ],
 
@@ -173,7 +173,7 @@ export class AgentDashboardComponent implements OnInit{
         {name:'', city:'', rating:'', nights:'', costPerNight:''}
       ],
   
-      sightseeingList: [
+      sightseeing: [
         {location:'', description:''}
       ],
   

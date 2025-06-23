@@ -42,7 +42,7 @@ export class EditPackageComponent implements OnInit {
       {name:'', city:'', rating:'', nights:'', costPerNight:''}
     ],
 
-    sightseeingList: [
+    sightseeing: [
       {location:'', description:''}
     ],
 
