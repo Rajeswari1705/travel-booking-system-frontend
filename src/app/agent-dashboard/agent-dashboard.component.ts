@@ -42,7 +42,7 @@ export class AgentDashboardComponent implements OnInit{
       {name:'', city:'', rating:'', nights:'', costPerNight:''}
     ],
 
-    sightseeingList: [
+    sightseeing: [
       {location:'', description:''}
     ],
 
@@ -111,7 +111,12 @@ export class AgentDashboardComponent implements OnInit{
 
   //Delete a package
   deletePackage(id: number){
-    const confirmDelete = confirm("ARe you sure you want to delete this package?");
+    if(!id){
+      console.error('Invalid package ID:',id);
+      alert('Error: Cannot delete package. Invalid ID.');
+      return ;
+    }
+    const confirmDelete = confirm("Are you sure you want to delete this package?");
     if(!confirmDelete) return;
 
     const url = `http://localhost:8080/api/packages/${id}`;
@@ -169,7 +174,7 @@ export class AgentDashboardComponent implements OnInit{
         {name:'', city:'', rating:'', nights:'', costPerNight:''}
       ],
   
-      sightseeingList: [
+      sightseeing: [
         {location:'', description:''}
       ],
   
@@ -197,6 +202,15 @@ export class AgentDashboardComponent implements OnInit{
       item.dayNumber = i+1;
     });
 
+  }
+
+  // for sight seeing
+  addSightseeing(): void {
+    this.newPackage.sightseeing.push({location:'', description:''});
+  }
+
+  removeSightseeing(index: number): void {
+    this.newPackage.sightseeing.splice(index,1);
   }
 
 

@@ -21,10 +21,13 @@ export class ViewPackageComponent implements OnInit {
 
   ngOnInit(): void {
     this.packageId = Number(this.route.snapshot.paramMap.get('id'));
-    const url = `http://localhost:8080/api/packages/$(this.packageId)`;
+    const url = `http://localhost:8080/api/packages/${this.packageId}`;
 
     this.http.get<any>(url).subscribe({
-      next: (res) => this.packageData = res.data,
+      next: (res) =>{
+        this.packageData = res.data;
+        console.log("Loaded packages:", this.packageData);
+      },
       error: (err) =>{
         console.error('Error fetching package', err);
         alert('Failed to load package details');

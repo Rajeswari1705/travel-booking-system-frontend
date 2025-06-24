@@ -42,7 +42,7 @@ export class EditPackageComponent implements OnInit {
       {name:'', city:'', rating:'', nights:'', costPerNight:''}
     ],
 
-    sightseeingList: [
+    sightseeing: [
       {location:'', description:''}
     ],
 
@@ -106,6 +106,16 @@ export class EditPackageComponent implements OnInit {
     });
 
   }
+
+  // for sight seeing
+  addSightseeing(): void {
+    this.newPackage.sightseeing.push({location:'', description:''});
+  }
+
+  removeSightseeing(index: number): void {
+    this.newPackage.sightseeing.splice(index,1);
+  }
+
 
   cancelForm(){
     this.router.navigate(['/agent-dashboard']);
