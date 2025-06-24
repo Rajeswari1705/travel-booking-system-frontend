@@ -16,42 +16,7 @@ import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.c
 export class AgentDashboardComponent implements OnInit{
 
   packages: any[] = []; //store the list of travel packages
-  formVisible: boolean = false;
   agentId :number=0;
-
-
-  newPackage: any = {
-    title:'',
-    description:'',
-    duration:'',
-    price:'',
-    maxCapacity:'',
-    country:'',
-    destination:'',
-    tripType:'',
-    tripStartDate:'',
-    tripEndDate:'',
-    active: true,
-
-    offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
-
-    flights: [
-      {airline: '', fromCity:'', toCity:'', departureTime:'', arrivalTime:''}
-    ],
-
-    hotels: [
-      {name:'', city:'', rating:'', nights:'', costPerNight:''}
-    ],
-
-    sightseeing: [
-      {location:'', description:''}
-    ],
-
-    itinerary: [
-      {dayNumber:'', activityTitle:'', activityDescription:''}
-    ]
-
-  };
 
   private http = inject(HttpClient);
 
@@ -82,34 +47,6 @@ export class AgentDashboardComponent implements OnInit{
     });
   }
 
-
-  //Submit new package to backend
-  submitPackage(){
-    const url= `http://localhost:8080/api/packages`;
-    const fullData = {
-      ...this.newPackage,
-      agentId: this.agentId
-    };
-    this.http.post(url, fullData).subscribe({
-      next: () => {
-        alert('Package created successfully!');
-        this.formVisible = false;
-        this.loadPackages();
-        this.resetForm();
-      },
-
-      error: (err) => {
-        console.error('Error correcting package', err);
-        alert('Failed to create package. Check your input.');
-      }
-
-      
-    });
-
-
-  }
-
-
   //Delete a package
   deletePackage(id: number){
     if(!id){
@@ -121,7 +58,6 @@ export class AgentDashboardComponent implements OnInit{
     if(!confirmDelete) return;
 
     const url = `http://localhost:8080/api/packages/${id}`;
-
     this.http.delete(url).subscribe({
       next: () => {
         alert('Package deleted successfully!');
@@ -134,87 +70,10 @@ export class AgentDashboardComponent implements OnInit{
     });
   }
 
-
-  //show or hide create form
-  showCreateForm(){
-    this.formVisible = true;
-  }
-
-  cancelForm() {
-    this.formVisible = false;
-  }
-
-
   //placeholder for edit
   editPackage(pkg: any){
     alert('Edit package: ${pkg.title} - feature coming soon!');
   }
-
-  //Reset form after success
-  resetForm() {
-    this.newPackage = {
-      title:'',
-      description:'',
-      duration:'',
-      price:'',
-      maxCapacity:'',
-      country:'',
-      destination:'',
-      tripType:'',
-      tripStartDate:'',
-      tripEndDate:'',
-      active: true,
-
-      offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
-
-      flights: [
-        {airline: '', fromCity:'', toCity:'', departureTime:'', arrivalTime:''}
-      ],
-  
-      hotels: [
-        {name:'', city:'', rating:'', nights:'', costPerNight:''}
-      ],
-  
-      sightseeing: [
-        {location:'', description:''}
-      ],
-  
-      itinerary: [
-        {dayNumber:'', activityTitle:'', activityDescription:''}
-      ]
-  
-      
-    };
-  }
-
-  addItineraryDay(){
-    const newDay = this.newPackage.itinerary.length+1;
-    this.newPackage.itinerary.push({
-      dayNumber: newDay,
-      activityTitle: '',
-      activityDescription: ''
-    });
-
-  }
-
-  removeItineraryDay(index:number): void{
-    this.newPackage.itinerary.splice(index,1);
-    this.newPackage.itinerary.forEach((item: any, i: number) =>{
-      item.dayNumber = i+1;
-    });
-
-  }
-
-  // for sight seeing
-  addSightseeing(): void {
-    this.newPackage.sightseeing.push({location:'', description:''});
-  }
-
-  removeSightseeing(index: number): void {
-    this.newPackage.sightseeing.splice(index,1);
-  }
-
-
   //Go to my profile 
   goToProfile(){
     window.location.href = '/my-profile';
