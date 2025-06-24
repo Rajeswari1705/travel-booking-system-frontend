@@ -22,6 +22,9 @@ export const routes: Routes = [
   { path: 'admin/agent-packages/:id', loadComponent: () => import('./admin-agent-packages/admin-agent-packages.component').then(m => m.AdminAgentPackagesComponent)},
   { path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)},
   
+  //For creating new package by agent
+  { path: 'create-package', loadComponent:() => import('./agent-create-package/agent-create-package.component').then(m=> m.AgentCreatePackageComponent)},
+
   //For package editing/updating in agent dashboard
   { path: 'edit-package/:id', loadComponent:() => import('./edit-package/edit-package.component').then(m => m.EditPackageComponent)},
 
