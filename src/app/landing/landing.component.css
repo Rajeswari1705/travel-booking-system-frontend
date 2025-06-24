@@ -1,12 +1,21 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* Push content below navbar */
 .landing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-    height: 100vh;
-    background-color: #f0f8ff;
-  }
+  padding-top: 100px;
+  text-align: center;
+  height: calc(100vh - 100px); /* prevent scroll */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f0f8ff;
+}
+  
    
   h1 {
     color: #333;

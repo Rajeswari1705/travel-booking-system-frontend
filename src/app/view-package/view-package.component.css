@@ -1,0 +1,84 @@
+/* Root background and typography */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e6f0ff;
+    font-family: 'Segoe UI', sans-serif;
+    color: #0a1f44;
+  }
+  
+  /* Main container for details */
+  .package-details {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 40, 120, 0.1);
+  }
+  
+  /* Headings */
+  .package-details h2,
+  .package-details h3 {
+    text-align: center;
+    color: #1b3f91;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c8d8f3;
+    padding-bottom: 5px;
+  }
+  
+  /* Paragraph info */
+  .package-details p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #1a1a1a;
+  }
+  
+  /* Image */
+  .package-details img {
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0, 40, 120, 0.1);
+  }
+  
+  /* List sections */
+  .package-details ul {
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .package-details li {
+    background-color: #f5f8fe;
+    border: 1px solid #d4e0f5;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 40, 120, 0.05);
+  }
+  
+  /* Emphasis in list items */
+  .package-details li strong {
+    color: #1b3f91;
+  }
+  
+  /* Back button styling */
+  .package-details button {
+    display: block;
+    margin: 30px auto 0;
+    background-color: #1b3f91;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .package-details button:hover {
+    background-color: #274dba;
+  }
+  
