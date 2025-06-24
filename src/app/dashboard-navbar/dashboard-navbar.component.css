@@ -6,6 +6,18 @@
     height: 45px; /* Fixed navbar height */
     padding: 0 20px;
   }
+
+  .nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+   
+  .nav-links a:hover,
+  .active-link {
+    text-decoration: underline;
+  }
    
   .profile-link img {
     height: 30px;   /* Profile icon size */
@@ -15,3 +27,4 @@
     border: 2px solid white;
     cursor: pointer;
   }
+  
