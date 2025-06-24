@@ -28,5 +28,6 @@ export const routes: Routes = [
   //For viewing the details of the package by the agent(retrieve)
   { path: 'view-package/:id', loadComponent:() => import('./view-package/view-package.component').then(m => m.ViewPackageComponent)}
 
+
 ];
 

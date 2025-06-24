@@ -1,2 +1,17 @@
 <p>customer-dashboard works!</p>
 <a routerLink="/my-profile">My Profile</a>
+<h2 class="text-center my-3">Available Travel Packages</h2>
+<div class="row m-3">
+  <div class="col-md-4" *ngFor="let pkg of packages">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ pkg.packageName }}</h5>
+        <p class="card-text">
+          <strong>Destination:</strong> {{ pkg.destination }}<br />
+          <strong>Price:</strong> ₹{{ pkg.price }}<br />
+          <strong>Duration:</strong> {{ pkg.duration }} days<br />
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
