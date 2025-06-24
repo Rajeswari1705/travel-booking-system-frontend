@@ -1,11 +1,14 @@
 // Import Routes type from Angular Router
+import { provideRouter } from '@angular/router';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminUserManageComponent } from './admin-user-manage/admin-user-manage.component';
+import { CustomerHelpComponent } from './customer-help/customer-help.component';
+import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
+import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 
- 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
@@ -22,11 +25,35 @@ export const routes: Routes = [
   { path: 'admin/agent-packages/:id', loadComponent: () => import('./admin-agent-packages/admin-agent-packages.component').then(m => m.AdminAgentPackagesComponent)},
   { path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)},
   
+  //for landing navbar
+  { path: 'about', loadComponent: () => import('./about/about.component').then(m => m.AboutComponent) },
+{ path: 'contact-us', loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent) },
+
+
+
   //For package editing/updating in agent dashboard
   { path: 'edit-package/:id', loadComponent:() => import('./edit-package/edit-package.component').then(m => m.EditPackageComponent)},
 
   //For viewing the details of the package by the agent(retrieve)
-  { path: 'view-package/:id', loadComponent:() => import('./view-package/view-package.component').then(m => m.ViewPackageComponent)}
+  { path: 'view-package/:id', loadComponent:() => import('./view-package/view-package.component').then(m => m.ViewPackageComponent)},
+  
+  //for help and insurance
+
+  {
+    path: 'customer-help',
+    loadComponent: () =>
+      import('./customer-help/customer-help.component').then(
+        (m) => m.CustomerHelpComponent
+      ),
+  },
+  {
+    path: 'customer-insurance',
+    loadComponent: () =>
+      import('./customer-insurance/customer-insurance.component').then(
+        (m) => m.CustomerInsuranceComponent
+      ),
+  },
+
 
 ];
 

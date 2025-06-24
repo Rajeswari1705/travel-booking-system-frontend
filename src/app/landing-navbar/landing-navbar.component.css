@@ -1,0 +1,27 @@
+.landing-navbar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: #1976d2;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+  }
+   
+  .landing-navbar a {
+    text-decoration: none;
+    color: #0b0a0a;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+   
+  /* Highlight the active route */
+  .landing-navbar a.active-link {
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
+  }
+   
