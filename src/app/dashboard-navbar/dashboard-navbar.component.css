@@ -1,0 +1,17 @@
+.navbar {
+    background-color: #1976d2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 45px; /* Fixed navbar height */
+    padding: 0 20px;
+  }
+   
+  .profile-link img {
+    height: 30px;   /* Profile icon size */
+    width: 33px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+  }

@@ -3,12 +3,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
 
 
 @Component({
   selector: 'app-agent-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, RouterLink],
+  imports: [CommonModule, HttpClientModule, FormsModule, RouterLink, DashboardNavbarComponent],
   templateUrl: './agent-dashboard.component.html',
   styleUrl: './agent-dashboard.component.css'
 })

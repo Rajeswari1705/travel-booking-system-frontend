@@ -4,3 +4,9 @@ body, html {
     padding: 0;
     overflow-x: hidden; /* 👈 block horizontal scroll */
   }
+
+  body {
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+  }
