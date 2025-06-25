@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { TravelPackage } from '../models/travel-package';
 
-interface PackageResponse {
-  data: TravelPackage[];
-  message: string;
-  success: boolean;
-}
 
 @Injectable({
   providedIn: 'root'
 })
-export class PackageService {
+export class TravelPackageService {
   private baseUrl = 'http://localhost:8089/api/packages';
 
   constructor(private http: HttpClient) {}
 
-  getAllPackages(): Observable<PackageResponse> {
-    return this.http.get<PackageResponse>(this.baseUrl);
+  getAllPackages(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}`);
   }
+
+  getPackageById(packageId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${packageId}`);
+  }
+  // getPackageById(packageId: number | string) {
+  //   return this.http.get(`/api/packages/${packageId}`);
+  // }
+   
+  // getAllPackages() {
+  //   return this.http.get(`/api/packages/all`);
+  // }
 }
