@@ -1,42 +1,70 @@
 <div class="manage-container">
-    <h2>All Registered Users</h2>
-   
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>View</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
+  <h2>All Registered Users</h2>
 
-        <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.contactNumber }}</td>
-          <td>
-            <a *ngIf="user.role === 'AGENT'"
-            [routerLink]="['/admin/agent-packages', user.id]">
-            <button>View Packages</button>
-            </a>
+  <!-- START: Search Bar - ADD THIS BLOCK -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search by User ID..."
+      [(ngModel)]="searchUserId"
+      (input)="applyFilter()"
+      class="search-input"
+    />
+    <button (click)="clearSearch()" class="clear-search-button">Clear</button>
+  </div>
+  <!-- END: Search Bar -->
 
-          <td>
-            <select [value]="user.role"
-            (change)="onRoleChange(user, $event)">
+  <div class="user-cards-container">
+    <!-- CHANGE THIS LINE: from `users` to `filteredUsers` -->
+    <div class="user-card" *ngFor="let user of filteredUsers">
+      <div class="card-header">
+        <h3>{{ user.name }}</h3>
+        <span class="user-role-display">Role: {{ user.role }}</span>
+      </div>
+
+      <div class="card-body">
+        <!-- ADD THIS LINE: To display User ID -->
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.contactNumber }}</p>
+      </div>
+
+      <div class="card-actions">
+        <div class="role-selection">
+          <label for="role-{{user.id}}">Change Role:</label>
+          <div class="custom-select-wrapper">
+            <select
+              id="role-{{user.id}}"
+              [value]="user.role"
+              (change)="onRoleChange(user, $event)"
+            >
               <option value="CUSTOMER">CUSTOMER</option>
               <option value="AGENT">AGENT</option>
-          </select>
-          </td>
+            </select>
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
 
-          
-          <td>
-            <button (click)="deleteUser(user.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <div class="action-buttons">
+          <a
+            *ngIf="user.role === 'AGENT'"
+            [routerLink]="['/admin/agent-packages', user.id]"
+          >
+            <button class="action-button primary">View Packages</button>
+          </a>
+          <button (click)="deleteUser(user.id)" class="action-button danger">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- START: No Results Messages - ADD THESE BLOCKS -->
+    <div *ngIf="filteredUsers.length === 0 && searchUserId" class="no-results">
+        No user found with that ID.
+    </div>
+    <div *ngIf="users.length === 0 && !searchUserId" class="no-results">
+        No registered users found.
+    </div>
+    <!-- END: No Results Messages -->
   </div>
+</div>

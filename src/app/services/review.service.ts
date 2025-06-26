@@ -24,7 +24,7 @@ export class ReviewService {
   }
  
   hasCompletedBooking(userId: number, packageId: number) {
-    return this.http.get(`http://localhost:8082/api/bookings/user/${userId}/package/${packageId}/completed`);
+    return this.http.get(`http://localhost:8086/api/bookings/user/${userId}/package/${packageId}/completed`);
   }
  
   hasAlreadyReviewed(userId: number, packageId: number) {

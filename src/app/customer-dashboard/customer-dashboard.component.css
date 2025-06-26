@@ -146,3 +146,39 @@ button:hover {
   background-color: #dc3545;
   color: white;
 }
+/* for ratings css style */
+/* src/app/customer-dashboard/customer-dashboard.component.css */
+
+/* ... existing styles ... */
+
+.stars {
+  color: gold; /* Default star color for empty stars */
+  display: inline-block; /* To keep stars together */
+}
+
+.star {
+  font-size: 20px;
+  /* Adjust this if you want stars to be clickable, but not for display */
+}
+
+.star.filled {
+  color: orange; /* Color for filled stars */
+}
+
+/* For half-filled stars */
+.star.half-filled {
+  position: relative;
+  display: inline-block;
+  color: gold; /* Color for the "empty" part of the half star */
+  overflow: hidden;
+  width: 1em; /* Adjust based on your font-size */
+}
+
+.star.half-filled:before {
+  content: '\2605'; /* Unicode star character */
+  position: absolute;
+  left: 0;
+  width: 50%; /* Make half of the star orange */
+  overflow: hidden;
+  color: orange; /* Color for the "filled" part of the half star */
+}

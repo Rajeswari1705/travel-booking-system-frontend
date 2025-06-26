@@ -1,5 +1,6 @@
 export interface TravelPackage {
-    packageId: string;
+    // packageId: string;
+    packageId: number,
     title: string;
     description: string;
     destination: string;
@@ -15,5 +16,6 @@ export interface TravelPackage {
 country: string; // ✅ Add this
   tripType: string;
 location: string;
+averageRating?: number;
   }
   

@@ -70,6 +70,7 @@
 
 
 
+// src/app/customer-dashboard/customer-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TravelPackageService } from '../services/package.service';
 import { TravelPackage } from '../models/travel-package';
@@ -77,6 +78,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
+import { forkJoin, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -100,12 +103,47 @@ export class CustomerDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadPackagesWithRatings();
+  }
+
+  loadPackagesWithRatings(): void {
     this.packageService.getAllPackages().subscribe({
-      next: (data: any) => {
-        this.packages = Array.isArray(data) ? data : data.data;
+      next: (data: TravelPackage[]) => {
+        this.packages = data;
         this.filteredPackages = [...this.packages];
+        this.fetchAverageRatings(); // Call after packages are loaded
       },
       error: (err) => console.error("Failed to load packages", err)
+    });
+  }
+
+  fetchAverageRatings(): void {
+    if (this.packages.length === 0) {
+      return;
+    }
+
+    const ratingRequests = this.packages.map(pkg =>
+      // pkg.packageId is already number here, so no conversion needed
+      this.packageService.getAverageRatingForPackage(pkg.packageId).pipe(
+        map(avgRating => ({ packageId: pkg.packageId, averageRating: avgRating })),
+        catchError(error => {
+          console.error(`Error fetching average rating for package ${pkg.packageId}:`, error);
+          return of({ packageId: pkg.packageId, averageRating: 0.0 }); // Default to 0.0 on error
+        })
+      )
+    );
+
+    forkJoin(ratingRequests).subscribe({
+      next: (ratings: { packageId: number, averageRating: number }[]) => { // packageId is now number
+        ratings.forEach(rating => {
+          const pkg = this.packages.find(p => p.packageId === rating.packageId);
+          if (pkg) {
+            pkg.averageRating = rating.averageRating;
+          }
+        });
+        this.searchPackages(); // Re-filter to ensure average ratings are applied to the displayed packages
+      },
+      error: (err) => console.error("Failed to fetch average ratings", err)
     });
   }
 
@@ -116,7 +154,11 @@ export class CustomerDashboardComponent implements OnInit {
       const matchesText =
         pkg.title?.toLowerCase().includes(text) ||
         pkg.destination?.toLowerCase().includes(text) ||
-        pkg.description?.toLowerCase().includes(text);
+        pkg.description?.toLowerCase().includes(text) ||
+        pkg.country?.toLowerCase().includes(text) ||
+        pkg.tripType?.toLowerCase().includes(text) ||
+        pkg.price?.toString().includes(text);
+
 
       const matchesPrice =
         (this.minPrice === null || pkg.price >= this.minPrice) &&
@@ -137,7 +179,22 @@ export class CustomerDashboardComponent implements OnInit {
     this.filteredPackages = [...this.packages];
   }
 
-  viewPackageDetails(packageId: string): void {
+  // Changed packageId type to number
+  viewPackageDetails(packageId: number): void {
     this.router.navigate(['/package', packageId]);
+  }
+
+  getStarArray(rating: number | undefined): number[] {
+    if (rating === undefined || rating === 0) {
+      return [];
+    }
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStar;
+    return [
+      ...Array(fullStars).fill(1),
+      ...(halfStar ? [0.5] : []),
+      ...Array(emptyStars).fill(0)
+    ];
   }
 }
