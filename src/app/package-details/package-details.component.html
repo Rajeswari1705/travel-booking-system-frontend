@@ -1,0 +1,87 @@
+
+<div class="package-container">
+  <div class="top-section">
+    <div class="card image-card">
+      <img
+        class="package-image"
+        [src]="packageDetails.imageUrl || 'https://via.placeholder.com/400x250?text=Package+Image'"
+        alt="Package Image"
+      />
+    </div>
+
+    <div class="card details-card">
+      <h2>{{ packageDetails.title }}</h2>
+      <p class="desc">{{ packageDetails.description }}</p>
+
+      <div class="info-grid">
+        <div><strong>Destination:</strong> {{ packageDetails.destination }}</div>
+        <div><strong>Country:</strong> {{ packageDetails.country }}</div>
+        <div><strong>Trip Type:</strong> {{ packageDetails.tripType }}</div>
+        <div><strong>Duration:</strong> {{ packageDetails.duration }} days</div>
+        <div><strong>Price:</strong> ₹{{ packageDetails.price }}</div>
+        <div><strong>Max Capacity:</strong> {{ packageDetails.maxCapacity }}</div>
+        <div><strong>Start Date:</strong> {{ packageDetails.tripStartDate | date: 'MMM d, y' }}</div>
+        <div><strong>End Date:</strong> {{ packageDetails.tripEndDate | date: 'MMM d, y' }}</div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn book" (click)="goToBooking()">Book Now</button>
+        <button class="btn review" (click)="goToReview()">Give Review</button>
+        <button class="btn insurance" (click)="addInsurance()">Insurance</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-grid">
+    <div class="card" *ngIf="packageDetails.highlights?.length">
+      <h3>Highlights</h3>
+      <ul>
+        <li *ngFor="let h of packageDetails.highlights">🌟 {{ h }}</li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="packageDetails.flights?.length">
+      <h3>Flights</h3>
+      <ul>
+        <li *ngFor="let f of packageDetails.flights">
+          ✈️ {{ f.airline }} — {{ f.fromCity }} → {{ f.toCity }} ({{ f.departureTime }} - {{ f.arrivalTime }})
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="packageDetails.hotels?.length">
+      <h3>Hotels</h3>
+      <ul>
+        <li *ngFor="let h of packageDetails.hotels">
+          🏨 {{ h.name }}, {{ h.city }} — {{ h.rating }}★ ({{ h.nights }} nights)
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="packageDetails.sightseeing?.length">
+      <h3>Sightseeing</h3>
+      <ul>
+        <li *ngFor="let s of packageDetails.sightseeing">
+          📍 {{ s.location }} - {{ s.description }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="packageDetails.itinerary?.length">
+      <h3>Itinerary</h3>
+      <ul>
+        <li *ngFor="let i of packageDetails.itinerary">
+          🗓️ Day {{ i.dayNumber }}: {{ i.activityTitle }} - {{ i.activityDescription }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="packageDetails.offer">
+      <h3>Special Offer</h3>
+      <p>
+        🎁 <strong>{{ packageDetails.offer.couponCode }}</strong> —
+        {{ packageDetails.offer.description }} ({{ packageDetails.offer.discountPercentage }}% OFF)
+      </p>
+    </div>
+  </div>
+</div>

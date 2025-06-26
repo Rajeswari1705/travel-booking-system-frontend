@@ -1,0 +1,44 @@
+<div class="review-dashboard">
+  <h2>Package Reviews</h2>
+ 
+  <!-- Review List -->
+  <div class="review" *ngFor="let review of reviews">
+    <div class="review-header">
+      <div class="stars">
+        <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="review.rating >= star">&#9733;</span>
+      </div>
+      <p><strong>User {{ review.userId }}</strong> on {{ review.timestamp | date:'short' }}</p>
+    </div>
+    <p class="comment">{{ review.comment }}</p>
+ 
+    <!-- Agent Response -->
+    <div *ngIf="review.agentResponse" class="agent-response">
+      <p><strong>Agent Response:</strong> {{ review.agentResponse.responseMessage }}</p>
+    </div>
+ 
+    <!-- User actions -->
+    <div *ngIf="review.userId === userId">
+      <button (click)="enableEdit(review)">Edit</button>
+      <button (click)="deleteReview(review.reviewId)">Delete</button>
+    </div>
+  </div>
+ 
+  <!-- Add or Edit Review -->
+  <div class="review-form" *ngIf="canReview || editingReviewId !== null">
+    <h3>{{ editingReviewId ? 'Update' : 'Add' }} Your Review</h3>
+ 
+    <label>Rating:</label>
+    <div class="stars">
+      <span *ngFor="let star of [1,2,3,4,5]" class="star"
+            [class.filled]="newReview.rating >= star"
+            (click)="newReview.rating = star">&#9733;</span>
+    </div>
+ 
+    <textarea [(ngModel)]="newReview.comment" name="comment" placeholder="Write your comment..."></textarea>
+    <br/>
+    <button (click)="editingReviewId ? updateReview() : submitReview()">
+      {{ editingReviewId ? 'Update' : 'Submit' }}
+    </button>
+    <button *ngIf="editingReviewId" (click)="cancelEdit()">Cancel</button>
+  </div>
+</div>

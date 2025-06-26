@@ -1,19 +1,124 @@
-<app-dashboard-navbar></app-dashboard-navbar>
+<!-- <!-- <app-dashboard-navbar></app-dashboard-navbar>
 
-<p>customer-dashboard works!</p>
-<a routerLink="/my-profile">My Profile</a>
-<h2 class="text-center my-3">Available Travel Packages</h2>
-<div class="row m-3">
-  <div class="col-md-4" *ngFor="let pkg of packages">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ pkg.packageName }}</h5>
-        <p class="card-text">
-          <strong>Destination:</strong> {{ pkg.destination }}<br />
-          <strong>Price:</strong> ₹{{ pkg.price }}<br />
-          <strong>Duration:</strong> {{ pkg.duration }} days<br />
-        </p>
-      </div>
+<div class="customer-dashboard">
+  <h2 class="text-center">Available Travel Packages</h2>
+
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="searchPackages()"
+      placeholder="Search title, destination, description, price"
+    />
+    <input
+      type="number"
+      [(ngModel)]="minPrice"
+      (input)="searchPackages()"
+      placeholder="Min Price"
+    />
+    <input
+      type="number"
+      [(ngModel)]="maxPrice"
+      (input)="searchPackages()"
+      placeholder="Max Price"
+    />
+    <button (click)="clearSearch()">Clear</button>
+  </div>
+
+ 
+  <div class="package-grid" *ngIf="filteredPackages.length > 0">
+    <div
+      class="package-card"
+      *ngFor="let pack of filteredPackages"
+      (click)="viewPackageDetails(pack.packageId)"
+      style="cursor: pointer;"
+    >
+      <h3>{{ pack.title }}</h3>
+      <p><strong>Location:</strong> {{ pack.destination }}</p>
+      <p><strong>Description:</strong> {{ pack.description }}</p>
+      <p><strong>Price:</strong> ₹{{ pack.price }}</p>
+      <p><strong>Duration:</strong> {{ pack.duration }} days</p>
     </div>
   </div>
-</div>
+
+  <!-- 🚫 No Results Message 
+  <div *ngIf="filteredPackages.length === 0">
+    No packages found.
+  </div> -->
+
+
+
+  <app-dashboard-navbar></app-dashboard-navbar>
+
+  <div class="customer-dashboard">
+    <h2 class="text-center">Available Travel Packages</h2>
+  
+    <!-- 🔍 Compact Search Section -->
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search title,country,price,triptype etc.,"
+      />
+      <input
+        type="number"
+        [(ngModel)]="minPrice"
+        placeholder="Min Price"
+      />
+      <input
+        type="number"
+        [(ngModel)]="maxPrice"
+        placeholder="Max Price"
+      />
+      <input
+        type="number"
+        [(ngModel)]="exactDuration"
+        placeholder="Exact Duration (days)"
+      />
+      <button (click)="searchPackages()">Search</button>
+      <button class="clear-btn" (click)="clearSearch()">✕</button>
+    </div>
+  
+    <!-- 📦 Packages Grid -->
+    <div class="package-grid" *ngIf="filteredPackages.length > 0">
+      <div
+        class="package-card"
+        *ngFor="let pack of filteredPackages"
+        (click)="viewPackageDetails(pack.packageId)"
+        style="cursor: pointer;"
+      >
+        <h3>{{ pack.title }}</h3>
+        <p><strong>Location:</strong> {{ pack.destination }}</p>
+        <p><strong>Description:</strong> {{ pack.description }}</p>
+        <p>Country: {{ pack.country }}</p>
+        <p><strong>Trip Type:</strong> {{ pack.tripType }}</p>
+        <p><strong>Price:</strong> ₹{{ pack.price }}</p>
+        <p><strong>Duration:</strong> {{ pack.duration }} days</p>
+
+
+        <!-- for displaying average rating -->
+        <p>
+          <strong>Average Rating:</strong>
+          <span *ngIf="pack.averageRating !== undefined && pack.averageRating > 0">
+            {{ pack.averageRating | number:'1.1-1' }}
+            <span class="stars">
+              <ng-container *ngFor="let starType of getStarArray(pack.averageRating)">
+                <span *ngIf="starType === 1" class="star filled">&#9733;</span>
+                <span *ngIf="starType === 0.5" class="star half-filled">&#9733;</span> <span *ngIf="starType === 0" class="star">&#9733;</span>
+              </ng-container>
+            </span>
+          </span>
+          <span *ngIf="pack.averageRating === undefined || pack.averageRating === 0">
+            No reviews yet.
+          </span>
+        </p>
+  
+      </div>
+    </div>
+  
+    <!-- 🚫 No Results Message -->
+    <div *ngIf="filteredPackages.length === 0">
+      No packages found.
+    </div>
+  </div>
+  

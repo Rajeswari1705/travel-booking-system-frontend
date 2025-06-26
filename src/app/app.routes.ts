@@ -8,6 +8,7 @@ import { AdminUserManageComponent } from './admin-user-manage/admin-user-manage.
 import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -57,8 +58,10 @@ export const routes: Routes = [
         (m) => m.CustomerInsuranceComponent
       ),
   },
-
-
-
+  //For customer dashboard ,review dashboard,loading of package details
+  { path: '', redirectTo: 'customer-dashboard', pathMatch: 'full' }, 
+  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) },
+  { path: 'review-dashboard/:packageId', loadComponent: () => import('./review-dashboard/review-dashboard.component').then(m => m.ReviewDashboardComponent) },
+  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) }
 ];
 
