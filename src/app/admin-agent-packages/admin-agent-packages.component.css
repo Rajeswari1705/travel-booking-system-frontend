@@ -1,38 +1,85 @@
-/* Center the heading and add spacing */
-h2 {
-    text-align: center;
-    margin: 20px 0;
-    color: #333;
-    font-size: 24px;
+/* Body & Container */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fcfdff; /* Very light, almost white-blue background */ color: #343a40; margin: 0; padding: 15px; }
+.container { max-width: 900px; margin: 25px auto; padding: 25px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+
+/* Heading */
+h2 { text-align: center; color: #212529; font-size: 2.2em; margin-bottom: 35px; position: relative; padding-bottom: 12px; }
+h2::after { content: ''; display: block; width: 80px; height: 4px; background-color: #fff; margin: 5px auto 0; border-radius: 2px; }
+
+/* Table to Card Transformation */
+table { width: 100%; border-collapse: separate; border-spacing: 0 20px; margin: 0 auto; }
+thead { display: none; } /* Hide original table header */
+
+tr {
+  display: flex; flex-wrap: wrap;
+  background-color: #ffffff; /* Card background: Pure white */
+  border: 1px solid #eef1f5; /* Extremely subtle light grey-blue border */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04); /* Lighter, softer shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; /* Keep this for border-radius */
+  max-height: 200px; /* Slightly shorter card height */
+  align-content: flex-start;
+  position: relative; /* Crucial: Make TR the positioning context for absolute price */
+  padding-bottom: 30px; /* Make space for absolutely positioned price */
+}
+tr:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+
+td { padding: 12px 20px; border-bottom: none; display: block; flex: 1 1 100%; }
+
+/* Card Sections */
+td:first-child { /* Title - Card Header */
+  background-color: #fff; /* A professional, slightly muted blue */
+  color: #131313; font-size: 1.3em; font-weight: 600;
+  padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+  border-top-left-radius: 7px; border-top-right-radius: 7px;
+}
+/* Price - ABSOLUTELY POSITIONED TO BOTTOM RIGHT */
+td:nth-child(3) {
+  position: absolute; /* Take out of flow */
+  bottom: 15px; /* Distance from bottom of the card */
+  right: 15px; /* Distance from right of the card */
+  font-size: 1.4em; font-weight: 700;
+  background-color: #fff; /* Match card background */
+  padding: 6px 12px; border-radius: 4px;
+  color: #111010; /* Text color */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle shadow for price badge */
+  z-index: 10; /* Ensure it's above other content if overlapping */
+}
+
+td:nth-child(2) { /* Description */
+  font-size: 0.88em; color: #495057; line-height: 1.5; padding-top: 15px; padding-bottom: 10px; text-align: justify;
+  flex: 1 1 100%;
+}
+
+/* Details */
+td:nth-child(4)::before { content: 'Duration: '; } td:nth-child(5)::before { content: 'Start: '; }
+td:nth-child(6)::before { content: 'End: '; } td:nth-child(7)::before { content: 'Capacity: '; }
+td:not(:first-child):not(:nth-child(3))::before { font-weight: 600; color: #3498db; }
+td:not(:first-child):not(:nth-child(3)) {
+  font-size: 0.8em; color: #6c757d; padding: 6px 20px;
+  flex: 1 1 45%; /* Two columns on wider screens */
+  border-top: 1px dashed #f5f5f5; /* Even more subtle dashed line */
+}
+
+/* Adjusting padding for bottom of card */
+td:last-child {
+  padding-bottom: 15px; /* This padding applies to the last data cell */
+  border-bottom-left-radius: 7px; border-bottom-right-radius: 7px;
+}
+
+/* No packages message */
+.no-packages { text-align: center; color: #6c757d; margin-top: 30px; font-size: 1.1em; padding: 20px; border: 1px dashed #ced4da; border-radius: 8px; background-color: #fdfdfd; }
+
+/* Responsive (Simplified) */
+@media (max-width: 600px) {
+  table { border-spacing: 0 15px; }
+  tr { max-height: unset; padding-bottom: 60px; /* Increase space for price on small screens */ }
+  td:first-child { flex-direction: column; align-items: flex-start; }
+  td:nth-child(3) { /* Price positioning for mobile */
+    position: absolute; bottom: 15px; right: 15px; /* Ensure it stays bottom right */
+    margin-left: unset; margin-top: unset; /* Clear previous flex rules */
+    align-self: unset; /* Clear previous flex rules */
   }
-   
-  /* Style the table */
-  table {
-    width: 90%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    
-  }
-   
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-   
-  th {
-    background-color: #f8f8f8;
-    color: #444;
-  }
-   
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-   
-  /* Message if no packages found */
-  .no-packages {
-    text-align: center;
-    color: gray;
-    margin-top: 30px;
-    font-size: 18px;
-  }
+  td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7) { flex: 1 1 100%; }
+}
