@@ -4,7 +4,7 @@
     <h2>Welcome Agent!</h2>
    
     <button [routerLink]="['/create-package']">➕ Create New Package</button>
-    <button (click)="goToProfile()">👤 My Profile</button>
+    <!-- <button (click)="goToProfile()">👤 My Profile</button> -->
 
     <hr>
       <div *ngIf="packages.length > 0; else noPackages">
