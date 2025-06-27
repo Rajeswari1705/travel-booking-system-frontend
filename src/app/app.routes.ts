@@ -9,12 +9,14 @@ import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
-
+import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
+import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
- 
+  { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
+  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, // <--- ADD/ENSURE THIS LINE
   // Dashboard placeholders
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'agent-dashboard', loadComponent: () => import('./agent-dashboard/agent-dashboard.component').then(m => m.AgentDashboardComponent) },
@@ -48,20 +50,25 @@ export const routes: Routes = [
     path: 'customer-help',
     loadComponent: () =>
       import('./customer-help/customer-help.component').then(
-        (m) => m.CustomerHelpComponent
+        m => m.CustomerHelpComponent
       ),
   },
   {
     path: 'customer-insurance',
     loadComponent: () =>
       import('./customer-insurance/customer-insurance.component').then(
-        (m) => m.CustomerInsuranceComponent
+        m => m.CustomerInsuranceComponent
       ),
   },
-  //For customer dashboard ,review dashboard,loading of package details
-  { path: '', redirectTo: 'customer-dashboard', pathMatch: 'full' }, 
-  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) },
-  { path: 'review-dashboard/:packageId', loadComponent: () => import('./review-dashboard/review-dashboard.component').then(m => m.ReviewDashboardComponent) },
-  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) }
+  //For slecting insurance after choosing package
+  {
+    path: 'insurance-selection',
+    loadComponent: () =>
+      import('./insurance-selection/insurance-selection.component').then(
+        m => m.InsuranceSelectionComponent
+      ),
+  },
+
+
 ];
 

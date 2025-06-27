@@ -181,7 +181,7 @@ export class CustomerDashboardComponent implements OnInit {
 
   // Changed packageId type to number
   viewPackageDetails(packageId: number): void {
-    this.router.navigate(['/package', packageId]);
+    this.router.navigate(['/packages', packageId]);
   }
 
   getStarArray(rating: number | undefined): number[] {
