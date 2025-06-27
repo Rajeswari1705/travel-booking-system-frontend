@@ -8,6 +8,7 @@ import { AdminUserManageComponent } from './admin-user-manage/admin-user-manage.
 import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -25,6 +26,10 @@ export const routes: Routes = [
   { path: 'admin/agent-packages/:id', loadComponent: () => import('./admin-agent-packages/admin-agent-packages.component').then(m => m.AdminAgentPackagesComponent)},
   { path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)},
   
+
+  //For creating new package by agent
+  { path: 'create-package', loadComponent:() => import('./agent-create-package/agent-create-package.component').then(m=> m.AgentCreatePackageComponent)},
+
   //for landing navbar
   { path: 'about', loadComponent: () => import('./about/about.component').then(m => m.AboutComponent) },
 { path: 'contact-us', loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent) },
@@ -53,14 +58,7 @@ export const routes: Routes = [
         m => m.CustomerInsuranceComponent
       ),
   },
-  //For insurance Selection
-  {
-    path: 'insurance-selection',
-    loadComponent:()=>
-      import ('./insurance-selection/insurance-selection.component').then(
-        m=>m.InsuranceSelectionComponent
-      )
-  }
+
 
 ];
 

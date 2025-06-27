@@ -1,0 +1,135 @@
+/* Background and typography */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #e6f0ff;
+    color: #0a1f44;
+  }
+  
+  /* Container for the entire form */
+  .edit-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 40, 120, 0.1);
+  }
+  
+  /* Section heading */
+  .edit-container h2,
+  .edit-container h4 {
+    text-align: center;
+    color: #1b3f91;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d7e1f8;
+    padding-bottom: 6px;
+  }
+  
+  /* Label & form input layout */
+  .edit-container label {
+    display: block;
+    margin: 14px 0 6px;
+    font-weight: 500;
+    color: #0e2f6b;
+  }
+  
+  .edit-container input,
+  .edit-container textarea,
+  .edit-container select {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid #b4c9f0;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+    margin-bottom: 12px;
+  }
+  
+  .edit-container input:focus,
+  .edit-container textarea:focus,
+  .edit-container select:focus {
+    border-color: #1b3f91;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(27, 63, 145, 0.1);
+  }
+  
+  .edit-container textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Section blocks */
+  .edit-container h4 + div {
+    margin-bottom: 24px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f5f8fe;
+    border: 1px solid #d4def4;
+  }
+  
+  /* Repeating section buttons */
+  .edit-container button[type='button'] {
+    background-color: #f1f4fc;
+    color: #1b3f91;
+    border: 1px solid #c3cce9;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 5px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .edit-container button[type='button']:hover {
+    background-color: #dde9fd;
+  }
+  
+  /* Submit and cancel buttons */
+  .edit-container button[type='submit'],
+  .edit-container button[type='button']:last-of-type {
+    background-color: #1b3f91;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    margin: 20px 10px 0 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-container button[type='submit']:hover,
+  .edit-container button[type='button']:last-of-type:hover {
+    background-color: #274dba;
+  }
+  
+  /* Horizontal line */
+  .edit-container hr {
+    border: none;
+    border-top: 1px solid #aac4f1;
+    margin: 20px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .edit-container {
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    .edit-container button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
+  .edit-container .remove-button {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}

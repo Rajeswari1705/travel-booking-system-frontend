@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
 
  
 interface UserRoleCountResponse {
@@ -15,7 +16,7 @@ interface UserRoleCountResponse {
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css'],
-  imports : []
+  imports : [DashboardNavbarComponent]
 })
 export class AdminDashboardComponent implements OnInit {
  

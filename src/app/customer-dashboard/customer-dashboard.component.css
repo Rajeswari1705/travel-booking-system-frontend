@@ -1,0 +1,184 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #343a40;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.package-card {
+  background: #f0f8ff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 20px; /* Increased padding to prevent touching borders */
+  box-sizing: border-box;
+}
+
+.package-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  background-color: #e0f7fa; /* Cool hover color */
+}
+
+.package-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.package-details {
+  padding: 10px 0;
+}
+
+.package-details h3 {
+  color: #007bff;
+  margin: 0 0 10px 0;
+}
+
+.package-details p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+button {
+  flex: 1 1 30%;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #17a2b8; /* Teal hover color */
+}
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 1000px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-box input,
+.search-box button {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1 1 200px;
+  min-width: 150px;
+}
+
+.search-box button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-box button:hover {
+  background-color: #17a2b8;
+}
+.customer-dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto;
+  justify-content: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.search-box input,
+.search-box button {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 150px;
+}
+
+.search-box button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.clear-btn {
+  background-color: #dc3545;
+  color: white;
+}
+/* for ratings css style */
+/* src/app/customer-dashboard/customer-dashboard.component.css */
+
+/* ... existing styles ... */
+
+.stars {
+  color: gold; /* Default star color for empty stars */
+  display: inline-block; /* To keep stars together */
+}
+
+.star {
+  font-size: 20px;
+  /* Adjust this if you want stars to be clickable, but not for display */
+}
+
+.star.filled {
+  color: orange; /* Color for filled stars */
+}
+
+/* For half-filled stars */
+.star.half-filled {
+  position: relative;
+  display: inline-block;
+  color: gold; /* Color for the "empty" part of the half star */
+  overflow: hidden;
+  width: 1em; /* Adjust based on your font-size */
+}
+
+.star.half-filled:before {
+  content: '\2605'; /* Unicode star character */
+  position: absolute;
+  left: 0;
+  width: 50%; /* Make half of the star orange */
+  overflow: hidden;
+  color: orange; /* Color for the "filled" part of the half star */
+}

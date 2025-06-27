@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <!-- Profile Icon (Always Visible) -->
+    <a routerLink="/my-profile">
+  <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" width="40" height="40" />
+    </a>
+   
+    <!-- Show only for CUSTOMER -->
+    <div *ngIf="role === 'CUSTOMER'" class="nav-links">
+      <a routerLink="/customer-help" routerLinkActive="active-link">Help</a>
+      <a routerLink="/customer-insurance" routerLinkActive="active-link">My Insurance</a>
+    </div>
+  </nav>

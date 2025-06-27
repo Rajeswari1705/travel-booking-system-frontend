@@ -1,55 +1,77 @@
-/* Center the profile content */
+
+/* Container for the profile content - APPLY THESE CHANGES */
+.profile-card {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 40px 30px;
+  max-width: 600px;
+  width: 90%; /* Using percentage for better responsiveness */
+  text-align: center;
+  color: #2c3e50;
+
+  /* --- KEY STYLES FOR CENTERING --- */
+  position: absolute; /* Take it out of normal flow */
+  top: 50%;          /* Position top edge at 50% of parent height (viewport) */
+  left: 50%;         /* Position left edge at 50% of parent width (viewport) */
+  transform: translate(-50%, -50%); /* Adjust by its own size to truly center */
+  /* --- END KEY STYLES --- */
+
+  
+  z-index: 1;
+}
+
+/* Other styles for h2, p, buttons (from previous discussions) */
 h2 {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 26px;
-    font-weight: bold;
-    color: #333;
-  }
-   
-  p {
-    text-align: center;
-    font-size: 16px;
-    margin: 10px 0;
-    color: #444;
-  }
-   
-  /* Button container */
-  .profile-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-  }
-   
-  /* Style the buttons */
-  .profile-buttons button {
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-   
-  /* Different colors for each button */
-  .profile-buttons button:nth-child(1) {
-    background-color: #007bff;
-    color: white;
-  }
-   
-  .profile-buttons button:nth-child(2) {
-    background-color: #dc3545;
-    color: white;
-  }
-   
-  .profile-buttons button:nth-child(3) {
-    background-color: #6c757d;
-    color: white;
-  }
-   
-  /* Hover effects */
-  .profile-buttons button:hover {
-    opacity: 0.9;
-  }
+  text-align: center;
+  margin-top: 0; /* Remove default top margin to prevent pushing down */
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 25px; /* Spacing below heading */
+  line-height: 1.2;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+  margin-left: auto; /* Center the paragraph element itself */
+  margin-right: auto; /* Center the paragraph element itself */
+  margin-bottom: 15px; /* Consistent spacing below paragraphs */
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+/* Button container */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+/* Button styles */
+.profile-buttons button {
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.profile-buttons button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.profile-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
