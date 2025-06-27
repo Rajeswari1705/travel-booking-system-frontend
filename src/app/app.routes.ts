@@ -9,12 +9,14 @@ import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
-
+import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
+import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
- 
+  { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
+  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, // <--- ADD/ENSURE THIS LINE
   // Dashboard placeholders
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'agent-dashboard', loadComponent: () => import('./agent-dashboard/agent-dashboard.component').then(m => m.AgentDashboardComponent) },
