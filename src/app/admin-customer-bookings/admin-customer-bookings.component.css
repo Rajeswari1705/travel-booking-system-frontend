@@ -1,0 +1,122 @@
+/* General Body & Container */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light grey background */
+    color: #343a40; /* Dark text */
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .bookings-container {
+    max-width: 800px;
+    margin: 25px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Heading */
+  h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #212529; /* Dark heading */
+    font-size: 2.2em;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #007bff; /* Primary blue underline */
+    border-radius: 2px;
+  }
+  
+  /* Message Styling */
+  p.message {
+    text-align: center;
+    color: #28a745; /* Success green for message */
+    font-weight: 500;
+    margin-bottom: 20px;
+    background-color: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #28a745;
+  }
+  
+  /* Booking Cards */
+  .booking-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0; /* Light grey border */
+    border-radius: 8px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .booking-card p {
+    margin: 8px 0;
+    font-size: 0.95em;
+    line-height: 1.4;
+    display: flex; /* For label and value alignment */
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .booking-card strong {
+    color: rgb(0, 86, 179); /* Darker blue for labels */
+    min-width: 120px; /* Ensure labels align */
+    flex-shrink: 0;
+    margin-right: 15px;
+  }
+  
+  .booking-card span {
+    font-weight: 500;
+  }
+  
+  /* Status & Insurance Specific Styling */
+  .booking-card span[ng-reflect-ng-if]:not([ng-reflect-ng-if="false"]) {
+    color: #28a745; /* Green for confirmed/included */
+    font-weight: 600;
+  }
+  
+  .booking-card ng-template + span { /* Targeting ng-template siblings */
+    color: #dc3545; /* Red for pending/not included */
+    font-weight: 600;
+  }
+  
+  
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .bookings-container {
+      padding: 20px;
+      margin: 15px auto;
+    }
+    h2 {
+      font-size: 1.8em;
+    }
+    .booking-card {
+      padding: 15px 20px;
+    }
+    .booking-card p {
+      flex-direction: column; /* Stack label and value */
+      align-items: flex-start;
+    }
+    .booking-card strong {
+      margin-right: 0;
+      margin-bottom: 3px;
+    }
+  }
