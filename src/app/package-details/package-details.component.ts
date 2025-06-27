@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
  import { TravelPackageService } from '../services/package.service';
 import { TravelPackage } from '../models/travel-package';
  import { CommonModule } from '@angular/common';
- 
+ import { ReviewService } from '../services/review.service';
 @Component({ selector: 'app-package-details', 
   standalone: true,
    imports: [CommonModule],
@@ -15,6 +15,7 @@ import { TravelPackage } from '../models/travel-package';
    packageDetails:any;
 constructor( private route: ActivatedRoute,
    private packageService: TravelPackageService, 
+   private reviewService: ReviewService,
    private router: Router ) {}
  
    ngOnInit(): void {
