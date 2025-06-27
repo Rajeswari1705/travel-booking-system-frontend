@@ -1,1 +1,16 @@
-<p>customer-insurance works!</p>
+<div class="container">
+  <h2>My Insurances</h2>
+
+  <div class="content-box">
+    <div *ngIf="insurances.length === 0" class="no-insurance">
+      No insurance taken yet.
+    </div>
+
+    <div *ngFor="let ins of insurances" class="card">
+      <p><b>Coverage:</b> {{ ins.coverageType }}</p>
+      <p><b>Details:</b> {{ ins.coverageDetails }}</p>
+      <p><b>Price:</b> ₹{{ ins.price }}</p>
+      <p><b>Claimable:</b> ₹{{ ins.claimableAmount }}</p>
+    </div>
+  </div>
+</div>

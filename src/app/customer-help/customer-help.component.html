@@ -1,1 +1,25 @@
-<p>customer-help works!</p>
+<div class="container">
+  <h2>User Queries</h2>
+
+  <div *ngIf="queries.length === 0" class="no-query">
+    No queries raised yet.
+  </div>
+
+  <ul class="query-list">
+    <li *ngFor="let query of queries">
+      <b>{{ query.issue }}</b> — Status: {{ query.status }} — Resolution: {{ query.resolutionTime }}
+    </li>
+  </ul>
+
+  <hr>
+
+  <h3>Add New Query</h3>
+  <textarea
+    [(ngModel)]="newQuery"
+    (input)="onInputChange()"
+    placeholder="Describe your issue...">
+  </textarea><br>
+
+  <p class="message" *ngIf="hasTyped && showMessage">{{ showMessage }}</p>
+  <button (click)="submitQuery()">Submit</button>
+</div>

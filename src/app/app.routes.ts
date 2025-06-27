@@ -43,17 +43,24 @@ export const routes: Routes = [
     path: 'customer-help',
     loadComponent: () =>
       import('./customer-help/customer-help.component').then(
-        (m) => m.CustomerHelpComponent
+        m => m.CustomerHelpComponent
       ),
   },
   {
     path: 'customer-insurance',
     loadComponent: () =>
       import('./customer-insurance/customer-insurance.component').then(
-        (m) => m.CustomerInsuranceComponent
+        m => m.CustomerInsuranceComponent
       ),
   },
-
+  //For insurance Selection
+  {
+    path: 'insurance-selection',
+    loadComponent:()=>
+      import ('./insurance-selection/insurance-selection.component').then(
+        m=>m.InsuranceSelectionComponent
+      )
+  }
 
 ];
 

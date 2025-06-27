@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InsuranceService } from '../insurance.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-customer-insurance',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './customer-insurance.component.html',
-  styleUrl: './customer-insurance.component.css'
+  styleUrls: ['./customer-insurance.component.css']
 })
-export class CustomerInsuranceComponent {
+export class CustomerInsuranceComponent implements OnInit {
+  userId = Number(localStorage.getItem("userId"));
+  insurances: any[] = [];
 
+  constructor(private service: InsuranceService) {}
+
+  ngOnInit() {
+    this.service.getMyInsurances(this.userId).subscribe(res => {
+      this.insurances = res;
+    });
+  }
 }
