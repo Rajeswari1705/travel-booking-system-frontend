@@ -58,6 +58,14 @@ export const routes: Routes = [
         m => m.CustomerInsuranceComponent
       ),
   },
+  //For slecting insurance after choosing package
+  {
+    path: 'insurance-selection',
+    loadComponent: () =>
+      import('./insurance-selection/insurance-selection.component').then(
+        m => m.InsuranceSelectionComponent
+      ),
+  },
 
 
 ];
