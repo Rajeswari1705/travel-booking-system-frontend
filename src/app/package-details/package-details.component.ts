@@ -56,7 +56,7 @@ constructor( private route: ActivatedRoute,
   }
   addInsurance(): void {
     if (this.packageId) {
-      this.router.navigate(['/insurance', this.packageId]);
+      this.router.navigate(['/insurance-selection', this.packageId]);
     }
   }
     

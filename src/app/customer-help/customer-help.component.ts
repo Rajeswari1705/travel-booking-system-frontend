@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./customer-help.component.css']
 })
 export class CustomerHelpComponent implements OnInit {
-  userId = Number(localStorage.getItem("userId"));
+  userId = Number(localStorage.getItem("userId") || 0);
   queries: any[] = [];
   newQuery = '';
   showMessage = '';
@@ -24,7 +24,13 @@ export class CustomerHelpComponent implements OnInit {
   }
 
   loadQueries() {
-    this.service.getAssistanceQueries(this.userId).subscribe(res => this.queries = res);
+    this.service.getAssistanceQueries(this.userId).subscribe({
+      next: (res) => this.queries = res,
+      error: (err) => {
+        console.error('Error loading queries:', err);
+        this.showMessage = '❌ Failed to load queries.';
+      }
+    });
   }
 
   onInputChange() {
@@ -44,11 +50,19 @@ export class CustomerHelpComponent implements OnInit {
       return;
     }
 
-    this.service.addQuery(this.userId, trimmedQuery).subscribe(() => {
-      this.showMessage = '✅ Query submitted!';
-      this.newQuery = '';
-      this.hasTyped = false;
-      this.loadQueries();
+    console.log('Submitting query:', { userId: this.userId, issue: trimmedQuery });
+
+    this.service.addQuery(this.userId, trimmedQuery).subscribe({
+      next: () => {
+        this.showMessage = '✅ Query submitted!';
+        this.newQuery = '';
+        this.hasTyped = false;
+        this.loadQueries();
+      },
+      error: (err) => {
+        console.error('Submission error:', err);
+        this.showMessage = '❌ Failed to submit query. Please try again.';
+      }
     });
   }
 }
