@@ -10,8 +10,8 @@ import { TravelPackage } from '../models/travel-package';
   providedIn: 'root'
 })
 export class TravelPackageService {
-  private baseUrl = 'http://localhost:8089/api/packages'; // Assuming this is correct for your package management service
-  private reviewBaseUrl = 'http://localhost:8084/api/reviews';
+  private baseUrl = 'http://localhost:8080/api/packages'; // Assuming this is correct for your package management service
+  private reviewBaseUrl = 'http://localhost:8080/api/reviews';
   
   constructor(private http: HttpClient) {}
 
