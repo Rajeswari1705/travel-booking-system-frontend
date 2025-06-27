@@ -48,20 +48,25 @@ export const routes: Routes = [
     path: 'customer-help',
     loadComponent: () =>
       import('./customer-help/customer-help.component').then(
-        (m) => m.CustomerHelpComponent
+        m => m.CustomerHelpComponent
       ),
   },
   {
     path: 'customer-insurance',
     loadComponent: () =>
       import('./customer-insurance/customer-insurance.component').then(
-        (m) => m.CustomerInsuranceComponent
+        m => m.CustomerInsuranceComponent
       ),
   },
-  //For customer dashboard ,review dashboard,loading of package details
-  { path: '', redirectTo: 'customer-dashboard', pathMatch: 'full' }, 
-  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) },
-  { path: 'review-dashboard/:packageId', loadComponent: () => import('./review-dashboard/review-dashboard.component').then(m => m.ReviewDashboardComponent) },
-  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) }
+  //For slecting insurance after choosing package
+  {
+    path: 'insurance-selection',
+    loadComponent: () =>
+      import('./insurance-selection/insurance-selection.component').then(
+        m => m.InsuranceSelectionComponent
+      ),
+  },
+
+
 ];
 
