@@ -12,8 +12,8 @@ export class InsuranceService {
   }
  
   addQuery(userId: number, issue: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/assistance`, { userId, issue });
-  }
+    return this.http.post(`${this.baseUrl}/assistance`, { userId, issueDescription:issue });
+  }  
  
   getMyInsurances(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/insurance/user/${userId}`);

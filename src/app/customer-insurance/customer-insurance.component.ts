@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InsuranceService } from '../insurance.service';
+import { InsuranceService } from '../services/insurance.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
