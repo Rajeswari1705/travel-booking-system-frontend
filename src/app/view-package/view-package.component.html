@@ -1,7 +1,7 @@
 <div *ngIf="packageData" class="package-details">
     <h2>{{ packageData.title }}</h2>
     <!--Displaying image-->
-    <img [src]="packageData.imageUrl" alt="Package Image" width="400" height="250" style="border-radius: 10px; margin-bottom: 15px;">
+    <img *ngIf="packageData.imageUrl" [src]="'assets/images/' + packageData.imageUrl" alt="Package Image" width="400" height="250" style="border-radius: 10px; margin-bottom: 15px;">
     <p><strong>Description:</strong> {{ packageData.description }}</p>
     <p><strong>Duration:</strong> {{ packageData.duration }} days</p>
     <p><strong>Price:</strong> ₹{{ packageData.price }}</p>
@@ -12,6 +12,13 @@
     <p><strong>Start Date:</strong> {{ packageData.tripStartDate }}</p>
     <p><strong>End Date:</strong> {{ packageData.tripEndDate }}</p>
    
+    <h4>Highlights:</h4>
+    <ul>
+      <li *ngFor="let highlight of packageData.highlights">
+        ✅ {{ highlight }}
+      </li>
+    </ul>
+
     <h3>Offer:</h3>
     <p>Coupon Code: {{ packageData.offer?.couponCode }}</p>
     <p>Description: {{ packageData.offer?.description }}</p>

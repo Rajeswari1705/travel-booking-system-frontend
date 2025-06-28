@@ -28,6 +28,14 @@ export const routes: Routes = [
   { path: 'admin-user-manage' , loadComponent: () => import('./admin-user-manage/admin-user-manage.component').then(m =>AdminUserManageComponent)},
   { path: 'admin/agent-packages/:id', loadComponent: () => import('./admin-agent-packages/admin-agent-packages.component').then(m => m.AdminAgentPackagesComponent)},
   { path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)},
+  //for view booking option in admin registered list
+  {
+    path: 'admin/customer-bookings/:id',
+    loadComponent: () =>
+      import('./admin-customer-bookings/admin-customer-bookings.component').then(
+        m => m.AdminCustomerBookingsComponent
+      )
+  },
   
 
   //For creating new package by agent

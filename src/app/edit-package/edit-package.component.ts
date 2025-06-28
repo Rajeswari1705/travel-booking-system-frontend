@@ -30,6 +30,8 @@ export class EditPackageComponent implements OnInit {
     tripType:'',
     tripStartDate:'',
     tripEndDate:'',
+    imageUrl:'',
+    highlights:[],
     active: true,
 
     offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
@@ -120,4 +122,17 @@ export class EditPackageComponent implements OnInit {
   cancelForm(){
     this.router.navigate(['/agent-dashboard']);
   }
+
+  highlightInput: string = '';
+ 
+addHighlight() {
+  if (this.highlightInput.trim()) {
+    this.newPackage.highlights.push(this.highlightInput.trim());
+    this.highlightInput = '';
+  }
+}
+ 
+removeHighlight(index: number) {
+  this.newPackage.highlights.splice(index, 1);
+}
 }
