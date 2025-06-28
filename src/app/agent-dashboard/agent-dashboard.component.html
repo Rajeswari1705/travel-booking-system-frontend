@@ -17,6 +17,8 @@
             <button [routerLink]="['/view-package', pkg.packageId]">View Details</button>
             <button [routerLink]="['/edit-package', pkg.packageId]">Edit</button>
             <button (click)="deletePackage(pkg.packageId)"> Delete</button>
+
+            <button [routerLink]="['/agent-package-reviews',pkg.packageId]">View Reviews</button>
           </div>
           
         </li>

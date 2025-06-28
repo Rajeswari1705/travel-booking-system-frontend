@@ -1,0 +1,25 @@
+<div class="agent-container">
+    <h2>Reviews for Your Package #{{packageId}}</h2>
+   
+    <div *ngFor="let review of reviews" class="agent-review-card">
+      <strong>Rating:</strong> {{review.rating}} ⭐<br>
+      <strong>Comment:</strong> {{review.comment}}<br>
+      <small>{{review.timestamp}}</small>
+   
+      <div *ngIf="review.agentResponses?.length > 0" class="agent-response-block">
+        <div *ngFor="let response of review.agentResponses">
+          <strong>Your Response:</strong> {{response.responseMessage}}
+          <small>({{response.responseTime}})</small>
+        </div>
+      </div>
+   
+      <div class="agent-respond-box">
+        <input [(ngModel)]="newResponse[review.reviewId]" 
+               placeholder="Type your response...">
+        <button (click)="submitResponse(review.reviewId)">Respond</button>
+      </div>
+    </div>
+   
+    <p class="agent-message">{{message}}</p>
+  </div>
+   

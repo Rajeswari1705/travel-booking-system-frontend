@@ -78,6 +78,13 @@ export const routes: Routes = [
       ),
   },
 
+  //For agent to see the reviews and respond
+  {
+    path: 'agent-package-reviews/:packageId',
+    loadComponent:() => import('./agent-package-reviews/agent-package-reviews.component').then(
+      m => m.AgentPackageReviewsComponent)
+  },
+
 
 ];
 
