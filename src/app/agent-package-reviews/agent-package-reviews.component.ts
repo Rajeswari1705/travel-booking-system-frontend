@@ -56,7 +56,7 @@ export class AgentPackageReviewsComponent implements OnInit {
             return;
           }
           const payload = { responseMessage: this.newResponse[reviewId] };
-this.http.post(`http://localhost:8084/api/agent-responses/${this.agentId}/${reviewId}`, payload)
+            this.http.post(`http://localhost:8084/api/agent-responses/${this.agentId}/${reviewId}`, payload)
             .subscribe({
               next: () => {
                 this.message = "Response posted.";
