@@ -4,7 +4,7 @@
     <div class="card image-card">
       <img
         class="package-image"
-        [src]="packageDetails.imageUrl || 'https://via.placeholder.com/400x250?text=Package+Image'"
+        [src]="packageDetails?.imageUrl ? 'assets/images/' + packageDetails.imageUrl : 'assets/images/default.jpg'"
         alt="Package Image"
       />
     </div>
