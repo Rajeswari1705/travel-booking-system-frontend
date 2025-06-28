@@ -1,0 +1,134 @@
+/* --- Global / Base Styles (Re-use for consistency) --- */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define CSS Variables for easy theme management (consistent with Contact Us) */
+:root {
+    --primary-blue: #007bff;
+    --darker-blue: #0056b3;
+    --darkest-blue: #004085;
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --background-light: #f8f9fa;
+    --background-white: #ffffff;
+    --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --border-color-light: #e0e0e0;
+}
+
+/* --- About Container Styling (Corporate Look) --- */
+.about-container {
+    max-width: 960px;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: var(--background-white);
+    box-shadow: var(--shadow-light);
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.8;
+    /* --- ADJUSTMENT HERE: Changed border to black and slightly thicker --- */
+    border: 2px solid #000; /* 2px solid black border */
+}
+
+.about-container h2 {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    font-size: 3em;
+    color: var(--darker-blue);
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.about-container p {
+    font-size: 1.1em;
+    color: var(--text-color-dark);
+    margin-bottom: 25px;
+    text-align: center;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+/* Style for the emphasized core message paragraph */
+.about-container .core-message {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin-top: 40px;
+    padding: 20px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 5px;
+    background-color: #e6f2ff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .about-container {
+        padding: 40px;
+        margin: 40px auto;
+    }
+    .about-container h2 {
+        font-size: 2.6em;
+        margin-bottom: 12px;
+    }
+    .about-container p {
+        font-size: 1.05em;
+        max-width: 90%;
+    }
+    .about-container .core-message {
+        font-size: 1.15em;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        margin: 25px;
+        padding: 25px;
+    }
+    .about-container h2 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+    }
+    .about-container p {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+    .about-container .core-message {
+        font-size: 1.05em;
+        margin-top: 25px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        margin: 15px;
+        padding: 15px;
+    }
+    .about-container h2 {
+        font-size: 1.8em;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+    }
+    .about-container p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+    .about-container .core-message {
+        font-size: 0.95em;
+        margin-top: 20px;
+        padding: 10px;
+        border-width: 1px;
+    }
+}
