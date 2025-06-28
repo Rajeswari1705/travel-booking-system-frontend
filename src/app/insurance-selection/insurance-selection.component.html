@@ -1,24 +1,25 @@
 <div class="container">
-    <h2>Select Coverage Type</h2>
-  
-    <div class="plans">
-      <div class="plan" *ngFor="let plan of plans">
-        <div class="radio-group">
-          <input
-            type="radio"
-            name="coverage"
-            [value]="plan.coverageType"
-            [(ngModel)]="selected"
-            (change)="onSelectionChange()"
-          />
-          <label>{{ plan.coverageType }} – ₹{{ plan.price }}</label>
-        </div>
-        <p class="description">{{ plan.coverageDetails }}</p>
+  <h2>Select Coverage Type</h2>
+ 
+  <div class="plans">
+    <div class="plan-card" *ngFor="let plan of plans">
+      <div class="radio-group">
+        <input
+          type="radio"
+          name="coverage"
+          [value]="plan.coverageType"
+          [(ngModel)]="selected"
+          (change)="onSelectionChange()"
+        />
+        <label>{{ plan.coverageType }} – ₹{{ plan.price }}</label>
       </div>
+      <p class="description">{{ plan.coverageDetails }}</p>
     </div>
-  
-    <p class="error" *ngIf="error">{{ error }}</p>
-    <button (click)="submit()">Submit</button>
-    <p class="success" *ngIf="success">{{ success }}</p>
   </div>
-  
+ 
+  <p class="message error" *ngIf="error">{{ error }}</p>
+  <p class="message success" *ngIf="success">{{ success }}</p>
+ 
+  <button (click)="submit()">Submit</button>
+</div>
+ 
