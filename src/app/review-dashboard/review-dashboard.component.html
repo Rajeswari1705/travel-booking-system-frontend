@@ -1,44 +1,74 @@
-<div class="review-dashboard">
-  <h2>Package Reviews</h2>
+<!-- <div class="container" style="max-width:600px;margin:auto;">
+  <h2>Reviews for Package #{{packageId}}</h2>
  
-  <!-- Review List -->
-  <div class="review" *ngFor="let review of reviews">
-    <div class="review-header">
-      <div class="stars">
-        <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="review.rating >= star">&#9733;</span>
-      </div>
-      <p><strong>User {{ review.userId }}</strong> on {{ review.timestamp | date:'short' }}</p>
+  <div *ngIf="reviews.length > 0">
+    <div *ngFor="let r of reviews" style="border:1px solid #ddd;padding:10px;margin-bottom:8px;">
+      <strong>Rating:</strong> {{r.rating}} ⭐<br>
+      <strong>Comment:</strong> {{r.comment}}<br>
+      <small>{{r.timestamp}}</small>
     </div>
-    <p class="comment">{{ review.comment }}</p>
+  </div>
+  <div *ngIf="reviews.length === 0">
+    <p>No reviews yet for this package.</p>
+  </div>
  
-    <!-- Agent Response -->
-    <div *ngIf="review.agentResponse" class="agent-response">
-      <p><strong>Agent Response:</strong> {{ review.agentResponse.responseMessage }}</p>
+  <hr>
+ 
+  <div *ngIf="completedBooking && !alreadyReviewed">
+    <h3>Leave a Review</h3>
+    <div>
+      <span *ngFor="let star of [1,2,3,4,5]"
+            (click)="setRating(star)"
+            [style.color]="star <= rating ? 'orange' : 'gray'"
+            style="font-size:24px;cursor:pointer;">
+        ★
+      </span>
     </div>
+    <textarea [(ngModel)]="comment" rows="3" placeholder="Write your comment here..."
+              style="width:100%;margin-top:8px;"></textarea>
+    <button (click)="submitReview()" style="margin-top:8px;">Submit Review</button>
+  </div>
  
-    <!-- User actions -->
-    <div *ngIf="review.userId === userId">
-      <button (click)="enableEdit(review)">Edit</button>
-      <button (click)="deleteReview(review.reviewId)">Delete</button>
+  <p style="color:red;" *ngIf="message">{{message}}</p>
+</div> -->
+
+<div class="container" style="max-width:600px;margin:auto;">
+  <h2>Reviews for Package #{{packageId}}</h2>
+ 
+  <!-- ✅ Always show reviews list -->
+  <div *ngIf="reviews.length > 0; else noReviews">
+    <div *ngFor="let r of reviews" class="review-card">
+      <strong>Rating:</strong> {{r.rating}} ⭐<br>
+      <strong>Comment:</strong> {{r.comment}}<br>
+      <small>{{r.timestamp}}</small>
     </div>
   </div>
  
-  <!-- Add or Edit Review -->
-  <div class="review-form" *ngIf="canReview || editingReviewId !== null">
-    <h3>{{ editingReviewId ? 'Update' : 'Add' }} Your Review</h3>
+  <ng-template #noReviews>
+    <p>No reviews yet for this package.</p>
+  </ng-template>
  
-    <label>Rating:</label>
-    <div class="stars">
-      <span *ngFor="let star of [1,2,3,4,5]" class="star"
-            [class.filled]="newReview.rating >= star"
-            (click)="newReview.rating = star">&#9733;</span>
+  <hr>
+ 
+  <!-- ✅ Only show review form if allowed -->
+  <div *ngIf="completedBooking && !alreadyReviewed">
+    <h3>Leave a Review</h3>
+    <div>
+      <span *ngFor="let star of [1,2,3,4,5]" 
+            (click)="setRating(star)"
+            [style.color]="star <= rating ? 'orange' : 'gray'"
+            class="star">
+        ★
+      </span>
     </div>
+    <textarea [(ngModel)]="comment" rows="3" placeholder="Write your comment here..." 
+              style="width:100%;margin-top:8px;"></textarea>
+    <button (click)="submitReview()" style="margin-top:8px;">Submit Review</button>
+  </div>
  
-    <textarea [(ngModel)]="newReview.comment" name="comment" placeholder="Write your comment..."></textarea>
-    <br/>
-    <button (click)="editingReviewId ? updateReview() : submitReview()">
-      {{ editingReviewId ? 'Update' : 'Submit' }}
-    </button>
-    <button *ngIf="editingReviewId" (click)="cancelEdit()">Cancel</button>
+  <!-- ✅ Only show message near the form context -->
+  <div *ngIf="!completedBooking || alreadyReviewed" style="margin-top:10px;">
+    <p style="color:red;">{{message}}</p>
   </div>
 </div>
+ 

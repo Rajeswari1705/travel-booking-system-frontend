@@ -16,8 +16,9 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
-  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, // <--- ADD/ENSURE THIS LINE
+  
   // Dashboard placeholders
+  { path:'review-dashboard/:packageId',loadComponent:() => import('./review-dashboard/review-dashboard.component').then(m =>m.ReviewDashboardComponent)},
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'agent-dashboard', loadComponent: () => import('./agent-dashboard/agent-dashboard.component').then(m => m.AgentDashboardComponent) },
   { path: 'customer-dashboard', loadComponent: () => import('./customer-dashboard/customer-dashboard.component').then(m => m.CustomerDashboardComponent) },
