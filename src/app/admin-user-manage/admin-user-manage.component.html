@@ -52,6 +52,12 @@
           >
             <button class="action-button primary">View Packages</button>
           </a>
+          <a
+            *ngIf="user.role === 'CUSTOMER'"
+            [routerLink]="['/admin/customer-bookings', user.id]"
+          >
+            <button class="action-button primary">View Bookings</button>
+          </a>
           <button (click)="deleteUser(user.id)" class="action-button danger">
             Delete
           </button>
