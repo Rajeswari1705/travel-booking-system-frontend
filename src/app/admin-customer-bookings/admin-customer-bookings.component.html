@@ -1,0 +1,26 @@
+<div class="bookings-container">
+  <h2>Bookings by Customer #{{ customerId }}</h2>
+ 
+  <!-- Display message if no bookings are available -->
+  <p *ngIf="message" class="no-bookings-msg">{{ message }}</p>
+ 
+  <!-- Iterate over bookings if they exist -->
+  <div *ngFor="let booking of bookings" class="booking-card">
+    <p><strong>Booking ID:</strong> {{ booking.bookingId }}</p>
+    <p><strong>Package ID:</strong> {{ booking.packageId }}</p>
+    <p><strong>Trip Start:</strong> {{ booking.tripStartDate }}</p>
+    <p><strong>Trip End:</strong> {{ booking.tripEndDate }}</p>
+ 
+    <p>
+      <strong>Status:</strong>
+      <span *ngIf="booking.paymentId; else pending">Confirmed Booking</span>
+      <ng-template #pending>Payment Pending</ng-template>
+    </p>
+ 
+    <p>
+      <strong>Insurance:</strong>
+      <span *ngIf="booking.insuranceId; else noInsurance">Included</span>
+      <ng-template #noInsurance>Not Included</ng-template>
+    </p>
+  </div>
+</div>

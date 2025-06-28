@@ -25,6 +25,7 @@ export class AgentCreatePackageComponent {
     tripType:'',
     tripStartDate:'',
     tripEndDate:'',
+    imageUrl:'',
     active: true,
 
     offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
@@ -60,7 +61,7 @@ export class AgentCreatePackageComponent {
   }
 
   submitPackage(){
-    const url= `http://localhost:8080/api/packages`;
+    const url= `http://localhost:8089/api/packages`;
     const fullData = {
       ...this.newPackage,
       agentId: this.agentId
