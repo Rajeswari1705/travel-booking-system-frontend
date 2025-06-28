@@ -1,10 +1,11 @@
 
-<div class="package-container">
+<div *ngIf="packageDetails" class="package-container">
   <div class="top-section">
     <div class="card image-card">
+      <h2>{{ packageDetails.title }}</h2>
       <img
         class="package-image"
-        [src]="packageDetails?.imageUrl ? 'assets/images/' + packageDetails.imageUrl : 'assets/images/default.jpg'"
+        [src]="packageDetails.imageUrl ? 'assets/images/' + packageDetails.imageUrl : 'assets/images/default.jpg'"
         alt="Package Image"
       />
     </div>
