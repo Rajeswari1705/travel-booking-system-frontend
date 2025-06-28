@@ -32,15 +32,19 @@
   <p style="color:red;" *ngIf="message">{{message}}</p>
 </div> -->
 
-<div class="container" style="max-width:600px;margin:auto;">
+<!-- <div class="container" style="max-width:600px;margin:auto;">
   <h2>Reviews for Package #{{packageId}}</h2>
  
-  <!-- ✅ Always show reviews list -->
+  
   <div *ngIf="reviews.length > 0; else noReviews">
     <div *ngFor="let r of reviews" class="review-card">
       <strong>Rating:</strong> {{r.rating}} ⭐<br>
       <strong>Comment:</strong> {{r.comment}}<br>
       <small>{{r.timestamp}}</small>
+    <div *ngIf="r.agentResponse" class="agent-response-section">
+      <strong>Agent's Response (Agent ID: {{r.agentResponse.agentId}}):</strong> {{r.agentResponse.responseMessage}}<br>
+      <small>Responded on: {{r.agentResponse.responseTime | date:'medium'}}</small>
+    </div>
     </div>
   </div>
  
@@ -50,13 +54,13 @@
  
   <hr>
  
-  <!-- ✅ Only show review form if allowed -->
+
   <div *ngIf="completedBooking && !alreadyReviewed">
     <h3>Leave a Review</h3>
     <div>
       <span *ngFor="let star of [1,2,3,4,5]" 
             (click)="setRating(star)"
-            [style.color]="star <= rating ? 'orange' : 'gray'"
+            [class.active]="star <= rating "
             class="star">
         ★
       </span>
@@ -66,9 +70,53 @@
     <button (click)="submitReview()" style="margin-top:8px;">Submit Review</button>
   </div>
  
-  <!-- ✅ Only show message near the form context -->
+  
   <div *ngIf="!completedBooking || alreadyReviewed" style="margin-top:10px;">
     <p style="color:red;">{{message}}</p>
   </div>
 </div>
- 
+  -->
+
+  <div class="container">
+    <h2>Reviews for Package #{{packageId}}</h2>
+  
+    <div *ngIf="message" class="message">
+      <p>{{message}}</p>
+    </div>
+  
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <div *ngFor="let r of reviews" class="review-card">
+        <strong>Review by User ID:</strong> {{r.userId}} <br>
+        <strong>Rating:</strong> {{r.rating}} ⭐<br>
+        <strong>Comment:</strong> {{r.comment}}<br>
+        <small>Posted on: {{r.timestamp | date:'medium'}}</small>
+        <br>
+  
+        <div *ngIf="r.agentResponse" class="agent-response-section">
+          <strong>Agent's Response (Agent ID: {{r.agentResponse.agentId}}):</strong> {{r.agentResponse.responseMessage}}<br>
+          <small>Responded on: {{r.agentResponse.responseTime | date:'medium'}}</small>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noReviews>
+      <p>No reviews yet for this package.</p>
+    </ng-template>
+  
+    <hr>
+  
+    <div *ngIf="completedBooking && !alreadyReviewed">
+      <h3>Leave a Review</h3>
+      <div>
+        <span *ngFor="let star of [1,2,3,4,5]"
+              (click)="setRating(star)"
+              [class.active]="star <= rating "
+              class="star">
+          ★
+        </span>
+      </div>
+      <textarea [(ngModel)]="comment" rows="3" placeholder="Write your comment here..."
+                class="comment-textarea"></textarea>
+      <button (click)="submitReview()">Submit Review</button>
+    </div>
+  </div>

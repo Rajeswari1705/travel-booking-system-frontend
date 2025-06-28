@@ -1,4 +1,4 @@
-<div class="agent-container">
+<!-- <div class="agent-container">
     <h2>Reviews for Your Package #{{packageId}}</h2>
    
     <div *ngFor="let review of reviews" class="agent-review-card">
@@ -23,4 +23,36 @@
     <p class="agent-message">{{message}}</p>
   </div>
  
-  
+   -->
+   <app-dashboard-navbar></app-dashboard-navbar>
+   <div class="reviews-container">
+     <h2>Agent Responses for Package ID: {{ packageId }}</h2>
+   
+     <div *ngIf="message" class="message">{{ message }}</div>
+   
+     <div *ngIf="reviews.length > 0; else noReviews">
+       <div *ngFor="let review of reviews" class="review-card">
+         <h3>Review by User ID: {{ review.userId }} (Rating: {{ review.rating }}/5)</h3>
+         <p>"{{ review.comment }}"</p>
+         <small>Posted on: {{ review.timestamp | date:'medium' }}</small>
+   
+         <div *ngIf="review.agentResponse" class="agent-response">
+           <p><strong>Your Response:</strong> {{ review.agentResponse.responseMessage }}</p>
+           <small>Responded on: {{ review.agentResponse.responseTime | date:'medium' }}</small>
+         </div>
+   
+         <div *ngIf="!review.agentResponse" class="response-input">
+           <textarea
+             [(ngModel)]="newResponse[review.reviewId]"
+             placeholder="Type your response to this review..."
+             rows="3"
+           ></textarea>
+           <button (click)="submitResponse(review.reviewId)">Respond</button>
+         </div>
+       </div>
+     </div>
+   
+     <ng-template #noReviews>
+       <p>No reviews found for this package yet.</p>
+     </ng-template>
+   </div>
