@@ -62,6 +62,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'customer-dashboard', pathMatch: 'full' }, 
   { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) },
   { path: 'review-dashboard/:packageId', loadComponent: () => import('./review-dashboard/review-dashboard.component').then(m => m.ReviewDashboardComponent) },
-  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) }
+  { path: 'package/:packageId', loadComponent: () => import('./package-details/package-details.component').then(m => m.PackageDetailsComponent) },
 ];
 
