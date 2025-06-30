@@ -26,7 +26,7 @@ export class TravelPackageService {
   // CORRECTED: Changed packageId type to number
   getPackageById(packageId: number): Observable<TravelPackage> { // Type as TravelPackage
     return this.http.get<any>(`${this.baseUrl}/${packageId}`).pipe(
-      map(response => response.data || response) // Robustly get the package data
+      map((response: any) => response.data || response) // Robustly get the package data
     );
   }
    

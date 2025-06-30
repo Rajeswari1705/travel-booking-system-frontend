@@ -11,6 +11,10 @@ import { LandingNavbarComponent } from './landing-navbar/landing-navbar.componen
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
 import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
+import { BookingComponent } from './booking/booking.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentSuccessComponent } from './payment-suceess/payment-suceess.component';
+import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
@@ -84,6 +88,11 @@ export const routes: Routes = [
     loadComponent:() => import('./agent-package-reviews/agent-package-reviews.component').then(
       m => m.AgentPackageReviewsComponent)
   },
+
+  { path: 'booking', component: BookingComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { path: 'my-bookings', component: MyBookingsComponent },
  
  
 ];

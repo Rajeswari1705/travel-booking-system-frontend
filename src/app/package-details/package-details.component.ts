@@ -5,6 +5,7 @@ import { TravelPackage } from '../models/travel-package';
  import { CommonModule } from '@angular/common';
  import { ReviewService } from '../services/review.service';
 import { InsuranceService} from '../services/insurance.service';
+
 @Component({ selector: 'app-package-details',
   standalone: true,
    imports: [CommonModule],
@@ -53,8 +54,16 @@ constructor( private route: ActivatedRoute,
     }
   }
   goToBooking(): void {
-    if (this.packageId) {
-      this.router.navigate(['/booking', this.packageId]);
+    if (this.packageDetails) {
+      this.router.navigate(['/booking'], {
+        state: {
+          packageData: {
+            packageId: this.packageDetails.packageId,
+            tripStartDate: this.packageDetails.tripStartDate,
+            tripEndDate: this.packageDetails.tripEndDate
+          }
+        }
+      });
     }
   }
   addInsurance(): void {

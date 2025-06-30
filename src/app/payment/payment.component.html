@@ -1,1 +1,107 @@
-<p>payment works!</p>
+<div class="payment-container">
+  <h2>Process Payment</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div class="payment-details">
+    <p><strong>Booking ID:</strong> {{ bookingId }}</p>
+    <p><strong>User ID:</strong> {{ userId }}</p>
+    <p><strong>Amount Due:</strong> <input type="number" [(ngModel)]="paymentAmount" placeholder="Enter amount"></p>
+    </div>
+
+  <div class="payment-form">
+    <h3>Payment Information</h3>
+    <p>For demonstration, we are skipping actual card details.</p>
+    <label for="paymentMethod">Payment Method:</label>
+    <select id="paymentMethod" [(ngModel)]="paymentMethod">
+      <option value="Credit Card">Credit Card</option>
+      <option value="Debit Card">Debit Card</option>
+      <option value="Net Banking">Net Banking</option>
+    </select>
+
+    <button class="btn pay-now" (click)="processPayment()">Pay Now</button>
+  </div>
+</div>
+
+<style>
+.payment-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+.payment-container h2 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+.payment-details p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+.payment-details input {
+  padding: 8px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.payment-form {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+.payment-form h3 {
+  color: #555;
+  margin-bottom: 15px;
+}
+.payment-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.payment-form select {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.btn.pay-now {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+.btn.pay-now:hover {
+  background-color: #218838;
+}
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+</style>
