@@ -23,8 +23,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "public",
+                "output":"/"
+              },
+              "src/assets",
+              "src/favico.ico"
             ],
             "styles": [
               "src/styles.css"
@@ -83,6 +86,7 @@
                 "glob": "**/*",
                 "input": "public"
               }
+              
             ],
             "styles": [
               "src/styles.css"

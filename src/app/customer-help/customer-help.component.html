@@ -1,1 +1,38 @@
-<p>customer-help works!</p>
+<div class="card-container">
+  <h2 class="centered-heading">User Queries</h2>
+
+  <div *ngIf="queries.length === 0" class="no-query centered-text">
+    No queries raised yet.
+  </div>
+
+  <ul class="query-list">
+    <li *ngFor="let query of queries" class="query-item">
+      <div class="status-top-right" [ngClass]="{
+        'active': query.status === 'Active',
+        'pending': query.status === 'Pending',
+        'resolved': query.status === 'Resolved'
+      }">
+        {{ query.status }}
+      </div>
+      <div class="query-details">
+        <b>Assistance ID:</b> {{ query.requestId }}<br>
+        <b>Query:</b> {{ query.issueDescription }}<br>
+        <b>Submitted At:</b> {{ query.requestTimestamp | date:'medium' }}
+      </div>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h3 class="centered-heading">Add New Query</h3>
+  <div class="centered-form">
+    <textarea
+      [(ngModel)]="newQuery"
+      (input)="onInputChange()"
+      placeholder="Describe your issue...">
+    </textarea><br>
+
+    <p class="message" *ngIf="hasTyped && showMessage">{{ showMessage }}</p>
+    <button (click)="submitQuery()">Submit</button>
+  </div>
+</div>

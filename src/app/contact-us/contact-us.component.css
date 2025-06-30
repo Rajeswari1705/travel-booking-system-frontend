@@ -1,0 +1,392 @@
+/* --- Global / Base Styles (Re-use from About Us, ensure consistency) --- */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Optional: If you want to force no scroll on body/html, but content will be cut off if it overflows */
+    /* height: 100vh; */
+    /* overflow: hidden; */
+}
+
+/* Define CSS Variables for easy theme management */
+:root {
+    --primary-blue: #007bff;
+    --darker-blue: #0056b3;
+    --darkest-blue: #004085;
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --background-light: #f8f9fa;
+    --background-white: #ffffff;
+    --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --border-color: #ddd; /* Light gray border for inputs */
+    --focus-border-color: #80bdff; /* Light blue for input focus */
+}
+
+/* --- Contact Container Styling --- */
+.contact-container {
+    max-width: 1100px;
+    /* Reduced margins and padding to save vertical space */
+    margin: 20px auto; /* Reduced from 40px */
+    padding: 25px; /* Reduced from 40px */
+    background-color: var(--background-white);
+    box-shadow: var(--shadow-light);
+    border-radius: 8px;
+    text-align: center;
+    overflow: hidden; /* Prevents internal scrollbars on the container itself */
+}
+
+.contact-container h2 {
+    font-size: 2.2em; /* Reduced from 2.8em */
+    color: var(--darker-blue);
+    margin-bottom: 15px; /* Reduced from 20px */
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.contact-container .intro-message {
+    font-size: 1em; /* Reduced from 1.1em */
+    color: var(--text-color-medium);
+    margin-bottom: 25px; /* Reduced from 40px */
+    padding: 0 10px; /* Reduced horizontal padding */
+}
+
+/* --- Grid Layout for Form and Info --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 25px; /* Reduced from 40px */
+    text-align: left; /* Align content within grid columns to the left */
+}
+
+/* --- Contact Form Section --- */
+.contact-form-section {
+    background-color: #f0f4f7; /* Very light blueish background for the form area */
+    padding: 20px; /* Reduced from 30px */
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+}
+
+.contact-form-section h3 {
+    font-size: 1.6em; /* Reduced from 1.8em */
+    color: var(--darker-blue);
+    margin-bottom: 10px; /* Reduced from 25px, adjusted for form note */
+    text-align: center;
+}
+
+/* New style for the form note */
+.contact-form-section .form-note {
+    font-size: 0.9em;
+    color: #6a6a6a;
+    margin-bottom: 15px; /* Reduced from 25px */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.contact-form-section .form-note .fas {
+    color: #ffc107;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.contact-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px; /* Reduced from 8px */
+    color: var(--text-color-dark);
+    font-size: 0.95em;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px; /* Reduced from 12px 10px */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    color: var(--text-color-dark);
+    background-color: var(--background-white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--focus-border-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 80px; /* Reduced from 100px */
+}
+
+.contact-form .submit-button {
+    background-color: var(--primary-blue);
+    color: black; /* Button text is black */
+    padding: 10px 20px; /* Reduced from 12px 25px */
+    border: 1px solid var(--primary-blue);
+    border-radius: 5px;
+    font-size: 1em; /* Reduced from 1.1em */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    width: auto;
+    display: block;
+    margin: 15px auto 0 auto; /* Reduced margin */
+    min-width: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .submit-button:hover {
+    background-color: var(--darker-blue);
+    border-color: var(--darker-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Contact Info Section --- */
+.contact-info-section {
+    background-color: var(--background-white);
+    padding: 20px; /* Reduced from 30px */
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+.contact-info-section h3 {
+    font-size: 1.6em; /* Reduced from 1.8em */
+    color: var(--darker-blue);
+    margin-bottom: 15px; /* Reduced from 25px */
+    text-align: center;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Reduced from 15px */
+    color: var(--text-color-dark);
+    font-size: 1em; /* Reduced from 1.05em */
+}
+
+.contact-detail .icon {
+    color: var(--primary-blue);
+    font-size: 1.2em; /* Reduced from 1.4em */
+    margin-right: 10px; /* Reduced from 15px */
+    width: 25px; /* Reduced from 30px */
+    text-align: center;
+}
+
+.contact-detail a {
+    color: var(--darker-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-detail a:hover {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+/* --- Social Media Section --- */
+.social-media {
+    margin-top: 20px; /* Reduced from 30px */
+    text-align: center;
+}
+
+.social-media h4 {
+    font-size: 1.2em; /* Reduced from 1.4em */
+    color: var(--darker-blue);
+    margin-bottom: 10px; /* Reduced from 15px */
+}
+
+.social-icon {
+    color: var(--darker-blue);
+    font-size: 1.8em; /* Slightly reduced */
+    margin: 0 8px; /* Slightly reduced horizontal margin */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+    color: var(--primary-blue);
+    transform: translateY(-3px);
+}
+
+/* --- Map Section --- */
+.map-section {
+    margin-top: 20px; /* Reduced from 30px */
+    text-align: center;
+}
+
+.map-section h4 {
+    font-size: 1.2em; /* Reduced from 1.4em */
+    color: var(--darker-blue);
+    margin-bottom: 10px; /* Reduced from 15px */
+}
+
+.map-section iframe {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 180px; /* Reduced from 250px */
+}
+
+.map-section .map-note {
+    font-size: 0.9em;
+    margin-top: 5px; /* Reduced from 10px */
+}
+
+.map-section .map-note a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.map-section .map-note a:hover {
+    text-decoration: underline;
+}
+
+/* --- FAQ Link Section --- */
+.faq-link-section {
+    margin-top: 20px; /* Reduced from 30px */
+    text-align: center;
+    font-size: 1em; /* Reduced from 1.1em */
+}
+
+.faq-link-section a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: text-decoration 0.3s ease;
+}
+
+.faq-link-section a:hover {
+    text-decoration: underline;
+}
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stacks columns on smaller screens */
+    }
+
+    .contact-container {
+        padding: 20px; /* Further reduction */
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        margin: 15px; /* Further reduction */
+        padding: 15px; /* Further reduction */
+    }
+
+    .contact-container h2 {
+        font-size: 2em; /* Adjusted */
+    }
+
+    .contact-container .intro-message {
+        font-size: 0.95em; /* Adjusted */
+        margin-bottom: 20px;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 15px; /* Further reduction */
+    }
+
+    .contact-form-section h3,
+    .contact-info-section h3 {
+        font-size: 1.4em; /* Adjusted */
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        width: calc(100% - 16px);
+        padding: 8px; /* Further reduction */
+    }
+
+    .contact-form .submit-button {
+        padding: 8px 15px; /* Further reduction */
+        font-size: 0.9em; /* Adjusted */
+    }
+
+    .contact-detail {
+        font-size: 0.9em; /* Adjusted */
+        margin-bottom: 8px; /* Adjusted */
+    }
+
+    .social-icon {
+        font-size: 1.6em; /* Adjusted */
+        margin: 0 6px; /* Adjusted */
+    }
+
+    .map-section iframe {
+        height: 150px; /* Further reduction */
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 10px; /* Max reduction */
+        margin: 10px; /* Max reduction */
+    }
+
+    .contact-container h2 {
+        font-size: 1.6em; /* Max reduction */
+    }
+
+    .contact-container .intro-message {
+        padding: 0 5px; /* Max reduction */
+        margin-bottom: 15px;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 10px; /* Max reduction */
+    }
+
+    .contact-form-section h3,
+    .contact-info-section h3 {
+        font-size: 1.2em; /* Max reduction */
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        padding: 6px; /* Max reduction */
+        font-size: 0.8em; /* Max reduction */
+    }
+
+    .contact-form-section .form-note {
+        font-size: 0.75em; /* Max reduction */
+        padding: 0 5px;
+        margin-bottom: 10px;
+    }
+
+    .contact-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .contact-detail .icon {
+        margin-bottom: 5px;
+    }
+
+    .map-section iframe {
+        height: 120px; /* Extreme reduction */
+    }
+}
