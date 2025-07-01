@@ -11,12 +11,16 @@ import { LandingNavbarComponent } from './landing-navbar/landing-navbar.componen
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
 import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
+import { BookingComponent } from './booking/booking.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentSuccessComponent } from './payment-suceess/payment-suceess.component';
+import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
-  
+ 
   // Dashboard placeholders
   { path:'review-dashboard/:packageId',loadComponent:() => import('./review-dashboard/review-dashboard.component').then(m =>m.ReviewDashboardComponent)},
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
@@ -36,25 +40,25 @@ export const routes: Routes = [
         m => m.AdminCustomerBookingsComponent
       )
   },
-  
-
+ 
+ 
   //For creating new package by agent
   { path: 'create-package', loadComponent:() => import('./agent-create-package/agent-create-package.component').then(m=> m.AgentCreatePackageComponent)},
-
+ 
   //for landing navbar
   { path: 'about', loadComponent: () => import('./about/about.component').then(m => m.AboutComponent) },
 { path: 'contact-us', loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent) },
-
-
-
+ 
+ 
+ 
   //For package editing/updating in agent dashboard
   { path: 'edit-package/:id', loadComponent:() => import('./edit-package/edit-package.component').then(m => m.EditPackageComponent)},
-
+ 
   //For viewing the details of the package by the agent(retrieve)
   { path: 'view-package/:id', loadComponent:() => import('./view-package/view-package.component').then(m => m.ViewPackageComponent)},
-  
+ 
   //for help and insurance
-
+ 
   {
     path: 'customer-help',
     loadComponent: () =>
@@ -77,7 +81,7 @@ export const routes: Routes = [
         m => m.InsuranceSelectionComponent
       ),
   },
-
+ 
   //For agent to see the reviews and respond
   {
     path: 'agent-package-reviews/:packageId',
@@ -85,6 +89,13 @@ export const routes: Routes = [
       m => m.AgentPackageReviewsComponent)
   },
 
-
+  { path: 'booking', component: BookingComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { path: 'my-bookings', component: MyBookingsComponent },
+ 
+ 
 ];
-
+ 
+ 
+ 

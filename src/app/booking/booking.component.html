@@ -1,0 +1,40 @@
+<div *ngIf="travelPackage">
+    <h2>Book Travel Package: {{ travelPackage.title }}</h2>
+    <p>Description: {{ travelPackage.description }}</p>
+    <p>Price: {{ travelPackage.price | currency:'USD':'symbol':'1.2-2' }}</p>
+    <p>Dates: {{ travelPackage.tripStartDate }} to {{ travelPackage.tripEndDate }}</p>
+  
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="userId">Your User ID:</label>
+        <input id="userId" type="number" formControlName="userId" required>
+        <div *ngIf="bookingForm.get('userId')?.invalid && bookingForm.get('userId')?.touched" class="error-message">
+          User ID is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="insuranceId">Insurance ID (Optional):</label>
+        <input id="insuranceId" type="number" formControlName="insuranceId">
+      </div>
+  
+      <div class="form-group">
+        <label for="tripStartDate">Trip Start Date:</label>
+        <input id="tripStartDate" type="date" formControlName="tripStartDate" readonly>
+      </div>
+  
+      <div class="form-group">
+        <label for="tripEndDate">Trip End Date:</label>
+        <input id="tripEndDate" type="date" formControlName="tripEndDate" readonly>
+      </div>
+  
+      <button type="submit" [disabled]="!bookingForm.valid">Confirm Booking</button>
+    </form>
+  
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  </div>
+  
+  <div *ngIf="!travelPackage && !errorMessage">
+    Loading package details...
+  </div>
