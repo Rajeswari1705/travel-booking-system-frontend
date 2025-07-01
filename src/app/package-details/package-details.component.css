@@ -170,4 +170,19 @@
     line-height: 1.4;
     flex-grow: 1;
   }
+  .package-images-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between images */
+    justify-content: center;
+    margin-top: 15px;
+  }
   
+  .package-images-gallery .package-image {
+    width: 100%; /* Make images fill available width by default */
+    max-width: 300px; /* Limit maximum width of each image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+  }

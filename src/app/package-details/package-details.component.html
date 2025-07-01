@@ -2,11 +2,20 @@
   <div class="top-section">
     <div class="card image-card">
       <h2>{{ packageDetails.title }}</h2>
-      <img
-        class="package-image"
-        [src]="packageDetails.imageUrl ? 'assets/images/' + packageDetails.imageUrl : 'assets/images/default.jpg'"
-        alt="Package Image"
-      />
+      <div class="package-images-gallery">
+        <img
+          *ngFor="let imageUrl of packageDetails.imageUrls"
+          class="package-image"
+          [src]="'assets/images/' + imageUrl"
+          alt="Package Image"
+        />
+        <img
+          *ngIf="!packageDetails.imageUrls || packageDetails.imageUrls.length === 0"
+          class="package-image"
+          src="assets/images/default.jpg"
+          alt="Default Package Image"
+        />
+      </div>
     </div>
  
     <div class="card details-card">
