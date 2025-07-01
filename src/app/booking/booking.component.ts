@@ -81,9 +81,9 @@ this.bookingForm = this.fb.group({
       tripStartDate: this.tripStartDate,
       tripEndDate: this.tripEndDate
     };
-  
+ 
     console.log('Booking payload:', payload); // ✅ Inspect in browser console
-  
+ 
     this.bookingService.createBooking(payload).subscribe({
       next: (res) => {
         alert('Booking Created!');
@@ -93,15 +93,16 @@ this.bookingForm = this.fb.group({
       },
       error: (err) => {
         console.error('Booking failed:', err);
-    
+   
         const errorMsg =
           err?.error?.message ||         // proper error body (e.g., from ApiResponse)
           err?.message ||                // generic message (e.g., HttpClient)
           err?.statusText ||             // fallback HTTP status
           'Something went wrong.';
-    
+   
         alert('Booking failed: ' + errorMsg);
       }
     });
   }
 }
+ 

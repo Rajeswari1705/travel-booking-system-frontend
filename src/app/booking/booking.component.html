@@ -1,17 +1,17 @@
 <div class="card p-4 max-w-xl mx-auto bg-white rounded-lg shadow-md mt-6">
   <h2 class="text-2xl font-semibold mb-4 text-blue-600">Confirm Your Booking</h2>
-
+ 
   <form [formGroup]="bookingForm" (ngSubmit)="bookPackage()" class="space-y-4">
     <div>
       <label class="block text-sm font-medium text-gray-700">Trip Start Date</label>
       <p class="bg-gray-100 p-2 rounded text-gray-800">{{ tripStartDate }}</p>
     </div>
-
+ 
     <div>
       <label class="block text-sm font-medium text-gray-700">Trip End Date</label>
       <p class="bg-gray-100 p-2 rounded text-gray-800">{{ tripEndDate }}</p>
     </div>
-
+ 
     <div>
       <label class="block text-sm font-medium text-gray-700">Insurance ID (optional)</label>
       <input
@@ -21,7 +21,7 @@
         placeholder="Enter Insurance ID"
       />
     </div>
-
+ 
     <button
       type="submit"
       class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
