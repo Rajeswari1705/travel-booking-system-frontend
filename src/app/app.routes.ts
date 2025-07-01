@@ -9,14 +9,14 @@ import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
-import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
-import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
+import { PackageDetailsComponent } from './package-details/package-details.component'; 
+import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
-  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, // <--- ADD/ENSURE THIS LINE
+  { path: 'packages/:packageId', component: PackageDetailsComponent },     
+  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, 
   // Dashboard placeholders
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'agent-dashboard', loadComponent: () => import('./agent-dashboard/agent-dashboard.component').then(m => m.AgentDashboardComponent) },
@@ -74,6 +74,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./insurance-selection/insurance-selection.component').then(
         m => m.InsuranceSelectionComponent
+      ),
+  },
+
+  //for showing a customer's bookings
+  {
+    path: 'my-bookings', // The URL path (e.g., yourdomain.com/my-bookings)
+    loadComponent: () =>
+      import('./customer-mybookings/customer-mybookings.component').then(
+        m => m.CustomerMybookingsComponent // This loads the component lazily
       ),
   },
 
