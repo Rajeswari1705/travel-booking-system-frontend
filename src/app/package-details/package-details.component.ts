@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
- import { ActivatedRoute, Router } from '@angular/router'; 
+ import { ActivatedRoute, Router } from '@angular/router';
  import { TravelPackageService } from '../services/package.service';
 import { TravelPackage } from '../models/travel-package';
  import { CommonModule } from '@angular/common';
  import { ReviewService } from '../services/review.service';
 import { InsuranceService} from '../services/insurance.service';
-@Component({ selector: 'app-package-details', 
+
+@Component({ selector: 'app-package-details',
   standalone: true,
    imports: [CommonModule],
-    templateUrl: './package-details.component.html', 
-    styleUrl: './package-details.component.css' }) 
+    templateUrl: './package-details.component.html',
+    styleUrl: './package-details.component.css' })
   export class PackageDetailsComponent implements OnInit {
      packageId!: number;
     // travelPackage!: TravelPackage;
    packageDetails:any;
 constructor( private route: ActivatedRoute,
-   private packageService: TravelPackageService, 
+   private packageService: TravelPackageService,
    private reviewService: ReviewService,
    private insuranceService:InsuranceService,
    private router: Router ) {}
@@ -26,7 +27,7 @@ constructor( private route: ActivatedRoute,
     if (idParam) {
         this.packageId = Number(idParam);
         console.log('Opened Package ID:', this.packageId);
-
+ 
         this.packageService.getPackageById(this.packageId).subscribe({
             next: (response: any) => {
                 console.log('Fetched package details:', response);
@@ -53,12 +54,21 @@ constructor( private route: ActivatedRoute,
     }
   }
   goToBooking(): void {
-    if (this.packageId) {
-      this.router.navigate(['/booking', this.packageId]);
+    if (this.packageDetails) {
+      this.router.navigate(['/booking'], {
+        state: {
+          packageData: {
+            packageId: this.packageDetails.packageId,
+            tripStartDate: this.packageDetails.tripStartDate,
+            tripEndDate: this.packageDetails.tripEndDate
+          }
+        }
+      });
     }
   }
   addInsurance(): void {
     this.router.navigate(['/insurance-selection']);
   }
-    
+   
   }
+ 

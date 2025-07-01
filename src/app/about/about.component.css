@@ -1,4 +1,4 @@
-/* --- Global / Base Styles (Re-use for consistency) --- */
+/* --- Global / Base Styles (Retain current) --- */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -22,113 +22,316 @@ body {
     --border-color-light: #e0e0e0;
 }
 
-/* --- About Container Styling (Corporate Look) --- */
+/* --- Hero Section Styling --- */
+.about-hero {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(70%); /* Slightly darken image for text readability */
+}
+
+.hero-overlay {
+    position: absolute;
+    z-index: 1;
+    padding: 20px;
+}
+
+.about-hero h1 {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    font-size: 3.8em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.about-hero p {
+    font-size: 1.5em;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* --- About Container Styling (Corporate Look with pamphlet sections) --- */
 .about-container {
-    max-width: 960px;
+    max-width: 1000px; /* Slightly wider to accommodate visuals */
     margin: 50px auto;
     padding: 50px;
     background-color: var(--background-white);
     box-shadow: var(--shadow-light);
     border-radius: 8px;
-    text-align: center;
+    /* Removed text-align: center; from here to allow left/right alignment in sections */
     line-height: 1.8;
-    /* --- ADJUSTMENT HERE: Changed border to black and slightly thicker --- */
-    border: 2px solid #000; /* 2px solid black border */
+    border: 2px solid #000;
+}
+
+.section-block {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Space between text and image */
+    margin-bottom: 60px;
+    text-align: left; /* Align text within its block */
+}
+
+.section-block:last-of-type {
+    margin-bottom: 0;
+}
+
+.section-block.reverse-layout {
+    flex-direction: row-reverse;
+}
+
+.text-content {
+    flex: 2; /* Text takes more space */
+    padding-right: 20px; /* Small padding */
+}
+
+.image-content {
+    flex: 1; /* Image takes less space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.section-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+/* Stickers - positioned relative to image-content or text-content */
+.sticker-image {
+    position: absolute;
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    z-index: 2; /* Bring stickers to front */
+    opacity: 0.9;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+}
+
+.map-sticker {
+    top: -30px;
+    left: -30px;
+    transform: rotate(-10deg);
+}
+
+.passport-sticker {
+    bottom: -20px;
+    right: -20px;
+    transform: rotate(15deg);
+}
+
+.plane-sticker {
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
 }
 
 .about-container h2 {
     font-family: 'Georgia', 'Times New Roman', Times, serif;
-    font-size: 3em;
+    font-size: 2.8em; /* Slightly adjusted for section headings */
     color: var(--darker-blue);
     margin-bottom: 15px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
+    text-align: center; /* Keep main H2 centered */
+}
+
+.about-container h3 {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    font-size: 2em;
+    color: var(--darker-blue);
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 .about-container p {
     font-size: 1.1em;
     color: var(--text-color-dark);
-    margin-bottom: 25px;
-    text-align: center;
-    max-width: 780px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 15px; /* Reduced margin for sections */
+    max-width: none; /* Remove previous max-width */
     line-height: 1.7;
+    text-align: left; /* Default text alignment */
 }
 
 /* Style for the emphasized core message paragraph */
-.about-container .core-message {
+.core-message-section {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.core-message {
     font-size: 1.25em;
     font-weight: 600;
     color: var(--primary-blue);
     margin-top: 40px;
-    padding: 20px;
+    padding: 25px;
     border: 2px solid var(--primary-blue);
-    border-radius: 5px;
+    border-radius: 10px; /* Slightly more rounded */
     background-color: #e6f2ff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+    display: inline-block; /* To make padding work correctly */
+    max-width: 800px;
 }
 
-/* Responsive Adjustments */
+.call-to-action {
+    position: relative;
+    margin-top: 30px;
+    padding-top: 40px; /* Space for the sticker */
+}
+
+.cta-button {
+    background-color: var(--darker-blue);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-light);
+}
+
+.cta-button:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+
+/* Responsive Adjustments (Retain and adapt) */
 @media (max-width: 992px) {
+    .about-hero {
+        height: 300px;
+    }
+    .about-hero h1 {
+        font-size: 3em;
+    }
+    .about-hero p {
+        font-size: 1.2em;
+    }
     .about-container {
         padding: 40px;
         margin: 40px auto;
     }
     .about-container h2 {
-        font-size: 2.6em;
-        margin-bottom: 12px;
+        font-size: 2.4em;
     }
-    .about-container p {
-        font-size: 1.05em;
-        max-width: 90%;
+    .about-container h3 {
+        font-size: 1.8em;
     }
-    .about-container .core-message {
-        font-size: 1.15em;
-        padding: 15px;
+    .section-block {
+        flex-direction: column; /* Stack elements on smaller screens */
+        gap: 25px;
+    }
+    .section-block.reverse-layout {
+        flex-direction: column;
+    }
+    .text-content {
+        padding-right: 0;
+    }
+    .image-content {
+        order: -1; /* Image appears before text when stacked */
+        margin-bottom: 20px;
+    }
+    .sticker-image {
+        width: 60px;
+    }
+    .map-sticker {
+        top: -20px;
+        left: 0;
+    }
+    .passport-sticker {
+        bottom: -10px;
+        right: 0;
+    }
+    .plane-sticker {
+        top: -30px;
     }
 }
 
 @media (max-width: 768px) {
+    .about-hero {
+        height: 250px;
+    }
+    .about-hero h1 {
+        font-size: 2.5em;
+    }
+    .about-hero p {
+        font-size: 1em;
+    }
     .about-container {
         margin: 25px;
         padding: 25px;
     }
     .about-container h2 {
-        font-size: 2.2em;
-        margin-bottom: 10px;
+        font-size: 2em;
+    }
+    .about-container h3 {
+        font-size: 1.6em;
     }
     .about-container p {
         font-size: 1em;
-        margin-bottom: 15px;
     }
-    .about-container .core-message {
-        font-size: 1.05em;
-        margin-top: 25px;
-        padding: 12px;
+    .core-message {
+        font-size: 1.1em;
+        padding: 20px;
+    }
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
     }
 }
 
 @media (max-width: 480px) {
+    .about-hero {
+        height: 200px;
+    }
+    .about-hero h1 {
+        font-size: 1.8em;
+    }
+    .about-hero p {
+        font-size: 0.9em;
+    }
     .about-container {
         margin: 15px;
         padding: 15px;
     }
     .about-container h2 {
-        font-size: 1.8em;
-        letter-spacing: 0.05em;
-        margin-bottom: 8px;
+        font-size: 1.6em;
+    }
+    .about-container h3 {
+        font-size: 1.4em;
     }
     .about-container p {
         font-size: 0.9em;
-        margin-bottom: 15px;
     }
-    .about-container .core-message {
-        font-size: 0.95em;
-        margin-top: 20px;
-        padding: 10px;
-        border-width: 1px;
+    .core-message {
+        font-size: 1em;
+        padding: 15px;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    .sticker-image {
+        width: 45px;
     }
 }
