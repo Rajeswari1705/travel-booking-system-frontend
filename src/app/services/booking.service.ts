@@ -19,4 +19,10 @@ return this.http.post<any>(this.api, data);
   getBookingsByUser(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/internal/bookings/user/${userId}`);
   }
+  
+  cancelBooking(bookingId: number): Observable<string> {
+    return this.http.put(`${this.api}/cancel/${bookingId}`, null, {
+      responseType: 'text'
+    });
+  }
 }

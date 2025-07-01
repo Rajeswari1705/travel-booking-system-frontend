@@ -1,6 +1,6 @@
 /* Import Google Font - Poppins for a modern feel */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+ 
 /* Apply global styles to the host element (the component itself) */
 :host {
     display: flex;
@@ -13,7 +13,7 @@
     font-family: 'Poppins', sans-serif;
     color: #333; /* Default text color */
 }
-
+ 
 /* Enhancements for the main card container */
 .card {
     background-color: #ffffff;
@@ -28,7 +28,7 @@
     border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border for glass effect */
     backdrop-filter: blur(5px); /* Optional: if background allows, adds a subtle blur */
 }
-
+ 
 /* Keyframe for fade-in animation */
 @keyframes fadeIn {
     from {
@@ -40,12 +40,12 @@
         transform: translateY(0);
     }
 }
-
+ 
 .card:hover {
     transform: translateY(-8px) scale(1.01); /* More pronounced lift and slight scale on hover */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35); /* Even stronger shadow on hover */
 }
-
+ 
 /* Heading specific styles */
 .text-2xl.font-semibold.mb-4.text-blue-600 {
     color: #007bff; /* A vibrant blue for the heading */
@@ -56,7 +56,7 @@
     position: relative; /* For pseudo-element underline */
     padding-bottom: 15px;
 }
-
+ 
 .text-2xl.font-semibold.mb-4.text-blue-600::after {
     content: '';
     position: absolute;
@@ -68,7 +68,7 @@
     background-color: #007bff;
     border-radius: 2px;
 }
-
+ 
 /* Styling for the date display paragraphs */
 .bg-gray-100.p-2.rounded.text-gray-800 {
     background-color: #e9f5ff; /* Lighter blue tint background */
@@ -84,7 +84,7 @@
     font-size: 1.05em;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
 }
-
+ 
 /* Label styling */
 .block.text-sm.font-medium.text-gray-700 {
     color: #555;
@@ -92,7 +92,7 @@
     margin-bottom: 8px; /* Space between label and input/paragraph */
     display: block; /* Ensure it takes full width */
 }
-
+ 
 /* Input field focus and appearance */
 input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500 {
     padding: 12px; /* More padding for a taller input */
@@ -102,25 +102,25 @@ input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-
     color: #333;
     transition: all 0.3s ease-in-out;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle inner shadow */
-
+ 
     /* Hide the up and down arrows for number input */
     -moz-appearance: textfield; /* Firefox */
 }
-
+ 
 input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500::-webkit-outer-spin-button,
 input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500::-webkit-inner-spin-button {
     -webkit-appearance: none; /* Chrome, Safari, Edge */
     margin: 0; /* Remove margin to prevent extra space */
 }
-
-
+ 
+ 
 input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.35); /* More prominent glow */
     outline: none;
     background-color: #fcfdff; /* Very light blue background on focus */
 }
-
+ 
 /* Button styling enhancements */
 button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition {
     background: linear-gradient(45deg, #007bff, #0056b3); /* Blue gradient button */
@@ -135,19 +135,19 @@ button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.ro
     transition: all 0.3s ease-in-out;
     text-transform: uppercase; /* Uppercase text */
 }
-
+ 
 button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition:hover {
     background: linear-gradient(45deg, #0056b3, #007bff); /* Reverse gradient on hover */
     transform: translateY(-3px); /* More lift on hover */
     box-shadow: 0 12px 20px rgba(0, 123, 255, 0.4); /* Larger shadow on hover */
 }
-
+ 
 button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition:active {
     transform: translateY(0);
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
     background: #0056b3; /* Solid darker blue on active */
 }
-
+ 
 /* Responsive adjustments */
 @media (max-width: 640px) {
     .card {
@@ -155,25 +155,27 @@ button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.ro
         margin: 15px auto;
         border-radius: 10px;
     }
-
+ 
     .text-2xl.font-semibold.mb-4.text-blue-600 {
         font-size: 1.8em;
         padding-bottom: 10px;
     }
-
+ 
     .text-2xl.font-semibold.mb-4.text-blue-600::after {
         width: 40px;
         height: 3px;
     }
-
+ 
     .bg-gray-100.p-2.rounded.text-gray-800,
     input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500 {
         padding: 10px;
         font-size: 1em;
     }
-
+ 
     button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition {
         padding: 12px 20px;
         font-size: 1em;
     }
 }
+ 
+ 

@@ -1,1 +1,40 @@
-<p>my-bookings works!</p>
+<div class="bookings-container">
+  <h2 class="title">My Bookings</h2>
+
+  <div *ngIf="loading" class="loading">Loading your bookings...</div>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && bookings.length === 0 && !error" class="no-bookings">
+    You have no bookings yet. Explore our packages and make your first booking!
+  </div>
+
+  <div *ngFor="let booking of bookings" class="booking-card">
+    <h3>Booking #{{ booking.bookingId }}</h3>
+    <p>
+      <strong>Status:</strong>
+      <span
+        [class.status-confirmed]="booking.status === 'CONFIRMED'"
+        [class.status-pending]="booking.status === 'PENDING'"
+        [class.status-cancelled]="booking.status === 'CANCELLED'"
+      >
+        {{ booking.status }}
+      </span>
+    </p>
+    <p><strong>Package ID:</strong> {{ booking.packageId }}</p>
+    <p>
+      <strong>Insurance ID:</strong>
+      {{ booking.insuranceId ? booking.insuranceId : 'Not selected' }}
+    </p>
+    <p><strong>Trip Start Date:</strong> {{ booking.tripStartDate | date }}</p>
+    <p><strong>Trip End Date:</strong> {{ booking.tripEndDate | date }}</p>
+
+    <button
+      *ngIf="canCancel(booking)"
+      class="cancel-btn"
+      (click)="cancelBooking(booking.bookingId)"
+    >
+      Cancel Booking
+    </button>
+  </div>
+</div>

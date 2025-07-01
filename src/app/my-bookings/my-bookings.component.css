@@ -1,0 +1,119 @@
+/* General container for the bookings section */
+.bookings-container {
+  max-width: 900px; /* Slightly wider for better content display */
+  margin: 40px auto; /* More vertical margin */
+  padding: 25px; /* Slightly more padding */
+  background: #ffffff;
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+}
+
+/* Title styling */
+.title {
+  font-size: 28px; /* Larger font for emphasis */
+  font-weight: 700; /* Bolder */
+  margin-bottom: 30px; /* More space below title */
+  text-align: center;
+  color: #2c3e50;
+  border-bottom: 2px solid #e0e0e0; /* Add a subtle underline */
+  padding-bottom: 15px; /* Padding for the underline */
+}
+
+/* Styles for loading, error, and no bookings messages */
+.loading,
+.error,
+.no-bookings {
+  text-align: center;
+  font-size: 18px; /* Slightly larger font */
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f0f4f8; /* Light background for messages */
+  color: #555;
+}
+
+.error {
+  color: #d9534f; /* Red for errors */
+  background-color: #fdf2f2;
+  border: 1px solid #ebcccc;
+}
+
+.no-bookings {
+  color: #337ab7; /* Blue for informational messages */
+  background-color: #eaf5fb;
+  border: 1px solid #cce5ff;
+}
+
+/* Styling for individual booking cards */
+.booking-card {
+  background: #fdfdff; /* Off-white for card background */
+  padding: 20px 25px; /* More padding inside card */
+  margin-bottom: 20px; /* More space between cards */
+  border-left: 6px solid #007bff; /* Thicker left border */
+  border-radius: 8px; /* More rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Slightly stronger card shadow */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.booking-card:hover {
+  transform: translateY(-3px); /* Lift card on hover */
+}
+
+.booking-card h3 {
+  margin-top: 0; /* Remove default top margin */
+  margin-bottom: 12px;
+  color: #34495e; /* Darker title in card */
+  font-size: 20px;
+  border-bottom: 1px dashed #e9ecef; /* Subtle separator */
+  padding-bottom: 8px;
+}
+
+.booking-card p {
+  margin-bottom: 8px; /* Space between paragraphs */
+  color: #4a4a4a;
+  line-height: 1.5;
+}
+
+.booking-card p strong {
+  color: #333;
+}
+
+/* Cancel button styling */
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 18px; /* Larger padding */
+  margin-top: 15px; /* More space above button */
+  border-radius: 5px; /* Slightly more rounded */
+  cursor: pointer;
+  font-weight: 600; /* Bolder font */
+  font-size: 15px;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out; /* Smooth transitions */
+}
+
+.cancel-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+.cancel-btn:active {
+  transform: translateY(0); /* Press effect */
+}
+
+/* Optional: Styling for status text if you want different colors */
+.booking-card p.status-confirmed {
+  color: #28a745; /* Green for confirmed */
+  font-weight: 600;
+}
+
+.booking-card p.status-pending {
+  color: #ffc107; /* Orange for pending */
+  font-weight: 600;
+}
+
+.booking-card p.status-cancelled {
+  color: #dc3545; /* Red for cancelled */
+  font-weight: 600;
+  text-decoration: line-through; /* Strikethrough for cancelled */
+}
