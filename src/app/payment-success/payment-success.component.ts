@@ -2,14 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LottieServerModule } from 'ngx-lottie/server';
+// --- IMPORTANT CHANGE HERE ---
+// Import LottieModule for client-side usage of <ng-lottie>
+import { LottieComponent } from 'ngx-lottie';
+// If you are also doing Server-Side Rendering (SSR), you can keep LottieServerModule
+// import { LottieServerModule } from 'ngx-lottie/server';
+// --- END IMPORTANT CHANGE ---
+
 
 @Component({
   selector: 'app-payment-success',
   standalone: true,
   templateUrl: './payment-success.component.html',
   styleUrls: ['./payment-success.component.css'],
-  imports: [CommonModule, RouterModule, LottieServerModule]
+  imports: [
+    CommonModule,
+    RouterModule,
+    LottieComponent, // <--- ADD LottieModule HERE
+    // LottieServerModule // Keep this only if you need SSR support for Lottie
+  ]
 })
 export class PaymentSuccessComponent implements OnInit {
   userName!: string;

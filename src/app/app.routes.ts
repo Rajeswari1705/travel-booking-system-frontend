@@ -13,7 +13,7 @@ import { PackageDetailsComponent } from './package-details/package-details.compo
 import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
-import { PaymentSuccessComponent } from './payment-suceess/payment-suceess.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 export const routes: Routes = [
   { path: '', component: LandingComponent },

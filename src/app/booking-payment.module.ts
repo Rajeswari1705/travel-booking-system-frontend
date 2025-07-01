@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
  
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
-import { PaymentSuccessComponent } from './payment-suceess/payment-suceess.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
  
 @NgModule({
