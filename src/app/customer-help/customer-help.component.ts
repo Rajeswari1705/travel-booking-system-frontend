@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InsuranceService } from '../services/insurance.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -17,7 +18,8 @@ export class CustomerHelpComponent implements OnInit {
   showMessage = '';
   hasTyped = false;
 
-  constructor(private service: InsuranceService) {}
+  constructor(private router: Router,private service: InsuranceService) {}
+
 
   ngOnInit() {
     this.loadQueries();
@@ -50,8 +52,6 @@ export class CustomerHelpComponent implements OnInit {
       return;
     }
 
-    console.log('Submitting query:', { userId: this.userId, issue: trimmedQuery });
-
     this.service.addQuery(this.userId, trimmedQuery).subscribe({
       next: () => {
         this.showMessage = '✅ Query submitted!';
@@ -65,4 +65,12 @@ export class CustomerHelpComponent implements OnInit {
       }
     });
   }
+  goBack() {
+    this.router.navigate(['/customer-dashboard']);
+  }
 }
+
+
+
+
+

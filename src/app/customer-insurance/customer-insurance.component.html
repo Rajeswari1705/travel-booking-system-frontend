@@ -1,16 +1,27 @@
-<div class="container">
+<div class="insurance-container">
   <h2>My Insurances</h2>
 
-  <div class="content-box">
-    <div *ngIf="insurances.length === 0" class="no-insurance">
-      No insurance taken yet.
+  <div *ngIf="insurances.length === 0" class="no-insurance-message">
+    No insurances taken.
+  </div>
+
+  <div *ngFor="let ins of insurances" class="card">
+    <div class="status-indicator" [ngClass]="{
+      'status-pending': ins.issuanceStatus === 'PENDING',
+      'status-issued': ins.issuanceStatus === 'ISSUED'
+    }">
+      {{ ins.issuanceStatus.toLowerCase() | titlecase }}
     </div>
 
-    <div *ngFor="let ins of insurances" class="card">
-      <p><b>Coverage:</b> {{ ins.coverageType }}</p>
-      <p><b>Details:</b> {{ ins.coverageDetails }}</p>
-      <p><b>Price:</b> ₹{{ ins.price }}</p>
-      <p><b>Claimable:</b> ₹{{ ins.claimableAmount }}</p>
+    <div class="card-body">
+      <p><strong>Booking ID:</strong> {{ ins.bookingId }}</p>
+      <p><strong>Coverage:</strong> {{ ins.coverageType }}</p>
+      <p><strong>Details:</strong> {{ ins.coverageDetails }}</p>
+      <p><strong>Price:</strong> ₹{{ ins.price }}</p>
+      <p><strong>Claimable:</strong> ₹{{ ins.claimableAmount }}</p>
     </div>
   </div>
+  <div class="back-button-wrapper">
+    <button class="back-button" (click)="goBack()">← Back</button>
+  </div>   
 </div>
