@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./insurance-selection.component.css']
 })
 export class InsuranceSelectionComponent implements OnInit {
-  userId = Number(localStorage.getItem("userId"));
+  userId = Number(localStorage.getItem("userId") || 0);
   selected = '';
   plans: any[] = [];
   error = '';
@@ -24,7 +24,6 @@ export class InsuranceSelectionComponent implements OnInit {
     this.service.getCoveragePlans().subscribe(data => this.plans = data);
   }
 
-  // ✅ This method clears the error when a selection is made
   onSelectionChange() {
     if (this.selected) {
       this.error = '';
@@ -34,13 +33,25 @@ export class InsuranceSelectionComponent implements OnInit {
   submit() {
     if (!this.selected) {
       this.error = '⚠️ Please select a coverage type.';
+      this.success = '';
       return;
     }
 
-    this.service.submitInsurance(this.userId, this.selected).subscribe(() => {
-      this.success = 'Insurance selected!';
-      this.error = '';
-      setTimeout(() => this.router.navigate(['/booking']), 2000);
+    this.service.getMyInsurances(this.userId).subscribe(existingInsurances => {
+      const hasPending = existingInsurances.some(
+        insurance => insurance.bookingId === null
+      );
+
+      if (hasPending) {
+        this.error = '⚠️ Insurance already selected. Please complete your booking.';
+        this.success = '';
+      } else {
+        this.service.submitInsurance(this.userId, this.selected).subscribe(() => {
+          this.success = '✅ Insurance selected successfully!';
+          this.error = '';
+          setTimeout(() => this.router.navigate(['/booking']), 2000);
+        });
+      }
     });
   }
 }

@@ -26,6 +26,7 @@ export class AgentCreatePackageComponent {
     tripStartDate:'',
     tripEndDate:'',
     imageUrl:'',
+    hightlights:[],
     active: true,
 
     offer: { couponCode:'', description:'', discountPercentage: 0, active: false},
@@ -111,4 +112,17 @@ export class AgentCreatePackageComponent {
   cancelForm(): void{
     window.location.href = '/agent-dashboard';
   }
+
+  highlightInput: string = '';
+ 
+addHighlight() {
+  if (this.highlightInput.trim()) {
+    this.newPackage.highlights.push(this.highlightInput.trim());
+    this.highlightInput = '';
+  }
+}
+ 
+removeHighlight(index: number) {
+  this.newPackage.highlights.splice(index, 1);
+}
 }

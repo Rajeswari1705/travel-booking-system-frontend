@@ -8,8 +8,8 @@ export interface TravelPackage {
     duration: number;
     itinerary: string;
     features: string;
-    startDate: string;
-    endDate: string;
+    tripStartDate: string;
+    tripEndDate: string;
     imageUrl: string;
     termsAndConditions: string;
     

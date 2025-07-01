@@ -41,6 +41,27 @@
         <!--Images-->
         <label>Package Image URL: </label>
         <input type="text" [(ngModel)]="newPackage.imageUrl" name="imageUrl"><br>
+
+
+        <label for="highlightInput">Highlights:</label>
+      <div style="display: flex; gap: 10px;">
+        <input
+          type="text"
+          [(ngModel)]="highlightInput"
+          placeholder="Enter highlight"
+          class="form-control"
+          name="highlightInput"
+        />
+        <button type="button" (click)="addHighlight()" class="btn btn-primary">Add</button>
+      </div>
+     
+      <ul>
+        <li *ngFor="let highlight of newPackage.highlights; let i = index">
+          {{ highlight }}
+          <button type="button" (click)="removeHighlight(i)" class="btn btn-sm btn-danger">Remove</button>
+        </li>
+      </ul>
+
   
         <!--Offer Section-->
         <h4>Offer Details</h4>

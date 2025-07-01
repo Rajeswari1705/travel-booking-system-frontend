@@ -12,6 +12,13 @@
     <p><strong>Start Date:</strong> {{ packageData.tripStartDate }}</p>
     <p><strong>End Date:</strong> {{ packageData.tripEndDate }}</p>
    
+    <h4>Highlights:</h4>
+    <ul>
+      <li *ngFor="let highlight of packageData.highlights">
+        ✅ {{ highlight }}
+      </li>
+    </ul>
+
     <h3>Offer:</h3>
     <p>Coupon Code: {{ packageData.offer?.couponCode }}</p>
     <p>Description: {{ packageData.offer?.description }}</p>

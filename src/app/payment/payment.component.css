@@ -1,0 +1,196 @@
+/* Import Google Font - Poppins for a modern feel */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Apply global styles to the host element (the component itself) */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically for a more prominent card */
+    min-height: 100vh;
+    background: #eef6ff; /* Consistent background color with booking component */
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #333; /* Default text color */
+}
+
+/* Enhancements for the main card container */
+.card {
+    background-color: #ffffff;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Stronger, more diffused shadow */
+    padding: 30px; /* Adjusted padding to give more space for inputs */
+    width: 100%;
+    max-width: 600px; /* Increased max-width to make the card wider */
+    margin: 20px auto; /* Center with some vertical margin */
+    transition: all 0.4s ease-in-out; /* Smooth transition for hover effects */
+    animation: fadeIn 0.8s ease-out; /* Fade-in animation for the card */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border for glass effect */
+    backdrop-filter: blur(5px); /* Optional: if background allows, adds a subtle blur */
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.01); /* More pronounced lift and slight scale on hover */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35); /* Even stronger shadow on hover */
+}
+
+/* Heading specific styles */
+.text-2xl.font-semibold.mb-4.text-green-600 {
+    color: #007bff; /* Changed to vibrant blue for the heading */
+    text-align: center;
+    margin-bottom: 30px !important;
+    font-size: 2.2em; /* Larger heading */
+    font-weight: 700; /* Bolder heading */
+    position: relative; /* For pseudo-element underline */
+    padding-bottom: 15px;
+}
+
+.text-2xl.font-semibold.mb-4.text-green-600::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px; /* Short, centered underline */
+    height: 4px;
+    background-color: #007bff; /* Changed to matching blue underline */
+    border-radius: 2px;
+}
+
+/* Label styling */
+.block.text-sm.font-medium.text-gray-700 {
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 8px; /* Space between label and input/paragraph */
+    display: block; /* Ensure it takes full width */
+}
+
+/* Input field and select appearance (matching the blue-accented field from the image) */
+input[type="text"].w-full.p-2.border.border-gray-300.rounded,
+input[type="password"].w-full.p-2.border.border-gray-300.rounded,
+input[type="number"].w-full.p-2.border.border-gray-300.rounded,
+select.w-full.p-2.border.border-gray-300.rounded {
+    background-color: #f0f8ff; /* Very light blue background */
+    border: 1px solid #cce5ff; /* Light blue border */
+    border-left: 6px solid #007bff; /* Prominent left blue border */
+    padding: 10px 15px; /* Adjusted padding */
+    border-radius: 6px; /* Matching input border-radius */
+    font-size: 1em;
+    color: #333;
+    height: 40px; /* Fixed height for consistency */
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out; /* Faster transition for snappier feel */
+    box-shadow: none; /* Remove inner shadow */
+}
+
+/* Input field focus styles */
+input[type="text"].w-full.p-2.border.border-gray-300.rounded:focus,
+input[type="password"].w-full.p-2.border.border-gray-300.rounded:focus,
+input[type="number"].w-full.p-2.border.border-gray-300.rounded:focus,
+select.w-full.p-2.border.border-gray-300.rounded:focus {
+    border-color: #007bff; /* Vibrant blue border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Subtle glow on focus */
+    outline: none;
+    background-color: #ffffff; /* White background on focus */
+}
+
+/* Hide the up and down arrows for number input */
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari, Edge */
+    margin: 0; /* Remove margin to prevent extra space */
+}
+
+/* Expected Total Display */
+.total-display {
+    background-color: #e9f5ff; /* Changed to lighter blue tint background */
+    border: 1px solid #cce5ff; /* Changed to matching blue border */
+    border-left: 6px solid #007bff; /* Changed to prominent left blue border */
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #333; /* Changed to darker text color */
+    font-size: 1.1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-top: 20px; /* Space above the total display */
+}
+
+/* Button styling enhancements - Blue theme */
+button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition {
+    background: #007bff; /* Changed to solid vibrant blue, matching booking button */
+    border: none;
+    border-radius: 6px; /* Consistent border-radius with inputs */
+    padding: 12px 25px; /* Adjusted padding */
+    font-size: 1em; /* Smaller font size for button text */
+    font-weight: 600; /* Bolder text */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle button shadow */
+    transition: all 0.2s ease-in-out;
+    text-transform: uppercase; /* Uppercase text */
+}
+
+button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Gentle lift on hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Slightly larger shadow on hover */
+}
+
+button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+    background-color: #004085; /* Even darker on active */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .card {
+        padding: 25px;
+        margin: 15px auto;
+        border-radius: 10px;
+    }
+
+    .text-2xl.font-semibold.mb-4.text-green-600 {
+        font-size: 1.8em;
+        padding-bottom: 10px;
+    }
+
+    .text-2xl.font-semibold.mb-4.text-green-600::after {
+        width: 40px;
+        height: 3px;
+    }
+
+    .block.text-sm.font-medium.text-gray-700 {
+        font-size: 0.9em;
+    }
+
+    input[type="text"].w-full.p-2.border.border-gray-300.rounded,
+    input[type="password"].w-full.p-2.border.border-gray-300.rounded,
+    input[type="number"].w-full.p-2.border.border-gray-300.rounded,
+    select.w-full.p-2.border.border-gray-300.rounded {
+        padding: 8px 12px;
+        font-size: 0.95em;
+        height: 38px;
+    }
+
+    button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}

@@ -1,119 +1,127 @@
-// review-dashboard.component.ts
-// =============================
-import { FormsModule } from '@angular/forms';
-
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ReviewService } from '../services/review.service';
-import { Review } from '../models/review.model';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { forkJoin, of } from 'rxjs'; // NEW: Import 'of' and 'forkJoin'
+import { catchError, map, switchMap } from 'rxjs/operators'; // NEW: Import RxJS operators
+
 @Component({
   selector: 'app-review-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './review-dashboard.component.html',
-  styleUrl: './review-dashboard.component.css'
+  styleUrls: ['./review-dashboard.component.css']
 })
-
 export class ReviewDashboardComponent implements OnInit {
   packageId!: number;
-  userId: number = Number(sessionStorage.getItem('userId'));
-  newReview={
-    rating:0,
-    comment:'',
-    userId:0,
-    packageId:0
-   };
+  userId!: number;
+  completedBooking = false;
+  alreadyReviewed = false;
+  rating = 0;
+  comment = '';
   reviews: any[] = [];
-  editingReviewId: number | null = null;
-  hasAlreadyReviewed: boolean = false;
-  canReview: boolean = false;
- 
-  constructor(private route: ActivatedRoute, private reviewService: ReviewService) {}
- 
+  message = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) {}
+
   ngOnInit(): void {
     this.packageId = Number(this.route.snapshot.paramMap.get('packageId'));
+    this.userId = Number(localStorage.getItem('userId'));
+    this.checkCompletedBooking();
     this.loadReviews();
-    this.checkUserEligibility();
   }
- 
+
+  checkCompletedBooking() {
+    this.http.get<boolean>(`http://localhost:8086/api/bookings/user/${this.userId}/package/${this.packageId}/completed`)
+      .subscribe({
+        next: (res) => {
+          this.completedBooking = res;
+          if (!this.completedBooking) {
+            this.message = "You can only review this package after completing the trip.";
+          }
+        },
+        error: () => this.message = "Could not validate booking. Try again later."
+      });
+  }
+
+  // CRITICAL: This method fetches reviews AND then fetches agent responses for each
   loadReviews() {
-    this.reviewService.getReviewsByPackage(this.packageId).subscribe(data => {
-      this.reviews = data;
-    });
+    this.http.get<any[]>(`http://localhost:8084/api/reviews/${this.packageId}`)
+      .pipe(
+        switchMap(reviews => {
+          if (reviews.length === 0) {
+            return of([]); // If no reviews, return an empty array directly
+          }
+
+          // For each review, make a separate API call to get its agent response
+          const reviewWithAgentResponses$ = reviews.map(review =>
+            this.http.get<any[]>(`http://localhost:8084/api/agent-responses/${review.reviewId}`).pipe(
+              map(agentResponses => {
+                // Assuming agent-responses/{reviewId} returns an array, take the first one if present
+                // This line attaches the 'agentResponse' property to your 'review' object
+                review.agentResponse = agentResponses.length > 0 ? agentResponses[0] : null;
+                return review; // Return the modified review object
+              }),
+              catchError(error => {
+                console.error(`Error fetching agent response for review ${review.reviewId}:`, error);
+                review.agentResponse = null; // Set to null on error to prevent breaking display
+                return of(review); // Continue with other reviews even if this one fails
+              })
+            )
+          );
+          // Use forkJoin to wait for all individual agent response fetches to complete
+          return forkJoin(reviewWithAgentResponses$);
+        })
+      )
+      .subscribe({
+        next: (reviewsWithResponses) => {
+          this.reviews = reviewsWithResponses; // Update the reviews array with agent responses
+          this.alreadyReviewed = this.reviews.some(r => r.userId === this.userId);
+          if (this.alreadyReviewed) {
+            this.message = "You have already reviewed this package.";
+          }
+        },
+        error: () => {
+          this.message = "Failed to load reviews or agent responses.";
+          console.error("Error in loadReviews subscription.");
+        }
+      });
   }
- 
-  checkUserEligibility() {
-    this.reviewService.hasCompletedBooking(this.userId, this.packageId).subscribe(hasCompleted => {
-      if (hasCompleted) {
-        this.reviewService.hasAlreadyReviewed(this.userId, this.packageId).subscribe(already => {
-          this.hasAlreadyReviewed = already;
-          this.canReview = !already;
-        });
-      }
-    });
-  }
- 
+
   submitReview() {
-    this.reviewService.postReview({
+    if (this.comment.length < 10) {
+      this.message = "Comment must be at least 10 characters.";
+      return;
+    }
+
+    const review = {
       userId: this.userId,
       packageId: this.packageId,
-      rating: this.newReview.rating,
-      comment: this.newReview.comment
-    }).subscribe(() => {
-      this.loadReviews();
-      this.canReview = false;
-      this.newReview = {
-        rating: 0,
-        comment: '',
-        userId: this.userId,
-        packageId: this.packageId
-      };
-      
-    });
-  }
- 
-  enableEdit(review: any) {
-    this.editingReviewId = review.reviewId;
-    this.newReview = {
-      rating: review.rating,
-      comment: review.comment,
-      userId: this.userId,
-      packageId: this.packageId
+      rating: this.rating,
+      comment: this.comment
     };
-     }
- 
-  updateReview() {
-    if (this.editingReviewId != null) {
-      this.reviewService.updateReview(this.editingReviewId, this.newReview).subscribe(() => {
-        this.loadReviews();
-        this.editingReviewId = null;
-        this.newReview = {
-          rating: 0,
-          comment: '',
-          userId: this.userId,
-          packageId: this.packageId
-        };
-        });
-    }
+
+    this.http.post('http://localhost:8084/api/reviews', review)
+      .subscribe({
+        next: () => {
+          this.message = "Review submitted successfully.";
+          this.loadReviews(); // Reload reviews to show the new one
+          this.rating = 0;
+          this.comment = '';
+        },
+        error: () => this.message = "Failed to submit review."
+      });
   }
- 
-  deleteReview(reviewId: number) {
-    this.reviewService.deleteReview(reviewId).subscribe(() => {
-      this.loadReviews();
-      this.canReview = true;
-    });
+
+  setRating(stars: number) {
+    this.rating = stars;
   }
- 
-  cancelEdit() {
-    this.editingReviewId = null;
-    this.newReview = {
-      rating: 0,
-      comment: '',
-      userId: this.userId,
-      packageId: this.packageId
-    };
-    }
+  goBackToPackage() {
+    this.router.navigate(['/packages', this.packageId]);
+  }
 }
- 

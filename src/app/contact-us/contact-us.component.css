@@ -1,0 +1,531 @@
+/* --- Global / Base Styles (Re-use from About Us, ensure consistency) --- */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #e6f7ff; /* Lighter, more inviting background */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define CSS Variables for easy theme management */
+:root {
+    --primary-blue: #3498db; /* A slightly brighter blue */
+    --darker-blue: #2980b9;
+    --darkest-blue: #1abc9c; /* A vibrant green-blue accent */
+    --accent-orange: #f39c12; /* A warm orange accent */
+    --accent-purple: #9b59b6; /* A soft purple accent */
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --background-light: #f0f8ff; /* Even lighter background for sections */
+    --background-white: #ffffff;
+    --shadow-light: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+    --border-color: #cceeff; /* Light blue border for inputs */
+    --focus-border-color: #3498db; /* Primary blue for input focus */
+}
+
+/* --- Contact Container Styling --- */
+.contact-container {
+    max-width: 1100px;
+    margin: 30px auto; /* Slightly increased margin */
+    padding: 35px; /* Slightly increased padding */
+    background-color: var(--background-white);
+    box-shadow: var(--shadow-light);
+    border-radius: 12px; /* More rounded corners */
+    text-align: center;
+    overflow: hidden;
+    position: relative; /* Needed for potential animations or overlays */
+}
+
+.contact-container h2 {
+    font-size: 2.5em; /* Larger heading */
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    font-weight: 800; /* Bolder */
+    letter-spacing: 0.08em; /* More spacing */
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 10px; /* Space for an underline effect */
+}
+
+/* Underline effect for H2 */
+.contact-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-blue), var(--darkest-blue)); /* Gradient underline */
+    border-radius: 2px;
+}
+
+.contact-container .intro-message {
+    font-size: 1.1em; /* Slightly larger */
+    color: var(--text-color-medium);
+    margin-bottom: 35px; /* More space */
+    padding: 0 20px;
+    font-style: italic; /* A bit more friendly */
+}
+
+/* --- Grid Layout for Form and Info --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px; /* Increased gap */
+    text-align: left;
+}
+
+/* --- Contact Form Section --- */
+.contact-form-section {
+    background-color: #f7fcfd; 
+    padding: 30px; /* Increased padding */
+    border-radius: 10px;
+    /* Adjusted shadow for more depth, less inner glow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color); /* Soft border matching inputs */
+    position: relative; /* Needed for subtle top border effect */
+    overflow: hidden; /* Ensures border-radius applies properly */
+}
+
+/* Subtle top border for visual interest */
+.contact-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Thin line */
+    background: linear-gradient(to right, var(--primary-blue), var(--accent-purple)); /* Subtle gradient */
+    border-radius: 10px 10px 0 0; /* Match parent border-radius on top */
+}
+
+
+.contact-form-section h3 {
+    font-size: 1.8em; /* Larger heading */
+    color: var(--primary-blue); /* Changed to primary blue for consistency and prominence */
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 700;
+    /* Subtle text shadow for depth */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Underline for H3 */
+.contact-form-section h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px; /* Slightly shorter than H2 underline */
+    height: 3px;
+    background-color: var(--accent-purple); /* Accent color for H3 underline */
+    border-radius: 2px;
+}
+
+
+.contact-form-section .form-note {
+    font-size: 0.95em;
+    color: var(--text-color-medium); /* Slightly darker text */
+    margin-bottom: 25px; /* More space */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px; /* Increased padding */
+    background-color: #fffaf0; /* Very light, warm background (subtle cream) */
+    border-left: 5px solid var(--accent-orange); /* Orange border */
+    border-radius: 8px; /* Slightly more rounded */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for the note */
+}
+
+.contact-form-section .form-note .fas {
+    color: var(--accent-orange); /* Match border color */
+    font-size: 1.2em; /* Slightly larger icon */
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-color-dark);
+    font-size: 1em;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: calc(100% - 24px); /* Account for padding */
+    padding: 12px; /* More padding */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Slightly more rounded corners for inputs */
+    font-size: 1em;
+    color: var(--text-color-dark);
+    background-color: var(--background-white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--focus-border-color);
+    box-shadow: 0 0 0 0.3rem rgba(52, 152, 219, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Stronger focus shadow with retained inner shadow */
+    outline: none;
+    background-color: #fcfdff; /* Very slight change on focus for feedback */
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px; /* Slightly taller */
+}
+
+/* --- Contact Form Section --- */
+/* ... (previous styles for .contact-form-section and other elements) ... */
+
+.contact-form .submit-button {
+    background: linear-gradient(to right, var(--primary-blue), var(--darkest-blue)); /* Gradient background */
+    color: var(--text-color-dark); /* Changed to dark text color for contrast */
+    padding: 14px 35px; /* Slightly larger button */
+    border: none; /* No border for gradient */
+    border-radius: 30px; /* More pill shape */
+    font-size: 1.15em; /* Slightly larger font */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    width: auto;
+    display: block;
+    margin: 30px auto 0 auto; /* More margin */
+    min-width: 200px; /* Wider button */
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.25); /* More prominent shadow */
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* Increased letter spacing */
+}
+
+
+/* ... (rest of your CSS) ... */
+.contact-form .submit-button:hover {
+    background: linear-gradient(to right, var(--darkest-blue), var(--primary-blue)); /* Reverse gradient on hover */
+    transform: translateY(-4px) scale(1.03); /* More pronounced lift and enlarge */
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+}
+
+/* --- Contact Info Section --- */
+/* The contact-info-section already looks good and aligns with the desired aesthetic,
+   so no major changes are needed here. */
+.contact-info-section {
+    background-color: #f7fcfd; /* Very light, cool background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid #e0e0e0;
+}
+
+.contact-info-section h3 {
+    font-size: 1.8em;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+    font-size: 1.05em;
+    position: relative;
+    padding-left: 5px; /* Space for potential border */
+}
+
+.contact-detail .icon {
+    font-size: 1.5em; /* Larger icons */
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+    transition: transform 0.2s ease, filter 0.3s ease; /* Transition filter for color change */
+}
+
+/* Specific colors for Contact Detail Icons (Brand Colors) */
+.contact-detail .fa-envelope {
+    color: #DB4437; /* Google Mail Red */
+}
+
+.contact-detail .fa-phone-alt {
+    color: #25D366; /* WhatsApp Green (common for calls/messaging) */
+}
+
+.contact-detail .fa-map-marker-alt {
+    color: #4285F4; /* Google Maps Blue */
+}
+
+.contact-detail .fa-clock {
+    color: #FF9800; /* Amber/Orange for time/hours */
+}
+
+
+/* Hover effect for all contact detail icons */
+.contact-detail:hover .icon {
+    transform: scale(1.1) rotate(5deg); /* Slight bounce and rotate on hover */
+    filter: brightness(1.1); /* Slightly brighten the color on hover */
+}
+
+/* --- Social Media Section --- */
+.social-media {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-media h4 {
+    font-size: 1.4em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.social-icon {
+    font-size: 2.2em; /* Larger icons */
+    margin: 0 12px; /* More horizontal margin */
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    border: 2px solid transparent; /* For hover effect */
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1); /* More pronounced lift and scale */
+}
+
+/* *** CRITICAL: REAL BRAND COLORS FOR SOCIAL ICONS ***
+   Using !important here to ensure these colors override any other rules.
+   Only use !important if other methods of increasing specificity fail.
+*/
+.social-icon.fa-facebook-f {
+    color: #3b5998 !important; /* Facebook Blue */
+}
+.social-icon.fa-twitter {
+    color: #1DA1F2 !important; /* Twitter Blue */
+}
+.social-icon.fa-instagram {
+    color: #E4405F !important; /* Instagram Red/Pink (representative color) */
+}
+.social-icon.fa-linkedin-in {
+    color: #0A66C2 !important; /* LinkedIn Blue */
+}
+
+/* Adding hover border colors for social icons to match their brand color */
+.social-icon.fa-facebook-f:hover { border-color: #3b5998 !important; }
+.social-icon.fa-twitter:hover { border-color: #1DA1F2 !important; }
+.social-icon.fa-instagram:hover { border-color: #E4405F !important; }
+.social-icon.fa-linkedin-in:hover { border-color: #0A66C2 !important; }
+
+
+/* --- Map Section --- */
+.map-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.map-section h4 {
+    font-size: 1.4em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.map-section iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger map shadow */
+    height: 220px; /* Slightly taller */
+    border: 2px solid var(--primary-blue); /* Add a border to the map */
+}
+
+.map-section .map-note {
+    font-size: 0.95em;
+    margin-top: 10px;
+    color: #666;
+}
+
+.map-section .map-note a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.map-section .map-note a:hover {
+    text-decoration: underline;
+    color: var(--darker-blue);
+}
+
+/* --- FAQ Link Section --- */
+.faq-link-section {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.1em;
+    padding: 15px;
+    background-color: #eaf7ff; /* Light background for the link */
+    border-radius: 8px;
+    border: 1px dashed var(--primary-blue); /* Dashed border for attention */
+}
+
+.faq-link-section p {
+    margin: 0;
+    color: var(--text-color-dark);
+}
+
+.faq-link-section a {
+    color: var(--accent-orange); /* Use an accent color for the link */
+    text-decoration: none;
+    font-weight: 700;
+    transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.faq-link-section a:hover {
+    text-decoration: underline;
+    color: var(--darker-blue);
+}
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        padding: 25px;
+        margin: 25px auto;
+    }
+
+    .contact-container h2 {
+        font-size: 2.2em;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .contact-container h2 {
+        font-size: 1.8em;
+    }
+
+    .contact-container .intro-message {
+        font-size: 0.95em;
+        margin-bottom: 25px;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 20px;
+    }
+
+    .contact-form-section h3,
+    .contact-info-section h3 {
+        font-size: 1.5em;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+    }
+
+    .contact-form .submit-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .contact-detail {
+        font-size: 0.95em;
+        margin-bottom: 12px;
+    }
+
+    .social-icon {
+        font-size: 2em;
+        margin: 0 10px;
+    }
+
+    .map-section iframe {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .contact-container h2 {
+        font-size: 1.5em;
+    }
+
+    .contact-container .intro-message {
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 15px;
+    }
+
+    .contact-form-section h3,
+    .contact-info-section h3 {
+        font-size: 1.3em;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .contact-form-section .form-note {
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-bottom: 15px;
+    }
+
+    .contact-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .contact-detail .icon {
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+
+    .social-icon {
+        font-size: 1.8em;
+        margin: 0 8px;
+    }
+
+    .map-section iframe {
+        height: 150px;
+    }
+}

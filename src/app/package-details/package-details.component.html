@@ -1,18 +1,27 @@
-
-<div class="package-container">
+<div *ngIf="packageDetails" class="package-container">
   <div class="top-section">
     <div class="card image-card">
-      <img
-        class="package-image"
-        [src]="packageDetails.imageUrl || 'https://via.placeholder.com/400x250?text=Package+Image'"
-        alt="Package Image"
-      />
+      <h2>{{ packageDetails.title }}</h2>
+      <div class="package-images-gallery">
+        <img
+          *ngFor="let imageUrl of packageDetails.imageUrls"
+          class="package-image"
+          [src]="'assets/images/' + imageUrl"
+          alt="Package Image"
+        />
+        <img
+          *ngIf="!packageDetails.imageUrls || packageDetails.imageUrls.length === 0"
+          class="package-image"
+          src="assets/images/default.jpg"
+          alt="Default Package Image"
+        />
+      </div>
     </div>
-
+ 
     <div class="card details-card">
       <h2>{{ packageDetails.title }}</h2>
       <p class="desc">{{ packageDetails.description }}</p>
-
+ 
       <div class="info-grid">
         <div><strong>Destination:</strong> {{ packageDetails.destination }}</div>
         <div><strong>Country:</strong> {{ packageDetails.country }}</div>
@@ -23,7 +32,7 @@
         <div><strong>Start Date:</strong> {{ packageDetails.tripStartDate | date: 'MMM d, y' }}</div>
         <div><strong>End Date:</strong> {{ packageDetails.tripEndDate | date: 'MMM d, y' }}</div>
       </div>
-
+ 
       <div class="action-buttons">
         <button class="btn book" (click)="goToBooking()">Book Now</button>
         <button class="btn review" (click)="goToReview()">Give Review</button>
@@ -31,7 +40,7 @@
       </div>
     </div>
   </div>
-
+ 
   <div class="section-grid">
     <div class="card" *ngIf="packageDetails.highlights?.length">
       <h3>Highlights</h3>
@@ -39,7 +48,7 @@
         <li *ngFor="let h of packageDetails.highlights">🌟 {{ h }}</li>
       </ul>
     </div>
-
+ 
     <div class="card" *ngIf="packageDetails.flights?.length">
       <h3>Flights</h3>
       <ul>
@@ -48,7 +57,7 @@
         </li>
       </ul>
     </div>
-
+ 
     <div class="card" *ngIf="packageDetails.hotels?.length">
       <h3>Hotels</h3>
       <ul>
@@ -57,7 +66,7 @@
         </li>
       </ul>
     </div>
-
+ 
     <div class="card" *ngIf="packageDetails.sightseeing?.length">
       <h3>Sightseeing</h3>
       <ul>
@@ -66,7 +75,7 @@
         </li>
       </ul>
     </div>
-
+ 
     <div class="card" *ngIf="packageDetails.itinerary?.length">
       <h3>Itinerary</h3>
       <ul>
@@ -75,7 +84,7 @@
         </li>
       </ul>
     </div>
-
+ 
     <div class="card" *ngIf="packageDetails.offer">
       <h3>Special Offer</h3>
       <p>
@@ -85,3 +94,4 @@
     </div>
   </div>
 </div>
+ 
