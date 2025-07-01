@@ -17,6 +17,9 @@ import { provideToastr } from 'ngx-toastr';  // ✅ Use provideToastr here
 //for interceptor for jwt token expiration
 import { provideHttpClient } from '@angular/common/http';
 import { AuthExpiredInterceptor } from './app/auth-expired.interceptor';
+
+import { provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
  
 bootstrapApplication(AppComponent, {
   providers: [
@@ -43,6 +46,9 @@ bootstrapApplication(AppComponent, {
       timeOut: 3000,
       positionClass: 'toast-bottom-center',
       preventDuplicates: true
-    })
+    }),
+
+    provideLottieOptions({ player: () => player })
+
   ]
 });

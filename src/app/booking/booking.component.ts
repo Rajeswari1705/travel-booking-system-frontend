@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingService } from '../services/booking.service';
 import { TravelPackageService } from '../services/package.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
  
 @Component({
   selector: 'app-booking',
-  templateUrl: './booking.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  templateUrl: './booking.component.html',
+  styleUrls:['./booking.component.css'],
+  imports:[
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
+  ]
 })
 export class BookingComponent implements OnInit {
   bookingForm!: FormGroup;
-  userId! : number;
+  userId = 2; // To be replaced with Auth
   packageId!: number;
   tripStartDate!: string;
   tripEndDate!: string;
@@ -55,12 +59,11 @@ this.bookingForm = this.fb.group({
  
   fetchPackageFromBackend(id: number) {
     this.packageService.getPackageById(id).subscribe({
-      next: (res) => {
-        const data = res.data || res;
+      next: (pkg) => {
         this.setPackageDetails({
-          packageId: data.packageId,
-          tripStartDate: data.tripStartDate,
-          tripEndDate: data.tripEndDate
+          packageId: pkg.packageId,
+          tripStartDate: pkg.tripStartDate,
+          tripEndDate: pkg.tripEndDate
         });
       },
       error: () => {
@@ -78,7 +81,9 @@ this.bookingForm = this.fb.group({
       tripStartDate: this.tripStartDate,
       tripEndDate: this.tripEndDate
     };
- 
+  
+    console.log('Booking payload:', payload); // ✅ Inspect in browser console
+  
     this.bookingService.createBooking(payload).subscribe({
       next: (res) => {
         alert('Booking Created!');
@@ -87,7 +92,15 @@ this.bookingForm = this.fb.group({
         });
       },
       error: (err) => {
-        alert('Booking failed: ' + err.error?.message);
+        console.error('Booking failed:', err);
+    
+        const errorMsg =
+          err?.error?.message ||         // proper error body (e.g., from ApiResponse)
+          err?.message ||                // generic message (e.g., HttpClient)
+          err?.statusText ||             // fallback HTTP status
+          'Something went wrong.';
+    
+        alert('Booking failed: ' + errorMsg);
       }
     });
   }

@@ -1,1 +1,36 @@
-<p>payment-suceess works!</p>
+<div class="flex items-center justify-center min-h-screen bg-gray-50">
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
+    
+    <!-- ✅ Lottie Success Animation -->
+    <ng-lottie
+      [options]="{
+        path: 'https://lottie.host/8e055f56-c8bc-4a0e-a490-e59f7a6b0dc1/miqehTKixu.json',
+        autoplay: true,
+        loop: false
+      }"
+      style="width: 220px; height: 220px; margin: auto"
+    ></ng-lottie>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Payment Successful 🎉</h2>
+
+    <p class="text-gray-600 mb-4">
+      Hi <strong>{{ userName }}</strong>, your booking (ID: <strong>{{ bookingId }}</strong>) has been confirmed!
+    </p>
+
+    <p class="text-gray-600 mb-4">
+      You have successfully booked the travel package: <strong>{{ packageTitle }}</strong><br />
+      Your trip is scheduled from <strong>{{ tripStartDate }}</strong> to <strong>{{ tripEndDate }}</strong>.
+    </p>
+
+    <div class="bg-green-100 text-green-800 p-3 rounded border border-green-300 mb-4">
+      ✅ A confirmation email has been sent to your registered email address.
+    </div>
+
+    <a
+      routerLink="/"
+      class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded transition duration-200"
+    >
+      Go to Dashboard
+    </a>
+  </div>
+</div>

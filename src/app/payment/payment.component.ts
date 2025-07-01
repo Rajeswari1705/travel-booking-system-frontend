@@ -1,9 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PaymentService } from '../services/payment.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
  
-@Component({ selector: 'app-payment', templateUrl: './payment.component.html' })
+@Component({
+  selector: 'app-payment',
+  standalone: true,
+  templateUrl: './payment.component.html',
+  styleUrls:['./payment.component.css'],
+  imports:[
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
+  ]
+})
+
 export class PaymentComponent implements OnInit {
   paymentForm!: FormGroup;
   bookingId!: number;
@@ -19,12 +31,12 @@ export class PaymentComponent implements OnInit {
     this.userId = state.userId;
  
 this.paymentForm = this.fb.group({
-      cardNumber: ['', [Validators.required, Validators.pattern(/\d{16}/)]],
-      cvv: ['', [Validators.required, Validators.pattern(/\d{3}/)]],
-      expiryDate: ['', [Validators.required, Validators.pattern(/\d{2}\/\d{2}/)]],
-      atmPin: ['', [Validators.required, Validators.pattern(/\d{4}/)]],
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+      expiryDate: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}$/)]],
+      atmPin: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
       paymentMethod: ['Credit Card', Validators.required],
-      amount: ['', Validators.required],
+      amount: ['', [Validators.required, Validators.min(1)]],
       couponCode: ['']
     });
  
@@ -61,4 +73,3 @@ this.paymentForm = this.fb.group({
     });
   }
 }
- 

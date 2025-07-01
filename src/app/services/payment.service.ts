@@ -4,16 +4,16 @@ import { Observable } from 'rxjs';
  
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
-private baseUrl = 'http://localhost:8080/api/payments';
+private baseUrl = 'http://localhost:8086/api/payments';
  
   constructor(private http: HttpClient) {}
  
   getExpectedTotal(bookingId: number, couponCode?: string): Observable<any> {
-    let params = new HttpParams().set('bookingId', bookingId.toString());
+    let url = `${this.baseUrl}/expected-total/${bookingId}`;
     if (couponCode) {
-      params = params.set('couponCode', couponCode);
+      url += `?couponCode=${couponCode}`;
     }
-    return this.http.get<any>(`${this.baseUrl}/expected-total`, { params });
+    return this.http.get<any>(url);
   }
  
   processPayment(payment: any, couponCode?: string): Observable<any> {
