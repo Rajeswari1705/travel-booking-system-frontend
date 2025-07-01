@@ -7,7 +7,7 @@
   padding: 40px 20px;
 }
 
-.container {
+.insurance-container {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 10px;
@@ -22,11 +22,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.content-box {
-  width: 100%;
-}
-
-.no-insurance {
+.no-insurance-message {
   font-size: 16px;
   color: #666;
   margin-top: 20px;
@@ -40,6 +36,14 @@ h2 {
   margin-bottom: 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 255, 0.1);
   text-align: left;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 255, 0.2);
+  background-color: #e9eef1;
 }
 
 .card p {
@@ -47,3 +51,41 @@ h2 {
   font-size: 15px;
   color: #333;
 }
+
+.status-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+.status-pending {
+  background-color: #a9a9a9;
+}
+
+.status-issued {
+  background-color: #28a745;
+}
+
+.back-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.back-button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
