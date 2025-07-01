@@ -41,9 +41,18 @@ this.http.post<LoginResponse>('http://localhost:8080/api/auth/login', this.crede
 
  
           // Save token to localStorage
-          localStorage.setItem('token', token);
-          localStorage.setItem('role', role);
-          localStorage.setItem('userId', id.toString());
+          // localStorage.setItem('token', token);
+          // localStorage.setItem('role', role);
+          // localStorage.setItem('userId', id.toString());
+
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              userId: id,
+              role: role,
+              token: token
+            })
+          );
  
           // Redirect based on role
           if (role === 'ADMIN') {
