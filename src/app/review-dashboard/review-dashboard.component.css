@@ -54,6 +54,21 @@ h2 {
   transform: translateY(-3px);
 }
 
+/* MODIFIED: Styles for the review header to align buttons */
+.review-header {
+  display: flex;
+  justify-content: space-between; /* Pushes text content to left, buttons to right */
+  align-items: center; /* Vertically aligns text and buttons */
+  margin-bottom: 5px; /* Space below the header */
+}
+
+/* NEW: Style for the container of Edit/Delete buttons */
+.review-actions {
+  display: flex; /* Makes buttons inside this div sit side-by-side */
+  gap: 8px; /* Space between the Edit and Delete buttons */
+}
+
+
 .review-card strong {
   color: #34495e; /* Darker text for labels */
 }
@@ -148,7 +163,7 @@ h3 {
   outline: none;
 }
 
-/* Button styling */
+/* Button styling - General */
 button {
   padding: 12px 25px;
   background-color: #3498db;
@@ -173,30 +188,100 @@ button:active {
   transform: translateY(0);
 }
 
+/* MODIFIED: Styles for the small "Edit" and "Delete" buttons */
+.small-btn {
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 0.85em; /* Smaller font size */
+  /* margin-left: 8px; REMOVED: Managed by gap on .review-actions */
+  border: none;
+  border-radius: 5px; /* Slightly smaller radius for smaller buttons */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto; /* Override default button width */
+  /* display: inline-block; REMOVED: Managed by flex on .review-actions */
+  margin-top: 0; /* Remove top margin from general button style */
+}
+
+/* Specific colors for small buttons */
+.small-btn:first-of-type { /* Targets the "Edit" button */
+  background-color: #007bff; /* Blue for Edit */
+  color: white;
+}
+
+.small-btn:first-of-type:hover {
+  background-color: #0056b3;
+}
+
+.small-btn:last-of-type { /* Targets the "Delete" button */
+  background-color: #dc3545; /* Red for Delete */
+  color: white;
+}
+
+.small-btn:last-of-type:hover {
+  background-color: #c82333;
+}
+
+/* Ensure the submit review button for new reviews is styled correctly */
+div > button { /* Targets the "Submit Review" button directly under a div */
+  width: 100%; /* Ensure it's full width as per your general button style */
+}
+
+/* Styles for the edit review form buttons (e.g., Update Review, Cancel) */
+.edit-review-form button {
+  width: auto; /* Allow these buttons to be auto-width, not full width */
+  display: inline-block; /* Keep them inline */
+  margin-right: 10px; /* Space between them */
+}
+.edit-review-form button:last-child {
+  margin-right: 0; /* No right margin for the last button */
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .container {
-      margin: 20px auto;
-      padding: 20px;
+    margin: 20px auto;
+    padding: 20px;
   }
   h2 {
-      font-size: 1.8em;
+    font-size: 1.8em;
   }
   .review-card {
-      padding: 18px;
+    padding: 18px;
   }
   button {
-      padding: 10px 20px;
-      font-size: 1em;
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+  /* Adjust small buttons for smaller screens if needed */
+  .small-btn {
+    padding: 4px 8px;
+    font-size: 0.8em;
   }
 }
+
+/* Back button specific styles */
 .back-button {
-  padding: 4px 6px;
-  background: #4caf50;
+  padding: 10px 20px; /* Increased padding to match other main buttons */
+  background: #6c757d; /* Consistent with previous example, but now like a main button */
   color: white;
   border: none;
-  font-size:20px;
-  border-radius: 3px;
+  font-size: 1em; /* Adjusted font size */
+  border-radius: 6px; /* Consistent with other buttons */
   cursor: pointer;
-  margin-bottom: 20px; /* Added for spacing as in your original example */
+  margin-top: 25px; /* Consistent with other main buttons */
+  display: block;
+  width: 100%;
+  text-align: center; /* Center text inside the block button */
+  text-decoration: none; /* In case it becomes an <a> tag */
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
+
+.back-button:active {
+  transform: translateY(0);
 }

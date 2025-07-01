@@ -1,4 +1,4 @@
-  <div class="container">
+  <!-- <div class="container">
     <h2>Reviews for Package #{{packageId}}</h2>
   
     <div *ngIf="message" class="message">
@@ -16,6 +16,78 @@
         <div *ngIf="r.agentResponse" class="agent-response-section">
           <strong>Agent's Response (Agent ID: {{r.agentResponse.agentId}}):</strong> {{r.agentResponse.responseMessage}}<br>
           <small>Responded on: {{r.agentResponse.responseTime | date:'medium'}}</small>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noReviews>
+      <p>No reviews yet for this package.</p>
+    </ng-template>
+  
+    <hr>
+  
+    <div *ngIf="completedBooking && !alreadyReviewed">
+      <h3>Leave a Review</h3>
+      <div>
+        <span *ngFor="let star of [1,2,3,4,5]"
+              (click)="setRating(star)"
+              [class.active]="star <= rating "
+              class="star">
+          ★
+        </span>
+      </div>
+      <textarea [(ngModel)]="comment" rows="3" placeholder="Write your comment here..."
+                class="comment-textarea"></textarea>
+      <button (click)="submitReview()">Submit Review</button>
+    </div>
+    <button (click)=" goBackToPackage()" class="back-button">
+      ⬅ Back to Package Details
+    </button>
+  </div> -->
+  <div class="container">
+    <h2>Reviews for Package #{{packageId}}</h2>
+  
+    <div *ngIf="message" class="message">
+      <p>{{message}}</p>
+    </div>
+  
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <div *ngFor="let r of reviews" class="review-card">
+        <div *ngIf="!editingReview || editingReview.reviewId !== r.reviewId">
+          <div class="review-header">
+            <div>
+              <strong>Review by User ID:</strong> {{r.userId}}
+            </div>
+            <div class="review-actions" *ngIf="r.userId === userId">
+              <button (click)="startEditReview(r)" class="small-btn">Edit</button>
+              <button (click)="deleteReview(r.reviewId)" class="small-btn">Delete</button>
+            </div>
+          </div>
+          <strong>Rating:</strong> {{r.rating}} ⭐<br>
+          <strong>Comment:</strong> {{r.comment}}<br>
+          <small>Posted on: {{r.timestamp | date:'medium'}}</small>
+          <br>
+  
+          <div *ngIf="r.agentResponse" class="agent-response-section">
+            <strong>Agent's Response (Agent ID: {{r.agentResponse.agentId}}):</strong> {{r.agentResponse.responseMessage}}<br>
+            <small>Responded on: {{r.agentResponse.responseTime | date:'medium'}}</small>
+          </div>
+        </div>
+  
+        <div *ngIf="editingReview && editingReview.reviewId === r.reviewId" class="edit-review-form">
+          <h3>Edit Your Review</h3>
+          <div>
+            <span *ngFor="let star of [1,2,3,4,5]"
+                  (click)="setEditRating(star)"
+                  [class.active]="star <= editingReview.rating"
+                  class="star">
+              ★
+            </span>
+          </div>
+          <textarea [(ngModel)]="editingReview.comment" rows="3" placeholder="Edit your comment here..."
+                    class="comment-textarea"></textarea>
+          <button (click)="submitEditReview()">Update Review</button>
+          <button (click)="cancelEdit()">Cancel</button>
         </div>
       </div>
     </div>
