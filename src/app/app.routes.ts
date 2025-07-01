@@ -9,18 +9,25 @@ import { CustomerHelpComponent } from './customer-help/customer-help.component';
 import { CustomerInsuranceComponent } from './customer-insurance/customer-insurance.component';
 import { LandingNavbarComponent } from './landing-navbar/landing-navbar.component';
 import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
+
 import { PackageDetailsComponent } from './package-details/package-details.component'; // <--- ADD THIS LINE
 import { ReviewDashboardComponent } from './review-dashboard/review-dashboard.component'; // <--- ADD THIS LINE
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+
+  { path: 'packages/:packageId', component: PackageDetailsComponent },     
+  { path: 'review-dashboard/:packageId', component: ReviewDashboardComponent }, 
+
   { path: 'packages/:packageId', component: PackageDetailsComponent },     // <--- ADD THIS LINE
  
+
   // Dashboard placeholders
   { path:'review-dashboard/:packageId',loadComponent:() => import('./review-dashboard/review-dashboard.component').then(m =>m.ReviewDashboardComponent)},
   { path: 'admin-dashboard', loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
@@ -89,12 +96,25 @@ export const routes: Routes = [
       m => m.AgentPackageReviewsComponent)
   },
 
+
+  //for showing a customer's bookings
+  {
+    path: 'my-bookings', // The URL path (e.g., yourdomain.com/my-bookings)
+    loadComponent: () =>
+      import('./customer-mybookings/customer-mybookings.component').then(
+        m => m.CustomerMybookingsComponent // This loads the component lazily
+      ),
+  },
+
+
+
   { path: 'booking', component: BookingComponent },
   { path: 'payment', component: PaymentComponent },
   { path: 'payment-success', component: PaymentSuccessComponent },
   { path: 'my-bookings', component: MyBookingsComponent },
  
  
+
 ];
  
  
