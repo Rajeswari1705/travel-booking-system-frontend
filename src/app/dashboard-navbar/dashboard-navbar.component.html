@@ -1,4 +1,10 @@
 <nav class="navbar">
+
+  <!-- Sidebar Toggle for ADMIN only -->
+  <span *ngIf="role === 'ADMIN'" class="hamburger" (click)="toggleSidebar()">☰</span>
+
+<div class="nav-spacer"></div>
+
     <!-- Profile Icon (Always Visible) -->
     <a routerLink="/my-profile">
   <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" width="40" height="40" />
@@ -8,5 +14,7 @@
     <div *ngIf="role === 'CUSTOMER'" class="nav-links">
       <a routerLink="/customer-help" routerLinkActive="active-link">Help</a>
       <a routerLink="/customer-insurance" routerLinkActive="active-link">My Insurance</a>
+      <a routerLink="/my-bookings" routerLinkActive="active-link">My Bookings</a>
+
     </div>
   </nav>

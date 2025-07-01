@@ -1,191 +1,128 @@
-/* Import Google Font - Poppins (looks similar to the image's font) */
+/* Import Google Font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* Apply global styles to the host element (the component itself) */
 :host {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center vertically in the viewport */
-    min-height: 100vh;
-    background-color: #eef6ff; /* Light blue background matching the image */
-    padding: 20px;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; /* Consistent font */
-    color: #333; /* Default text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #eef6ff; /* Light blue background */
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-/* Enhancements for the main card container */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .card {
-    background-color: #ffffff; /* White background for the card */
-    border-radius: 12px; /* Slightly less rounded than previous, matching image */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle, diffused shadow */
-    padding: 35px 40px; /* Adjusted padding for a balanced look */
-    width: 100%;
-    max-width: 480px; /* Adjusted max-width to match the card size in the image */
-    margin: 20px auto; /* Center with some vertical margin */
-    transition: transform 0.3s ease-out; /* Smooth transition for hover effect */
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 35px 40px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center; /* Ensure text is centered within the card */
+  transition: transform 0.3s ease-out;
 }
 
 .card:hover {
-    transform: translateY(-3px); /* Gentle lift on hover */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Heading specific styles */
-.text-2xl.font-semibold.mb-4.text-blue-600 {
-    color: #007bff; /* Vibrant blue for the heading */
-    text-align: center;
-    margin-bottom: 30px !important; /* Space below heading */
-    font-size: 1.8em; /* Adjusted font size to match image */
-    font-weight: 600; /* Bolder heading */
-    position: relative;
-    padding-bottom: 10px; /* Space for the underline */
+.success-icon {
+  margin: 0 auto 20px auto; /* Center the icon, add space below */
+  width: 60px; /* Slightly larger icon */
+  height: 60px;
+  color: #28a745; /* Green color for success */
 }
 
-.text-2xl.font-semibold.mb-4.text-blue-600::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 50px; /* Shorter, more subtle underline */
-    height: 3px;
-    background-color: #007bff; /* Matching blue underline */
-    border-radius: 1.5px;
+.success-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
-/* Label styling */
-.block.text-sm.font-medium.text-gray-700 {
-    color: #555; /* Slightly darker grey for labels */
-    font-weight: 500; /* Medium weight for labels */
-    margin-bottom: 8px; /* Space between label and input/paragraph */
-    display: block;
-    font-size: 0.95em; /* Slightly smaller label font */
+.main-heading {
+  font-size: 2em; /* Larger, more prominent heading */
+  font-weight: 700; /* Bolder */
+  color: #007bff; /* Vibrant blue */
+  margin-bottom: 20px; /* Space below heading */
 }
 
-/* Styling for the date display paragraphs (now acting like read-only inputs) */
-.bg-gray-100.p-2.rounded.text-gray-800 {
-    background-color: #f0f8ff; /* Very light blue background, matching image's input fields */
-    border: 1px solid #cce5ff; /* Light blue border */
-    padding: 10px 15px; /* Adjusted padding */
-    border-radius: 6px; /* Matching input border-radius */
-    font-weight: 500;
-    color: #333;
-    font-size: 1em;
-    height: 40px; /* Fixed height for consistency with inputs */
-    display: flex;
-    align-items: center; /* Vertically align text in the middle */
-    box-sizing: border-box; /* Include padding and border in height */
+.detail-text {
+  font-size: 1.1em; /* Slightly larger text for readability */
+  color: #555;
+  line-height: 1.6; /* Better line spacing */
+  margin-bottom: 15px; /* Spacing between paragraphs */
 }
 
-/* Input field focus and appearance */
-input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500 {
-    padding: 10px 15px; /* Adjusted padding */
-    border: 1px solid #cce5ff; /* Light blue border, matching image */
-    border-radius: 6px; /* Consistent border-radius */
-    font-size: 1em;
-    color: #333;
-    height: 40px; /* Fixed height for consistency */
-    box-sizing: border-box;
-    transition: all 0.2s ease-in-out; /* Faster transition for snappier feel */
-    box-shadow: none; /* Remove inner shadow */
+.detail-text strong {
+  color: #333; /* Make strong text stand out */
 }
 
-input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500:focus {
-    border-color: #007bff; /* Vibrant blue border on focus */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Subtle glow on focus */
-    outline: none;
-    background-color: #ffffff; /* White background on focus */
+.confirmation-email-box {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green text */
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #c3e6cb; /* Green border */
+  margin-top: 25px; /* Space above the box */
+  margin-bottom: 30px; /* Space below the box */
+  font-size: 0.95em;
+  font-weight: 500;
 }
 
-/* Hide the up and down arrows for number input */
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
+.dashboard-button {
+  display: inline-block;
+  background-color: #007bff; /* Vibrant blue */
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none; /* Remove underline */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.95em;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none; /* Chrome, Safari, Edge */
-    margin: 0; /* Remove margin to prevent extra space */
+.dashboard-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
-/* Button styling enhancements */
-button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition {
-    background-color: #007bff; /* Solid vibrant blue, matching image */
-    border: none;
-    border-radius: 6px; /* Consistent border-radius with inputs */
-    padding: 12px 25px; /* Adjusted padding */
-    font-size: 1em; /* Smaller font size for button text */
-    font-weight: 600; /* Bolder text */
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle button shadow */
-    transition: all 0.2s ease-in-out; /* Faster transition */
-    text-transform: uppercase; /* Uppercase text */
+.dashboard-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+  background-color: #004085;
 }
-
-button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Gentle lift on hover */
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Slightly larger shadow on hover */
-}
-
-button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
-    background-color: #004085; /* Even darker on active */
-}
-
-/* Spacing between elements */
-.space-y-4 > *:not(:last-child) {
-    margin-bottom: 20px; /* Increased space between form elements to match image */
-}
-
-/* Adjust the button wrapper margin to match image spacing */
-.mt-8.flex.justify-center {
-    margin-top: 30px !important; /* Adjust this value if needed for precise match */
-}
-
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-    .card {
-        padding: 25px;
-        margin: 15px auto;
-        border-radius: 10px;
-    }
-
-    .text-2xl.font-semibold.mb-4.text-blue-600 {
-        font-size: 1.6em;
-        padding-bottom: 8px;
-    }
-
-    .text-2xl.font-semibold.mb-4.text-blue-600::after {
-        width: 40px;
-        height: 2px;
-    }
-
-    .block.text-sm.font-medium.text-gray-700 {
-        font-size: 0.9em;
-    }
-
-    .bg-gray-100.p-2.rounded.text-gray-800,
-    input[type="number"].w-full.p-2.border.border-gray-300.rounded.focus\:ring-blue-500.focus\:border-blue-500 {
-        padding: 8px 12px;
-        font-size: 0.95em;
-        height: 38px;
-    }
-
-    button.w-full.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded.transition {
-        padding: 10px 20px;
-        font-size: 0.95em;
-    }
-
-    .space-y-4 > *:not(:last-child) {
-        margin-bottom: 15px; /* Adjust spacing for smaller screens */
-    }
-
-    .mt-8.flex.justify-center {
-        margin-top: 25px !important;
-    }
+  .card {
+    padding: 25px;
+    border-radius: 10px;
+  }
+  .main-heading {
+    font-size: 1.8em;
+  }
+  .detail-text {
+    font-size: 1em;
+  }
+  .confirmation-email-box {
+    padding: 12px;
+    font-size: 0.9em;
+  }
+  .dashboard-button {
+    padding: 10px 25px;
+    font-size: 0.9em;
+  }
 }
