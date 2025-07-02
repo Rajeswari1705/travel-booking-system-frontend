@@ -148,8 +148,8 @@ export class PackageDetailsComponent implements OnInit {
    */
   setDynamicDefaultImage(): void {
     const defaultImageFilenames = [
-      'image_8116da.png', // Provided image 1
-      'image_772dd1.png'  // Provided image 2
+      'bali.jpg', // Provided image 1
+      'ooty.jpg'  // Provided image 2
       // Add more filenames here if you have other default images in assets/images/
     ];
     const randomIndex = Math.floor(Math.random() * defaultImageFilenames.length);
