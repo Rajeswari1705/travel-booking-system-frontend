@@ -146,7 +146,6 @@ button:active {
   gap: 10px;
 }
 
-
 .review-rating-line {
   margin-top: 10px; /* Space between date and rating */
   margin-bottom: 10px; /* Space between rating and comment */
@@ -155,9 +154,14 @@ button:active {
   gap: 8px;
 }
 
+/* CORRECTED CSS FOR DISPLAYED STARS */
 .rating-stars-display .star-icon {
-  color: #ffc107; /* Gold for displayed stars */
+  color: #d1d1d1; /* Default: Lighter grey for unfilled displayed stars */
   font-size: 1.4em; /* Slightly larger displayed stars */
+}
+
+.rating-stars-display .star-icon.filled {
+  color: #ffc107; /* Specific: Gold for filled displayed stars */
 }
 
 .review-comment-section {
