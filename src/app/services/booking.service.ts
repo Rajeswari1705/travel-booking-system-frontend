@@ -16,7 +16,7 @@ return this.http.post<any>(this.api, data);
     return this.http.get(`${this.api}/${id}`);
   }
  
-  getBookingsByUser(userId: number): Observable<any[]> {
+  getBookingsByUserId(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/internal/bookings/user/${userId}`);
   }
   

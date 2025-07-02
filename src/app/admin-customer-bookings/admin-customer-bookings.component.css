@@ -16,6 +16,20 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+.back-button {
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+ 
+.back-button:hover {
+  background-color: #0056b3;
+}
+
 /* Heading */
 h2 {
   text-align: center;

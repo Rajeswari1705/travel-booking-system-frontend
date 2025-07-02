@@ -1,287 +1,289 @@
-/* General Body and Font Styles - Consistent with agent dashboard */
-body {
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
+.review-dashboard-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 25px; /* Slightly more padding */
+  background-color: #ffffff; /* White background */
+  border-radius: 10px; /* More rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+  font-family: 'Inter', sans-serif;
   color: #333;
-  background-color: #f4f7f6; /* A slightly warmer off-white background */
 }
 
-/* Overall Container for the Review Dashboard */
-.container {
-  max-width: 700px; /* Consistent width with agent dashboard */
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
+h2, h3 {
+  color: #2c3e50; /* Darker heading color */
   text-align: center;
-  color: #2c3e50;
-  margin-bottom: 35px;
-  font-size: 2.2em;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  margin-bottom: 25px; /* More space below headings */
+  font-weight: 600; /* Slightly bolder */
 }
 
-/* Styling for general messages (e.g., success/error) */
-.message {
+.alert {
   padding: 12px 20px;
   margin-bottom: 25px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 0.95em;
-  color: #c0392b; /* Red for errors */
-  background-color: #fcebeb;
-  border: 1px solid #e74c3c;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
-}
-
-/* Styling for individual review cards */
-.review-card {
-  border: 1px solid #e0e6ec;
-  background-color: #ffffff;
-  padding: 25px;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease-in-out;
-}
-
-.review-card:hover {
-  transform: translateY(-3px);
-}
-
-/* MODIFIED: Styles for the review header to align buttons */
-.review-header {
-  display: flex;
-  justify-content: space-between; /* Pushes text content to left, buttons to right */
-  align-items: center; /* Vertically aligns text and buttons */
-  margin-bottom: 5px; /* Space below the header */
-}
-
-/* NEW: Style for the container of Edit/Delete buttons */
-.review-actions {
-  display: flex; /* Makes buttons inside this div sit side-by-side */
-  gap: 8px; /* Space between the Edit and Delete buttons */
-}
-
-
-.review-card strong {
-  color: #34495e; /* Darker text for labels */
-}
-
-.review-card p {
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 12px;
-  font-size: 1.05em;
-}
-
-.review-card small {
-  color: #888;
-  display: block;
-  margin-bottom: 18px;
-  font-size: 0.88em;
-}
-
-/* Styling for the agent's response section within user view */
-.agent-response-section {
-  margin-top: 20px;
-  padding: 18px;
-  border-left: 5px solid #27ae60;
-  background-color: #eaf7ed;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.agent-response-section strong {
-  color: #1e8449; /* Darker green for response label */
-  font-weight: 500;
-}
-
-.agent-response-section small {
-  color: #666;
-  font-size: 0.8em;
-}
-
-/* Styling for "No reviews" message */
-.container > ng-template p {
+  font-weight: bold;
   text-align: center;
-  color: #999;
-  font-style: italic;
-  padding: 40px 0;
-  font-size: 1.1em;
+  border-left: 5px solid; /* Add a left border for emphasis */
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #e0e6ec;
-  margin: 30px 0;
+.alert-danger {
+  background-color: #fce8e8; /* Lighter red */
+  color: #a94442;
+  border-color: #ebccd1;
 }
 
-/* Styling for "Leave a Review" section */
-h3 {
-  color: #34495e;
-  font-size: 1.8em;
-  font-weight: 600;
-  margin-bottom: 20px;
+.alert-info {
+  background-color: #eaf6fa; /* Lighter blue */
+  color: #31708f;
+  border-color: #bce8f1;
+}
+
+.alert-success {
+  background-color: #e6faed; /* Lighter green */
+  color: #3c763d;
+  border-color: #d6e9c6;
+}
+
+.review-form-section, .edit-review-form {
+  background-color: #fefefe;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px; /* More space below forms */
+  border: 1px solid #e0e0e0;
+}
+
+.rating-stars {
+  font-size: 2.5em; /* Larger stars for input */
+  color: #d1d1d1; /* Lighter grey for empty stars */
+  margin-bottom: 15px;
   text-align: center;
 }
 
-/* Star rating styling */
-.star {
-  font-size: 32px; /* Larger stars */
+.rating-stars .star {
   cursor: pointer;
-  color: #ccc;
   transition: color 0.2s ease-in-out;
 }
 
-.star.active {
-  color: #f39c12; /* Vibrant orange for active stars */
+.rating-stars .star.filled {
+  color: #ffc107; /* Gold for filled stars */
 }
 
-/* Textarea styling */
 .comment-textarea {
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 12px;
-  margin-top: 15px; /* More space from stars */
-  border: 1px solid #dcdcdc;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1em;
-  box-sizing: border-box;
   resize: vertical;
-  min-height: 100px; /* Minimum height for better typing experience */
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  min-height: 100px; /* Slightly taller textarea */
+  font-size: 1em;
+  line-height: 1.5;
+  box-sizing: border-box; /* Include padding in width */
 }
 
-.comment-textarea:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-  outline: none;
-}
-
-/* Button styling - General */
 button {
   padding: 12px 25px;
-  background-color: #3498db;
-  color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 1.05em;
   font-weight: 600;
-  margin-top: 15px; /* More space from textarea */
-  display: block; /* Make button full width */
-  width: 100%; /* Ensure full width */
-  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-right: 15px; /* More spacing between primary buttons */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-  background-color: #2980b9;
-  transform: translateY(-1px);
+button:last-child {
+  margin-right: 0;
 }
 
 button:active {
-  transform: translateY(0);
+  transform: translateY(1px);
 }
 
-/* MODIFIED: Styles for the small "Edit" and "Delete" buttons */
-.small-btn {
-  padding: 5px 10px; /* Smaller padding */
-  font-size: 0.85em; /* Smaller font size */
-  /* margin-left: 8px; REMOVED: Managed by gap on .review-actions */
-  border: none;
-  border-radius: 5px; /* Slightly smaller radius for smaller buttons */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: auto; /* Override default button width */
-  /* display: inline-block; REMOVED: Managed by flex on .review-actions */
-  margin-top: 0; /* Remove top margin from general button style */
-}
-
-/* Specific colors for small buttons */
-.small-btn:first-of-type { /* Targets the "Edit" button */
-  background-color: #007bff; /* Blue for Edit */
+.submit-button {
+  background-color: #28a745; /* Green for submit */
   color: white;
 }
 
-.small-btn:first-of-type:hover {
+.submit-button:hover {
+  background-color: #218838;
+}
+
+.save-button {
+  background-color: #007bff; /* Blue for save */
+  color: white;
+}
+
+.save-button:hover {
   background-color: #0056b3;
 }
 
-.small-btn:last-of-type { /* Targets the "Delete" button */
-  background-color: #dc3545; /* Red for Delete */
+.cancel-button {
+  background-color: #6c757d;
   color: white;
 }
 
-.small-btn:last-of-type:hover {
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.review-item {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px; /* More space between reviews */
+  /* This line was removed as per your request in a previous turn: border-left: 5px solid #a2d2ff; */
+}
+
+.review-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically in the middle */
+  margin-bottom: 10px; /* Space below header (user ID/actions) */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.review-rating-line {
+  margin-top: 10px; /* Space between date and rating */
+  margin-bottom: 10px; /* Space between rating and comment */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* CORRECTED CSS FOR DISPLAYED STARS */
+.rating-stars-display .star-icon {
+  color: #d1d1d1; /* Default: Lighter grey for unfilled displayed stars */
+  font-size: 1.4em; /* Slightly larger displayed stars */
+}
+
+.rating-stars-display .star-icon.filled {
+  color: #ffc107; /* Specific: Gold for filled displayed stars */
+}
+
+.review-comment-section {
+  margin-bottom: 15px; /* Space below the user's comment */
+}
+
+.review-comment-section p {
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 0; /* No extra margin below paragraph */
+}
+
+.posted-date {
+  font-size: 0.85em;
+  color: #777;
+  margin-top: 2px; /* Small margin to separate from User ID line */
+  margin-bottom: 0; /* Remove default paragraph bottom margin */
+}
+
+.review-actions button {
+  padding: 8px 15px;
+  font-size: 0.9em;
+  margin-left: 8px; /* Space between edit and delete */
+  box-shadow: none; /* No shadow on these smaller buttons */
+}
+
+.edit-button {
+  background-color: #007bff; /* Consistent blue for edit */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Consistent red for delete */
+  color: white;
+}
+
+.delete-button:hover {
   background-color: #c82333;
 }
 
-/* Ensure the submit review button for new reviews is styled correctly */
-div > button { /* Targets the "Submit Review" button directly under a div */
-  width: 100%; /* Ensure it's full width as per your general button style */
+.agent-response-section {
+  background-color: #f5f5f5; /* Lighter grey for agent response */
+  border-left: 4px solid #6c757d; /* Darker grey border */
+  padding: 15px;
+  margin-top: 20px; /* Increased space above agent response section */
+  border-radius: 6px;
+  line-height: 1.5;
 }
 
-/* Styles for the edit review form buttons (e.g., Update Review, Cancel) */
-.edit-review-form button {
-  width: auto; /* Allow these buttons to be auto-width, not full width */
-  display: inline-block; /* Keep them inline */
-  margin-right: 10px; /* Space between them */
-}
-.edit-review-form button:last-child {
-  margin-right: 0; /* No right margin for the last button */
+.agent-response-section strong {
+  display: block; /* Ensures "Agent's Response (Agent: X):" is on its own line */
+  margin-bottom: 5px; /* Space below the agent response heading */
 }
 
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .container {
-    margin: 20px auto;
-    padding: 20px;
-  }
-  h2 {
-    font-size: 1.8em;
-  }
-  .review-card {
-    padding: 18px;
-  }
-  button {
-    padding: 10px 20px;
-    font-size: 1em;
-  }
-  /* Adjust small buttons for smaller screens if needed */
-  .small-btn {
-    padding: 4px 8px;
-    font-size: 0.8em;
-  }
+.agent-response-section p {
+  margin-bottom: 5px; /* Space between the response message and the timestamp */
 }
 
-/* Back button specific styles */
+.agent-response-section .posted-date {
+  margin-top: 0; /* Override default top margin as it's directly after another paragraph */
+}
+
+.no-reviews-message {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 30px;
+  padding: 15px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
 .back-button {
-  padding: 10px 20px; /* Increased padding to match other main buttons */
-  background: #6c757d; /* Consistent with previous example, but now like a main button */
-  color: white;
-  border: none;
-  font-size: 1em; /* Adjusted font size */
-  border-radius: 6px; /* Consistent with other buttons */
-  cursor: pointer;
-  margin-top: 25px; /* Consistent with other main buttons */
   display: block;
-  width: 100%;
-  text-align: center; /* Center text inside the block button */
-  text-decoration: none; /* In case it becomes an <a> tag */
-  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  width: fit-content;
+  margin: 30px auto 0; /* More margin above */
+  background-color: #6c757d;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .back-button:hover {
   background-color: #5a6268;
-  transform: translateY(-1px);
 }
 
-.back-button:active {
-  transform: translateY(0);
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .review-dashboard-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .review-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px; /* More space when stacked */
+  }
+
+  .review-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  button {
+    width: auto; /* Allow buttons to size naturally */
+    flex-grow: 1; /* Distribute space */
+    margin-right: 5px;
+  }
+  button:last-child {
+    margin-right: 0;
+  }
+
+  .comment-textarea {
+    min-height: 80px;
+  }
 }

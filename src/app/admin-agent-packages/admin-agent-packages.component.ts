@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
  
@@ -16,8 +16,13 @@ export class AdminAgentPackagesComponent implements OnInit {
  
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private location: Location
   ) {}
+
+  goBack(): void{
+    this.location.back();
+  }
  
   ngOnInit(): void {
     // Get agent ID from route parameter
@@ -41,4 +46,5 @@ export class AdminAgentPackagesComponent implements OnInit {
         }
       });
   }
+  
 }

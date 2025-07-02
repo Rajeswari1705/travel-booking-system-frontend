@@ -14,15 +14,38 @@ body {
   background-color: #fff; border: 1px solid #e9ecef; border-radius: 6px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+
+.back-button {
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
 h2 {
   text-align: center; color: #212529; margin-bottom: 30px;
   font-size: 26px; font-weight: 600; padding-bottom: 15px;
   border-bottom: 1px solid #dee2e6;
 }
 
+/* NEW: Filter Controls Container */
+.filter-controls {
+  display: flex;
+  gap: 15px; /* Space between dropdown and search bar */
+  margin-bottom: 30px;
+  align-items: center;
+}
+
 /* Search Bar */
 .search-bar {
-  display: flex; gap: 10px; margin-bottom: 30px;
+  display: flex; gap: 10px; flex-grow: 1; /* Allow search bar to take available space */
   padding: 10px; border: 1px solid #e9ecef; border-radius: 6px;
   background-color: #fcfcfc; align-items: center;
 }
@@ -75,6 +98,7 @@ h2 {
 
 /* Custom Select Box */
 .custom-select-wrapper { position: relative; display: inline-block; flex-grow: 1; }
+.custom-select-wrapper.role-filter { flex-grow: 0; min-width: 150px; } /* NEW: Specific styling for role filter */
 select { padding-right: 35px; /* Space for custom arrow */ } /* Added padding here after combining */
 .dropdown-arrow {
   position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
@@ -109,6 +133,9 @@ select { padding-right: 35px; /* Space for custom arrow */ } /* Added padding he
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .manage-container { padding: 20px; margin: 20px auto; }
+  .filter-controls { flex-direction: column; align-items: stretch; gap: 10px;} /* NEW: Stack filters on small screens */
+  .search-bar { width: 100%; } /* NEW: Make search bar full width */
+  .custom-select-wrapper.role-filter { width: 100%; min-width: unset; } /* NEW: Make role filter full width */
   .card-actions, .role-selection, .action-buttons {
     flex-direction: column; align-items: stretch;
   }
