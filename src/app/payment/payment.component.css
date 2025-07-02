@@ -109,6 +109,7 @@ select.w-full.p-2.border.border-gray-300.rounded:focus {
 /* Hide the up and down arrows for number input */
 input[type="number"] {
     -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Standard property for compatibility */
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -132,27 +133,28 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /* Button styling enhancements - Blue theme */
-button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition {
-    background: #007bff; /* Changed to solid vibrant blue, matching booking button */
+button { /* This generic 'button' selector applies base styles, Tailwind classes will then override width/position */
+    background: #007bff;
     border: none;
-    border-radius: 6px; /* Consistent border-radius with inputs */
-    padding: 12px 25px; /* Adjusted padding */
-    font-size: 1em; /* Smaller font size for button text */
-    font-weight: 600; /* Bolder text */
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
     letter-spacing: 0.5px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle button shadow */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
     transition: all 0.2s ease-in-out;
-    text-transform: uppercase; /* Uppercase text */
+    text-transform: uppercase;
+    color: white; /* Ensure text color is white */
 }
 
-button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition:hover {
+button:hover {
     background-color: #0056b3; /* Darker blue on hover */
     transform: translateY(-2px); /* Gentle lift on hover */
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Slightly larger shadow on hover */
 }
 
-button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition:active {
+button:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
     background-color: #004085; /* Even darker on active */
@@ -189,8 +191,8 @@ button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.
         height: 38px;
     }
 
-    button.w-full.bg-green-600.hover\:bg-green-700.text-white.font-medium.py-2.px-4.rounded.transition {
+    button { /* Apply responsive styles to the button as well */
         padding: 12px 20px;
         font-size: 1em;
     }
-}
+} 
