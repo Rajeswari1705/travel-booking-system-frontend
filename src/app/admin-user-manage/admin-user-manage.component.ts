@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms'; //THIS LINE: Import FormsModule
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-user-manage',
   standalone: true,
-  // ADD FormsModule here
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule], // MODIFIED LINE
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
   templateUrl: './admin-user-manage.component.html',
   styleUrls: ['./admin-user-manage.component.css']
 })
 export class AdminUserManageComponent implements OnInit {
 
   users: any[] = [];
-  
+
   filteredUsers: any[] = []; // This array will be displayed
   searchUserId: string = ''; // Binds to the search input
+  selectedRoleFilter: string = 'ALL'; // NEW: Binds to the role filter dropdown
 
-  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService, private location: Location) { }
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -35,35 +35,43 @@ export class AdminUserManageComponent implements OnInit {
     }).subscribe({
       next: (res) => {
         this.users = res.filter(user => user.role && user.role.toUpperCase() !== 'ADMIN');
-        this.filteredUsers = [...this.users]; // Initialize filteredUsers with all fetched non-admin users
+        this.applyFilter(); // MODIFIED: Apply filter after fetching users
       },
       error: () => this.toastr.error('Failed to load users')
     });
   }
 
-  // START:METHODS FOR SEARCH FUNCTIONALITY
-
+  // MODIFIED: applyFilter now considers both ID and role
   applyFilter(): void {
-    if (!this.searchUserId) {
-      // If search bar is empty, show all non-admin users
-      this.filteredUsers = [...this.users];
-      return;
+    let tempFilteredUsers = [...this.users];
+
+    // First, filter by role
+    if (this.selectedRoleFilter !== 'ALL') {
+      tempFilteredUsers = tempFilteredUsers.filter(user =>
+        user.role.toUpperCase() === this.selectedRoleFilter.toUpperCase()
+      );
     }
 
-    // Filter by ID (case-insensitive and partial match)
-    // Convert ID to string for includes() method
-    this.filteredUsers = this.users.filter(user =>
-      user.id.toString().toLowerCase().includes(this.searchUserId.toLowerCase())
-    );
+    // Then, filter by ID on the already role-filtered users
+    if (this.searchUserId) {
+      tempFilteredUsers = tempFilteredUsers.filter(user =>
+        user.id.toString().toLowerCase().includes(this.searchUserId.toLowerCase())
+      );
+    }
+
+    this.filteredUsers = tempFilteredUsers;
+  }
+
+
+  // NEW: Method for role filter change
+  onRoleFilterChange(): void {
+    this.applyFilter();
   }
 
   clearSearch(): void {
     this.searchUserId = ''; // Clear the input field
-    this.applyFilter(); // Re-apply filter to show all users
+    this.applyFilter(); // Re-apply filter to show all users based on current role filter
   }
-
-  // END: ADD THESE METHODS FOR SEARCH FUNCTIONALITY
-
 
   // Called when admin changes the role of a user from dropdown
   onRoleChange(user: any, event: Event): void {
@@ -72,6 +80,8 @@ export class AdminUserManageComponent implements OnInit {
     // Prevent manually assigning ADMIN role
     if (selectedRole === 'ADMIN') {
       this.toastr.warning('Admin role cannot be assigned manually.');
+      // Revert the dropdown selection visually
+      (event.target as HTMLSelectElement).value = user.role;
       return;
     }
 
@@ -97,8 +107,11 @@ export class AdminUserManageComponent implements OnInit {
         }
         this.applyFilter(); // Re-apply filter to update filteredUsers
       },
-      error: () => {
+      error: (err) => {
+        console.error("❌ Role update failed:", err);
         this.toastr.error('Failed to update role');
+        // Revert the dropdown selection visually on error
+        (event.target as HTMLSelectElement).value = user.role;
       }
     });
   }
@@ -110,7 +123,7 @@ export class AdminUserManageComponent implements OnInit {
     this.http.delete(`http://localhost:8080/api/users/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
       responseType: 'text', //avoids json parsing
-      observe: 'response'  //  Observe the full HTTP response
+      observe: 'response'  // Observe the full HTTP response
     }).subscribe({
       next: (response) => {
         // Check if status is 200 OK or 204 No Content
@@ -119,7 +132,7 @@ export class AdminUserManageComponent implements OnInit {
           // MODIFIED: Remove user from `users` array and re-apply filter
           this.users = this.users.filter(user => user.id !== id);
           this.applyFilter(); // Update filteredUsers after deletion
-          
+
         } else {
           this.toastr.error('Unexpected response from server');
         }
@@ -135,4 +148,11 @@ export class AdminUserManageComponent implements OnInit {
   viewAgentPackages(agentId: number) {
     this.router.navigate(['/admin/agent-packages', agentId]);
   }
+
+
+  //to go back to previous page
+  goBack(): void {
+    this.location.back();
+  }
+
 }

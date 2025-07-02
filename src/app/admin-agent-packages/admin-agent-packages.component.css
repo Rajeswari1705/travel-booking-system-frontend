@@ -2,6 +2,21 @@
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fcfdff; /* Very light, almost white-blue background */ color: #343a40; margin: 0; padding: 15px; }
 .container { max-width: 900px; margin: 25px auto; padding: 25px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
 
+
+.back-button {
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+ 
+.back-button:hover {
+  background-color: #0056b3;
+}
+
 /* Heading */
 h2 { text-align: center; color: #212529; font-size: 2.2em; margin-bottom: 35px; position: relative; padding-bottom: 12px; }
 h2::after { content: ''; display: block; width: 80px; height: 4px; background-color: #fff; margin: 5px auto 0; border-radius: 2px; }

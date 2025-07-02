@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { RouterModule } from '@angular/router';
  
 @Component({
@@ -22,9 +22,15 @@ export class AdminCustomerBookingsComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
  
+
+  goBack(): void{
+    this.location.back();
+  }
+
   ngOnInit(): void {
     this.customerId = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchBookings();
