@@ -18,18 +18,24 @@
     <h2 class="main-heading">Payment Successful 🎉</h2>
 
     <p class="detail-text">
-      Hi **{{ userName }}**, your booking (ID: **{{ bookingId }}**) has been confirmed!
+      Hi {{ userName }}, your booking 
+      <!-- (ID: **{{ bookingId }}**)  -->
+      has been confirmed!
     </p>
 
     <p class="detail-text mb-4">
-      You have successfully booked the travel package: **{{ packageTitle }}**<br />
-      Your trip is scheduled from **{{ tripStartDate | date:'mediumDate' }}** to **{{ tripEndDate | date:'mediumDate' }}**.
+      You have successfully booked the travel package
+      <!-- : **{{ packageTitle }}** -->
+      <br />
+      <!-- Your trip is scheduled from **{{ tripStartDate | date:'mediumDate' }}** to **{{ tripEndDate | date:'mediumDate' }}**. -->
     </p>
 
     <div class="confirmation-email-box">
       ✅ A confirmation email has been sent to your registered email address.
     </div>
 
-    <a routerLink="/" class="dashboard-button"> Go to Dashboard </a>
+    <!-- <a routerLink="/" class="dashboard-button"> Go to Dashboard </a>
+     -->
+     <a routerLink="/customer-dashboard" class="dashboard-button"> Go back to packages </a>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InsuranceService } from '../services/insurance.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,7 +18,7 @@ export class InsuranceSelectionComponent implements OnInit {
   error = '';
   success = '';
 
-  constructor(private service: InsuranceService, private router: Router) {}
+  constructor(private service: InsuranceService, private router: Router, private location:Location) {}
 
   ngOnInit() {
     this.service.getCoveragePlans().subscribe(data => this.plans = data);
@@ -38,20 +38,23 @@ export class InsuranceSelectionComponent implements OnInit {
     }
 
     this.service.getMyInsurances(this.userId).subscribe(existingInsurances => {
-      const hasPending = existingInsurances.some(
+      const pendingInsurance = existingInsurances.find(
         insurance => insurance.bookingId === null
       );
 
-      if (hasPending) {
-        this.error = '⚠️ Insurance already selected. Please complete your booking.';
+      if (pendingInsurance) {
+        this.error = `⚠️ Insurance already selected with Insurance ID: ${pendingInsurance.insuranceId}. Please complete your booking.`;
         this.success = '';
       } else {
-        this.service.submitInsurance(this.userId, this.selected).subscribe(() => {
-          this.success = '✅ Insurance selected successfully!';
+        this.service.submitInsurance(this.userId, this.selected).subscribe(newInsurance => {
+          this.success = `✅ Insurance selected successfully with Insurance ID: ${newInsurance.insuranceId}!`;
           this.error = '';
-          setTimeout(() => this.router.navigate(['/booking']), 2000);
         });
       }
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
