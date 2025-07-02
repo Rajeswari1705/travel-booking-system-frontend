@@ -54,6 +54,7 @@ export class ReviewDashboardComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.completedBooking = res;
+          console.log(`Booking completed status for userId ${this.userId}, packageId ${this.packageId}: ${this.completedBooking}`);
           // Set message if not completed, otherwise clear it to allow form to show
           if (!this.completedBooking) {
             this.message = "You can only review this package after completing the trip.";
@@ -64,7 +65,8 @@ export class ReviewDashboardComponent implements OnInit {
             }
           }
         },
-        error: () => {
+        error: (err) => {
+          console.error("Error checking completed booking status:", err);
           this.message = "Could not validate booking status. Try again later.";
           this.completedBooking = false; // Assume not completed on error
         }
@@ -72,16 +74,25 @@ export class ReviewDashboardComponent implements OnInit {
   }
 
   loadReviews() {
+    console.log("loadReviews() called.");
     this.http.get<any[]>(`http://localhost:8084/api/reviews/${this.packageId}`)
       .pipe(
         switchMap(reviews => {
+          console.log("Raw reviews received from backend (before agent responses):", reviews); // Log raw data
+
           if (reviews.length === 0) {
+            console.log("No reviews found for this package.");
             return of([]); // If no reviews, return an empty array directly
           }
 
           // For each review, make a separate API call to get its agent response
-          const reviewWithAgentResponses$ = reviews.map(review =>
-            this.http.get<any[]>(`http://localhost:8084/api/agent-responses/${review.reviewId}`).pipe(
+          const reviewWithAgentResponses$ = reviews.map(review => {
+            // IMPORTANT: Ensure rating is a number for reliable comparison in template
+            console.log(`Processing review ID: ${review.reviewId}, Original Rating type: ${typeof review.rating}, Original Rating value: ${review.rating}`);
+            review.rating = Number(review.rating); // Explicitly convert to Number
+            console.log(`Processed Review ID: ${review.reviewId}, New Rating type: ${typeof review.rating}, New Rating value: ${review.rating}`);
+
+            return this.http.get<any[]>(`http://localhost:8084/api/agent-responses/${review.reviewId}`).pipe(
               map(agentResponses => {
                 // Assuming agent-responses/{reviewId} returns an array, take the first one if present
                 review.agentResponse = agentResponses.length > 0 ? agentResponses[0] : null;
@@ -92,8 +103,8 @@ export class ReviewDashboardComponent implements OnInit {
                 review.agentResponse = null; // Set to null on error to prevent breaking display
                 return of(review); // Continue with other reviews even if this one fails
               })
-            )
-          );
+            );
+          });
           // Use forkJoin to wait for all individual agent response fetches to complete
           return forkJoin(reviewWithAgentResponses$);
         })
@@ -101,7 +112,9 @@ export class ReviewDashboardComponent implements OnInit {
       .subscribe({
         next: (reviewsWithResponses) => {
           this.reviews = reviewsWithResponses; // Update the reviews array with agent responses
+          console.log("Final processed reviews array (should be displayed):", this.reviews); // Log processed data
           this.alreadyReviewed = this.reviews.some(r => r.userId === this.userId);
+          console.log(`User ${this.userId} has already reviewed: ${this.alreadyReviewed}`);
 
           // Update message based on current state after loading reviews
           if (this.completedBooking && this.alreadyReviewed) {
@@ -111,15 +124,10 @@ export class ReviewDashboardComponent implements OnInit {
           } else if (!this.completedBooking) {
               this.message = "You can only review this package after completing the trip.";
           }
-          // If no specific message applies, it remains empty, which is good for the form to appear.
-
-          // If the user has already reviewed and is not currently editing,
-          // ensure the form for new review is hidden and edit option is available.
-          // No need to pre-fill the form here, as startEditReview will do that.
         },
-        error: () => {
+        error: (err) => {
+          console.error("Error in loadReviews subscription:", err);
           this.message = "Failed to load reviews or agent responses.";
-          console.error("Error in loadReviews subscription.");
           this.alreadyReviewed = false; // Assume no reviews if loading fails
         }
       });
@@ -128,10 +136,12 @@ export class ReviewDashboardComponent implements OnInit {
   submitReview() {
     if (this.rating === 0) {
       this.message = "Please provide a rating.";
+      console.warn("Submit review failed: No rating provided.");
       return;
     }
     if (this.comment.length < 10) {
       this.message = "Comment must be at least 10 characters.";
+      console.warn("Submit review failed: Comment too short.");
       return;
     }
 
@@ -142,10 +152,12 @@ export class ReviewDashboardComponent implements OnInit {
       comment: this.comment
     };
 
+    console.log("Submitting new review:", review);
     this.http.post('http://localhost:8084/api/reviews', review)
       .subscribe({
         next: () => {
           this.message = "Review submitted successfully.";
+          console.log("New review submitted successfully.");
           this.loadReviews(); // Reload reviews to show the new one
           this.rating = 0; // Reset form fields
           this.comment = ''; // Reset form fields
@@ -153,24 +165,29 @@ export class ReviewDashboardComponent implements OnInit {
         error: (err) => {
           if (err.status === 400 && err.error && err.error.message && err.error.message.includes("already reviewed")) {
             this.message = "You have already submitted a review for this package.";
+            console.warn("Review submission failed: User already reviewed.");
           } else {
             this.message = "Failed to submit review. Please check console for details.";
+            console.error("Error submitting new review:", err);
           }
-          console.error("Error submitting review:", err);
         }
       });
   }
 
   setRating(stars: number) {
     this.rating = stars; // Update rating for new review form
+    console.log("New review rating set to:", this.rating);
   }
 
   // Method to start editing a review
   startEditReview(review: any) {
       this.editingReview = { ...review }; // Create a copy of the review to edit
-      this.rating = this.editingReview.rating; // Populate rating input with existing rating
+      // IMPORTANT: Ensure rating is a number when populating edit form
+      this.rating = Number(this.editingReview.rating); // Populate rating input with existing rating
       this.comment = this.editingReview.comment; // Populate comment input with existing comment
       this.message = ''; // Clear any previous messages
+      console.log("Entering edit mode for review:", this.editingReview);
+      console.log("Initial rating for edit form:", this.rating, " (type: " + typeof this.rating + ")");
   }
 
   // Method to set rating for the review being edited
@@ -179,18 +196,21 @@ export class ReviewDashboardComponent implements OnInit {
     if (this.editingReview) {
       this.editingReview.rating = stars; // Also update the editingReview object's rating
     }
+    console.log("Rating selected in edit mode set to:", this.rating);
   }
 
   // Method to submit the edited review
   submitEditReview() {
     if (!this.editingReview || !this.editingReview.reviewId) {
       this.message = "No review selected for editing.";
+      console.warn("Submit edit review failed: No review selected.");
       return;
     }
 
     // Use this.comment and this.rating for the submission, as they are bound to the edit form
     if (this.comment.length < 10) {
       this.message = "Edited comment must be at least 10 characters.";
+      console.warn("Submit edit review failed: Edited comment too short.");
       return;
     }
 
@@ -202,13 +222,16 @@ export class ReviewDashboardComponent implements OnInit {
         comment: this.comment // Use the current comment from the edit form
     };
 
+    console.log("Submitting updated review:", updatedReview);
     this.http.put(`http://localhost:8084/api/reviews/${updatedReview.reviewId}`, updatedReview)
       .subscribe({
         next: () => {
           this.message = "Review updated successfully.";
+          console.log("Review updated successfully on backend.");
           this.editingReview = null; // Exit edit mode
           this.rating = 0; // Reset form fields
           this.comment = ''; // Reset form fields
+          console.log("Calling loadReviews() after successful update...");
           this.loadReviews(); // Reload reviews to show updated one
         },
         error: (err) => {
@@ -224,15 +247,18 @@ export class ReviewDashboardComponent implements OnInit {
     this.rating = 0; // Reset form fields
     this.comment = ''; // Reset form fields
     this.message = ''; // Clear any messages
+    console.log("Edit mode cancelled.");
   }
 
   // Method to delete a review
   deleteReview(reviewId: number) {
     if (confirm('Are you sure you want to delete this review?')) {
+      console.log(`Attempting to delete review with ID: ${reviewId}`);
       this.http.delete(`http://localhost:8084/api/reviews/${reviewId}`)
         .subscribe({
           next: () => {
             this.message = "Review deleted successfully.";
+            console.log(`Review ${reviewId} deleted successfully.`);
             this.loadReviews(); // Reload reviews after deletion
             this.checkCompletedBooking(); // Re-check booking status as review count might change eligibility
           },
@@ -245,6 +271,7 @@ export class ReviewDashboardComponent implements OnInit {
   }
 
   goBackToPackage() {
+    console.log(`Navigating back to package details for package ID: ${this.packageId}`);
     this.router.navigate(['/packages', this.packageId]);
   }
 }

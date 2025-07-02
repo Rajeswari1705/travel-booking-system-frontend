@@ -151,34 +151,35 @@ button:hover {
 
 /* ... existing styles ... */
 
+/* --- Average Rating Stars Display --- */
+
+/* This targets the container holding the stars for average rating */
 .stars {
-  color: gold; /* Default star color for empty stars */
-  display: inline-block; /* To keep stars together */
+  /* Using flexbox is the most reliable way to keep elements on a line */
+  display: inline-flex;
+  align-items: center; /* Vertically aligns the stars */
+  white-space: nowrap; /* Prevents stars from wrapping to the next line */
+  margin-left: 5px; /* Adds a small space after the numeric rating */
 }
 
+/* Base style for each individual star in the average rating display */
 .star {
-  font-size: 20px;
-  /* Adjust this if you want stars to be clickable, but not for display */
+  font-size: 20px; /* Adjust as needed */
+  color: #ccc; /* Default color for empty stars (light grey) */
+  line-height: 1; /* Helps with vertical alignment, removes extra space */
+  display: inline-block; /* Ensures consistent sizing and spacing */
 }
 
 .star.filled {
-  color: orange; /* Color for filled stars */
+  color: #ffc107; /* Gold color for filled stars */
 }
 
-/* For half-filled stars */
+/* Half-filled star using linear gradient for a smoother look */
 .star.half-filled {
   position: relative;
-  display: inline-block;
-  color: gold; /* Color for the "empty" part of the half star */
-  overflow: hidden;
-  width: 1em; /* Adjust based on your font-size */
-}
-
-.star.half-filled:before {
-  content: '\2605'; /* Unicode star character */
-  position: absolute;
-  left: 0;
-  width: 50%; /* Make half of the star orange */
-  overflow: hidden;
-  color: orange; /* Color for the "filled" part of the half star */
+  /* Uses a gradient to show half gold, half grey */
+  background: linear-gradient(to right, #ffc107 50%, #ccc 50%);
+  -webkit-background-clip: text; /* Clips background to text shape (for WebKit browsers) */
+  background-clip: text; /* Clips background to text shape (for other browsers) */
+  color: transparent; /* Makes the star character transparent so the background shows */
 }

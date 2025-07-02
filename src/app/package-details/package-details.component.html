@@ -1,4 +1,4 @@
-<!-- <!-- <div *ngIf="packageDetails" class="package-container">
+<!-- <div *ngIf="packageDetails" class="package-container">
   <div class="top-section">
     <div class="card image-card">
       <h2>{{ packageDetails.title }}</h2>
@@ -96,26 +96,25 @@
   </div>
 </div>
   -->
-
-  <!--
   <div *ngIf="packageDetails" class="package-container">
     <div class="top-section">
       <div class="card image-card">
         <h2>{{ packageDetails.title }}</h2>
         <div class="package-images-gallery">
+          
           <img
-            *ngFor="let imageUrl of packageDetails.imageUrls"
+            *ngIf="packageDetails.imageUrl"
             class="package-image"
-            [src]="'assets/' + imageUrl"
+            [src]="'assets/images/' + packageDetails.imageUrl"
             alt="Package Image"
           />
-  
-         <img
+   
+          <img
             *ngIf="!packageDetails.imageUrls || packageDetails.imageUrls.length === 0"
             class="package-image"
-            [src]="'assets/' + dynamicDefaultImage"
+            [src]="'assets/images' + dynamicDefaultImage"
             alt="Default Package Image"
-          />
+          /> 
         </div>
       </div>
   
@@ -194,127 +193,4 @@
         </p>
       </div>
     </div>
-  </div> -->
-
-
-  <!-- third code  -->
-  <div *ngIf="packageDetails" class="package-container">
-    <div class="top-section">
-      <div class="card image-card">
-        <h2>{{ packageDetails.title }}</h2>
-        <div class="package-images-gallery">
-          <img
-            *ngFor="let imageUrl of packageDetails.imageUrls"
-            class="package-image"
-            [src]="imageUrl"
-            alt="Package Image"
-          />
-          </div>
-      </div>
-  
-      <div class="card details-card">
-        <h2>{{ packageDetails.title }}</h2>
-        <p class="desc">{{ packageDetails.description }}</p>
-  
-        <div class="info-grid">
-          <div><strong>Destination:</strong> {{ packageDetails.destination }}</div>
-          <div><strong>Country:</strong> {{ packageDetails.country }}</div>
-          <div><strong>Trip Type:</strong> {{ packageDetails.tripType }}</div>
-          <div><strong>Duration:</strong> {{ packageDetails.duration }} days</div>
-          <div><strong>Price:</strong> ₹{{ packageDetails.price | number:'1.2-2' }}</div>
-          <div><strong>Max Capacity:</strong> {{ packageDetails.maxCapacity }}</div>
-          <div><strong>Start Date:</strong> {{ packageDetails.tripStartDate | date: 'MMM d, y' }}</div>
-          <div><strong>End Date:</strong> {{ packageDetails.tripEndDate | date: 'MMM d, y' }}</div>
-        </div>
-  
-        <div class="action-buttons">
-          <button class="btn book" (click)="goToBooking()">Book Now</button>
-          <button class="btn review" (click)="goToReview()">Give Review</button>
-          <button class="btn insurance" (click)="addInsurance()">Insurance</button>
-        </div>
-      </div>
-    </div>
-  
-    <div class="section-grid">
-      <div class="card" *ngIf="packageDetails.highlights?.length">
-        <h3>Highlights</h3>
-        <ul>
-          <li *ngFor="let h of packageDetails.highlights">🌟 {{ h }}</li>
-        </ul>
-      </div>
-      <div class="card" *ngIf="!packageDetails.highlights || packageDetails.highlights.length === 0">
-        <h3>Highlights</h3>
-        <p>No highlights available for this package.</p>
-      </div>
-  
-      <div class="card" *ngIf="packageDetails.flights?.length">
-        <h3>Flights</h3>
-        <ul>
-          <li *ngFor="let f of packageDetails.flights">
-            ✈️ {{ f.airline }} — {{ f.fromCity }} → {{ f.toCity }} ({{ f.departureTime }} - {{ f.arrivalTime }})
-          </li>
-        </ul>
-      </div>
-      <div class="card" *ngIf="!packageDetails.flights || packageDetails.flights.length === 0">
-        <h3>Flights</h3>
-        <p>No flight details available for this package.</p>
-      </div>
-  
-      <div class="card" *ngIf="packageDetails.hotels?.length">
-        <h3>Hotels</h3>
-        <ul>
-          <li *ngFor="let h of packageDetails.hotels">
-            🏨 {{ h.name }}, {{ h.city }} — {{ h.rating }}★ ({{ h.nights }} nights)
-            <span *ngIf="h.costPerNight">(${{ h.costPerNight | number:'1.2-2' }} / night)</span>
-          </li>
-        </ul>
-      </div>
-      <div class="card" *ngIf="!packageDetails.hotels || packageDetails.hotels.length === 0">
-        <h3>Hotels</h3>
-        <p>No hotel details available for this package.</p>
-      </div>
-  
-      <div class="card" *ngIf="packageDetails.sightseeing?.length">
-        <h3>Sightseeing</h3>
-        <ul>
-          <li *ngFor="let s of packageDetails.sightseeing">
-            📍 {{ s.location }} - {{ s.description }}
-          </li>
-        </ul>
-      </div>
-      <div class="card" *ngIf="!packageDetails.sightseeing || packageDetails.sightseeing.length === 0">
-        <h3>Sightseeing</h3>
-        <p>No sightseeing details available for this package.</p>
-      </div>
-  
-      <div class="card" *ngIf="packageDetails.itinerary?.length">
-        <h3>Itinerary</h3>
-        <ul>
-          <li *ngFor="let i of packageDetails.itinerary">
-            🗓️ Day {{ i.dayNumber }}: {{ i.activityTitle }} - {{ i.activityDescription }}
-          </li>
-        </ul>
-      </div>
-      <div class="card" *ngIf="!packageDetails.itinerary || packageDetails.itinerary.length === 0">
-        <h3>Itinerary</h3>
-        <p>No itinerary details available for this package.</p>
-      </div>
-  
-      <div class="card" *ngIf="packageDetails.offer">
-        <h3>Special Offer</h3>
-        <p>
-          🎁 <strong>{{ packageDetails.offer.couponCode }}</strong> —
-          {{ packageDetails.offer.description }} ({{ packageDetails.offer.discountPercentage }}% OFF)
-        </p>
-        <p *ngIf="!packageDetails.offer.active" class="offer-inactive">Offer Inactive</p>
-      </div>
-      <div class="card" *ngIf="!packageDetails.offer">
-        <h3>Special Offer</h3>
-        <p>No special offers available for this package.</p>
-      </div>
-    </div>
-  </div>
-  
-  <div *ngIf="!packageDetails" class="loading-message">
-    Loading package details...
   </div>
