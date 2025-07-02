@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit {
         this.totalUsers = res.totalUsers;
         this.totalAgents = res.agentCount;
         this.totalCustomers = res.customerCount;
-        // No change needed here for showTotal, it's updated on sidebar click
+        // it's updated on sidebar click
       },
       error: () => this.toastr.error('Failed to fetch user counts.')
     });
