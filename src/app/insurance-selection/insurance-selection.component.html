@@ -20,5 +20,8 @@
   <p class="message error" *ngIf="error">{{ error }}</p>
   <p class="message success" *ngIf="success">{{ success }}</p>
 
-  <button (click)="submit()">Submit</button>
+  <div class="button-row">
+    <button (click)="submit()" aria-label="Submit Insurance Selection">Submit</button>
+    <button class="back-button" (click)="goBack()" >← Back</button>
+  </div>
 </div>
