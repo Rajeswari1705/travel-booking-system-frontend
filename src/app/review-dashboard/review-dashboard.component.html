@@ -1,46 +1,155 @@
-  <div class="container">
-    <h2>Reviews for Package #{{packageId}}</h2>
-  
-    <div *ngIf="message" class="message">
-      <p>{{message}}</p>
-    </div>
-  
-    <div *ngIf="reviews.length > 0; else noReviews">
-      <div *ngFor="let r of reviews" class="review-card">
-        <strong>Review by User ID:</strong> {{r.userId}} <br>
-        <strong>Rating:</strong> {{r.rating}} ⭐<br>
-        <strong>Comment:</strong> {{r.comment}}<br>
-        <small>Posted on: {{r.timestamp | date:'medium'}}</small>
-        <br>
-  
-        <div *ngIf="r.agentResponse" class="agent-response-section">
-          <strong>Agent's Response (Agent ID: {{r.agentResponse.agentId}}):</strong> {{r.agentResponse.responseMessage}}<br>
-          <small>Responded on: {{r.agentResponse.responseTime | date:'medium'}}</small>
-        </div>
-      </div>
-    </div>
-  
-    <ng-template #noReviews>
-      <p>No reviews yet for this package.</p>
-    </ng-template>
-  
-    <hr>
-  
-    <div *ngIf="completedBooking && !alreadyReviewed">
-      <h3>Leave a Review</h3>
-      <div>
-        <span *ngFor="let star of [1,2,3,4,5]"
-              (click)="setRating(star)"
-              [class.active]="star <= rating "
-              class="star">
-          ★
-        </span>
-      </div>
-      <textarea [(ngModel)]="comment" rows="3" placeholder="Write your comment here..."
-                class="comment-textarea"></textarea>
-      <button (click)="submitReview()">Submit Review</button>
-    </div>
-    <button (click)=" goBackToPackage()" class="back-button">
-      ⬅ Back to Package Details
-    </button>
+<!-- <div class="review-dashboard-container">
+  <h2>Reviews for Package #{{ packageId }}</h2>
+
+  <div *ngIf="message" class="alert"
+       [ngClass]="{
+         'alert-danger': message.includes('error') || message.includes('Failed') || message.includes('only review after') || message.includes('Please log in'),
+         'alert-info': message.includes('already reviewed'),
+         'alert-success': message.includes('successfully')
+       }">
+    {{ message }}
   </div>
+
+  <div *ngIf="completedBooking && !alreadyReviewed && !editingReview && userId" class="review-form-section">
+    <h3>Leave a Review</h3>
+    <div class="rating-stars">
+      <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="star <= rating" (click)="setRating(star)">★</span>
+    </div>
+    <textarea [(ngModel)]="comment" rows="5" placeholder="Write your comment here (at least 10 characters)" class="comment-textarea"></textarea>
+    <button (click)="submitReview()" class="submit-button">Submit Review</button>
+  </div>
+
+  <div *ngIf="editingReview" class="review-form-section edit-review-form">
+    <h3>Edit Your Review (ID: {{ editingReview.reviewId }})</h3>
+    <div class="rating-stars">
+      <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="star <= rating" (click)="setEditRating(star)">★</span>
+    </div>
+    <textarea [(ngModel)]="comment" rows="5" placeholder="Edit your comment here (at least 10 characters)" class="comment-textarea"></textarea>
+    <div class="edit-buttons">
+      <button (click)="submitEditReview()" class="save-button">Save Changes</button>
+      <button (click)="cancelEdit()" class="cancel-button">Cancel</button>
+    </div>
+  </div>
+
+
+  <div *ngIf="reviews.length === 0 && !message && completedBooking && alreadyReviewed" class="no-reviews-message">
+    You have already reviewed this package.
+  </div>
+  <div *ngIf="reviews.length === 0 && !message && (!completedBooking || !userId || (!alreadyReviewed && completedBooking))" class="no-reviews-message">
+    No reviews yet for this package.
+  </div>
+
+  <div *ngFor="let review of reviews" class="review-item">
+    <div class="review-item-header">
+      <div class="review-user-info-and-date">
+        <strong>Review by User ID:</strong> {{ review.userId }}
+        <p class="posted-date">Posted on: {{ review.timestamp | date:'MMM d, y, h:mm:ss a' }}</p>
+      </div>
+
+      <div *ngIf="review.userId === userId && !editingReview" class="review-actions">
+          <button class="edit-button" (click)="startEditReview(review)">Edit</button>
+          <button class="delete-button" (click)="deleteReview(review.reviewId)">Delete</button>
+      </div>
+    </div>
+
+    <div class="review-rating-line">
+      <strong>Rating:</strong>
+      <span class="rating-stars-display">
+        <span *ngFor="let star of [1,2,3,4,5]" class="star-icon" [class.filled]="star <= review.rating">★</span>
+      </span>
+    </div>
+
+    <div class="review-comment-section">
+      <p>{{ review.comment }}</p>
+    </div>
+
+    <div *ngIf="review.agentResponse" class="agent-response-section">
+      <strong>Agent's Response (Agent ID: {{ review.agentResponse.agentId }}):</strong>
+      <p>{{ review.agentResponse.responseContent }}</p>
+      <p class="posted-date">Responded on: {{ review.agentResponse.timestamp | date:'MMM d, y, h:mm:ss a' }}</p>
+    </div>
+  </div>
+
+  <button (click)="goBackToPackage()" class="back-button">
+    ⬅ Back to Package Details
+  </button>
+</div> -->
+
+
+
+<div class="review-dashboard-container">
+  <h2>Reviews for Package #{{ packageId }}</h2>
+
+  <div *ngIf="message" class="alert"
+       [ngClass]="{
+         'alert-danger': message.includes('error') || message.includes('Failed') || message.includes('only review after') || message.includes('Please log in'),
+         'alert-info': message.includes('already reviewed'),
+         'alert-success': message.includes('successfully')
+       }">
+    {{ message }}
+  </div>
+
+  <div *ngIf="completedBooking && !alreadyReviewed && !editingReview && userId" class="review-form-section">
+    <h3>Leave a Review</h3>
+    <div class="rating-stars">
+      <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="star <= rating" (click)="setRating(star)">★</span>
+    </div>
+    <textarea [(ngModel)]="comment" rows="5" placeholder="Write your comment here (at least 10 characters)" class="comment-textarea"></textarea>
+    <button (click)="submitReview()" class="submit-button">Submit Review</button>
+  </div>
+
+  <div *ngIf="editingReview" class="review-form-section edit-review-form">
+    <h3>Edit Your Review (ID: {{ editingReview.reviewId }})</h3>
+    <div class="rating-stars">
+      <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="star <= rating" (click)="setEditRating(star)">★</span>
+    </div>
+    <textarea [(ngModel)]="comment" rows="5" placeholder="Edit your comment here (at least 10 characters)" class="comment-textarea"></textarea>
+    <div class="edit-buttons">
+      <button (click)="submitEditReview()" class="save-button">Save Changes</button>
+      <button (click)="cancelEdit()" class="cancel-button">Cancel</button>
+    </div>
+  </div>
+
+
+  <div *ngIf="reviews.length === 0 && !message && completedBooking && alreadyReviewed" class="no-reviews-message">
+    You have already reviewed this package.
+  </div>
+  <div *ngIf="reviews.length === 0 && !message && (!completedBooking || !userId || (!alreadyReviewed && completedBooking))" class="no-reviews-message">
+    No reviews yet for this package.
+  </div>
+
+  <div *ngFor="let review of reviews" class="review-item">
+    <div class="review-item-header">
+      <div class="review-user-info-and-date">
+        <strong>Review by User ID:</strong> {{ review.userId }}
+        <p class="posted-date">Posted on: {{ review.timestamp | date:'MMM d, y, h:mm:ss a' }}</p>
+      </div>
+
+      <div *ngIf="review.userId === userId && !editingReview" class="review-actions">
+          <button class="edit-button" (click)="startEditReview(review)">Edit</button>
+          <button class="delete-button" (click)="deleteReview(review.reviewId)">Delete</button>
+      </div>
+    </div>
+
+    <div class="review-rating-line">
+      <strong>Rating:</strong>
+      <span class="rating-stars-display">
+        <span *ngFor="let star of [1,2,3,4,5]" class="star-icon" [class.filled]="star <= review.rating">★</span>
+      </span>
+    </div>
+
+    <div class="review-comment-section">
+      <p>{{ review.comment }}</p>
+    </div>
+
+    <div *ngIf="review.agentResponse" class="agent-response-section">
+      <strong>Agent's Response (Agent: {{ review.agentResponse.agentId }}):</strong>
+      <p>{{ review.agentResponse.responseMessage }}</p>
+      <p class="posted-date">Responded on: {{ review.agentResponse.responseTime | date:'MMM d, y, h:mm:ss a' }}</p>
+    </div>
+  </div>
+
+  <button (click)="goBackToPackage()" class="back-button">
+    ⬅ Back to Package Details
+  </button>
+</div>

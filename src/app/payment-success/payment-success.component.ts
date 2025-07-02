@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'; // Import ActivatedRoute and ParamMap
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-// --- IMPORTANT CHANGE HERE ---
-// Import LottieModule for client-side usage of <ng-lottie>
-import { LottieComponent } from 'ngx-lottie';
-// If you are also doing Server-Side Rendering (SSR), you can keep LottieServerModule
-// import { LottieServerModule } from 'ngx-lottie/server';
-// --- END IMPORTANT CHANGE ---
-
 
 @Component({
   selector: 'app-payment-success',
@@ -18,27 +11,38 @@ import { LottieComponent } from 'ngx-lottie';
   imports: [
     CommonModule,
     RouterModule,
-    LottieComponent, // <--- ADD LottieModule HERE
-    // LottieServerModule // Keep this only if you need SSR support for Lottie
   ]
 })
 export class PaymentSuccessComponent implements OnInit {
-  userName!: string;
-  bookingId!: number;
-  packageTitle!: string;
-  tripStartDate!: string;
-  tripEndDate!: string;
+  // Initialize properties with default values (e.g., empty strings)
+  // This helps prevent "undefined" errors in the template if data isn't found.
+  userName: string = '';
+  bookingId: string = ''; // Keeping as string as it comes from URL
+  packageTitle: string = '';
+  tripStartDate: string = '';
+  tripEndDate: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute // Inject ActivatedRoute to read route parameters
+  ) {}
 
   ngOnInit(): void {
-    const state = this.router.getCurrentNavigation()?.extras.state;
-    if (state) {
-      this.userName = state['userName'];
-      this.bookingId = state['bookingId'];
-      this.packageTitle = state['packageTitle'];
-      this.tripStartDate = state['tripStartDate'];
-      this.tripEndDate = state['tripEndDate'];
-    }
+    // Subscribe to queryParamMap to get parameters from the URL
+    this.route.queryParamMap.subscribe((params: ParamMap) => {
+      this.userName = params.get('userName') || '';
+      this.bookingId = params.get('bookingId') || '';
+      this.packageTitle = params.get('packageTitle') || '';
+      this.tripStartDate = params.get('tripStartDate') || '';
+      this.tripEndDate = params.get('tripEndDate') || '';
+
+      // --- Important: Add a check for critical data ---
+      // If bookingId is essential and might be missing, consider redirecting
+      if (!this.bookingId) {
+        console.warn('Booking ID not found in URL. This might be a direct access or missing data.');
+        // Optionally, redirect the user to a more appropriate page, e.g., home or a transaction history.
+        // this.router.navigate(['/']); // Redirect to homepage
+      }
+    });
   }
 }

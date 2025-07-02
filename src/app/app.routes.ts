@@ -101,8 +101,8 @@ export const routes: Routes = [
   {
     path: 'my-bookings', // The URL path (e.g., yourdomain.com/my-bookings)
     loadComponent: () =>
-      import('./customer-mybookings/customer-mybookings.component').then(
-        m => m.CustomerMybookingsComponent // This loads the component lazily
+      import('./my-bookings/my-bookings.component').then(
+        m => m.MyBookingsComponent // This loads the component lazily
       ),
   },
 

@@ -1,30 +1,4 @@
-<!-- <div class="agent-container">
-    <h2>Reviews for Your Package #{{packageId}}</h2>
-   
-    <div *ngFor="let review of reviews" class="agent-review-card">
-      <strong>Rating:</strong> {{review.rating}} ⭐<br>
-      <strong>Comment:</strong> {{review.comment}}<br>
-      <small>{{review.timestamp}}</small>
-   
-      <div *ngIf="review.agentResponses?.length > 0" class="agent-response-block">
-        <div *ngFor="let response of review.agentResponses">
-          <strong>Your Response:</strong> {{response.responseMessage}}
-          <small>({{response.responseTime}})</small>
-        </div>
-      </div>
-   
-      <div class="agent-respond-box">
-        <input [(ngModel)]="newResponse[review.reviewId]" 
-               placeholder="Type your response...">
-        <button (click)="submitResponse(review.reviewId)">Respond</button>
-      </div>
-    </div>
-   
-    <p class="agent-message">{{message}}</p>
-  </div>
- 
-   -->
-   <app-dashboard-navbar></app-dashboard-navbar>
+   <!-- <app-dashboard-navbar></app-dashboard-navbar>
    <div class="reviews-container">
      <h2>Agent Responses for Package ID: {{ packageId }}</h2>
    
@@ -55,4 +29,57 @@
      <ng-template #noReviews>
        <p>No reviews found for this package yet.</p>
      </ng-template>
-   </div>
+   </div> -->
+   <app-dashboard-navbar></app-dashboard-navbar>
+<div class="reviews-container">
+  <h2>Agent Responses for Package ID: {{ packageId }}</h2>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+
+  <div *ngIf="reviews.length > 0; else noReviews">
+    <div *ngFor="let review of reviews" class="review-card">
+      <h3>Review by User ID: {{ review.userId }} (Rating: {{ review.rating }}/5)</h3>
+      <p>"{{ review.comment }}"</p>
+      <small>Posted on: {{ review.timestamp | date:'medium' }}</small>
+
+      <div *ngIf="review.agentResponse" class="agent-response-section">
+        <div *ngIf="!editingAgentResponse || editingAgentResponse.responseId !== review.agentResponse.responseId">
+          <div class="agent-response-header">
+            <p><strong>Your Response:</strong> {{ review.agentResponse.responseMessage }}</p>
+            <div class="agent-response-actions" *ngIf="review.agentResponse.agentId === agentId">
+              <button (click)="startEditResponse(review.agentResponse)" class="small-btn edit-btn">Edit</button>
+              <button (click)="deleteAgentResponse(review.agentResponse.responseId)" class="small-btn delete-btn">Delete</button>
+            </div>
+          </div>
+          <small>Responded on: {{ review.agentResponse.responseTime | date:'medium' }}</small>
+        </div>
+
+        <div *ngIf="editingAgentResponse && editingAgentResponse.responseId === review.agentResponse.responseId" class="edit-response-form">
+          <h4>Edit Your Response</h4>
+          <textarea
+            [(ngModel)]="editingAgentResponse.responseMessage"
+            placeholder="Edit your response..."
+            rows="3"
+          ></textarea>
+          <div class="form-actions">
+            <button (click)="submitEditResponse()" class="small-btn update-btn">Update</button>
+            <button (click)="cancelEditResponse()" class="small-btn cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!review.agentResponse" class="response-input">
+        <textarea
+          [(ngModel)]="newResponse[review.reviewId]"
+          placeholder="Type your response to this review..."
+          rows="3"
+        ></textarea>
+        <button (click)="submitResponse(review.reviewId)">Respond</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p>No reviews found for this package yet.</p>
+  </ng-template>
+</div>
