@@ -101,19 +101,20 @@
       <div class="card image-card">
         <h2>{{ packageDetails.title }}</h2>
         <div class="package-images-gallery">
+          
           <img
-            *ngFor="let imageUrl of packageDetails.imageUrls"
+            *ngIf="packageDetails.imageUrl"
             class="package-image"
-            [src]="'assets/' + imageUrl"
+            [src]="'assets/images/' + packageDetails.imageUrl"
             alt="Package Image"
           />
-  
-          <!-- <img
+   
+          <img
             *ngIf="!packageDetails.imageUrls || packageDetails.imageUrls.length === 0"
             class="package-image"
-            [src]="'assets/' + dynamicDefaultImage"
+            [src]="'assets/images' + dynamicDefaultImage"
             alt="Default Package Image"
-          /> -->
+          /> 
         </div>
       </div>
   

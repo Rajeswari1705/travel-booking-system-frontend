@@ -76,6 +76,7 @@
 //   }
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TravelPackageService } from '../services/package.service';
 // Assuming TravelPackage is defined in '../models/travel-package.ts'.
 // If you have a separate file for this, ensure it's up-to-date with the properties below.
@@ -138,7 +139,7 @@ export interface TravelPackage {
 @Component({
   selector: 'app-package-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './package-details.component.html',
   styleUrl: './package-details.component.css'
 })
@@ -149,7 +150,8 @@ export class PackageDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private packageService: TravelPackageService,
+    private http: HttpClient,
+    // private packageService: TravelPackageService,
     private reviewService: ReviewService,
     private insuranceService: InsuranceService,
     private router: Router
@@ -160,8 +162,11 @@ export class PackageDetailsComponent implements OnInit {
     if (idParam) {
       this.packageId = Number(idParam);
       console.log('Opened Package ID:', this.packageId);
+      
+      //direct calling 
+      const url = `http://localhost:8080/api/packages/${this.packageId}`;
 
-      this.packageService.getPackageById(this.packageId).subscribe({
+      this.http.get<any>(url).subscribe({
         next: (response: any) => {
           console.log('Fetched package details:', response);
           // Assign fetched data, handling potential 'data' wrapper
