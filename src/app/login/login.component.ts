@@ -3,7 +3,7 @@ interface LoginResponse {
   role: string;
   id: number;
 }
-
+ 
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -38,21 +38,12 @@ this.http.post<LoginResponse>('http://localhost:8080/api/auth/login', this.crede
           const role = res.role;
           const token = res.token;
           const id = res.id;
-
+ 
  
           // Save token to localStorage
-          // localStorage.setItem('token', token);
-          // localStorage.setItem('role', role);
-          // localStorage.setItem('userId', id.toString());
-
-          localStorage.setItem(
-            'user',
-            JSON.stringify({
-              userId: id,
-              role: role,
-              token: token
-            })
-          );
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
+          localStorage.setItem('userId', id.toString());
  
           // Redirect based on role
           if (role === 'ADMIN') {
@@ -68,10 +59,11 @@ this.http.post<LoginResponse>('http://localhost:8080/api/auth/login', this.crede
         }
       });
   }
-
+ 
   navigateToForgotPassword(event: Event) {
     event.preventDefault();
     this.router.navigate(['/forgot-password']);
   }
-
+ 
 }
+ 
