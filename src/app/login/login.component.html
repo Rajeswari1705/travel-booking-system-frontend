@@ -1,9 +1,9 @@
 <div class="login-container">
-    <h2>Login</h2>
-   
-    <form (ngSubmit)="login()">
-      <label>Email:</label>
-      <input
+  <h2>Login</h2>
+  
+  <form (ngSubmit)="login()" #loginForm="ngForm"> 
+    <label>Email:</label>
+    <input
       type="email"
       [(ngModel)]="credentials.email"
       name="email"
@@ -14,17 +14,22 @@
     <div *ngIf="email.invalid && email.touched" style="color: red;">
       Please enter a valid email address.
     </div>
-   
-      <label>Password:</label>
-      <input type="password" [(ngModel)]="credentials.password" name="password" required />
-   
-      <button type="submit">Login</button>
+  
+    <label>Password:</label>
+    <input 
+      type="password" 
+      [(ngModel)]="credentials.password" 
+      name="password"  required 
+      #password="ngModel" 
+    />
+    <div *ngIf="password.invalid && password.touched && password.errors?.['required']" style="color: red;">
+      Password is required.
+    </div>
+  
+    <button type="submit" [disabled]="loginForm.invalid">Login</button> 
+  </form>
 
-    </form>
-
-   <!-- Outside the <form> -->
-<div class="forgot-password-wrapper">
-  <a [routerLink]="['/forgot-password']" class="forgot-password-link">Forgot Password?</a>
-</div>
-
+  <div class="forgot-password-wrapper">
+    <a [routerLink]="['/forgot-password']" class="forgot-password-link">Forgot Password?</a>
   </div>
+</div>
