@@ -56,18 +56,20 @@ export class ReviewDashboardComponent implements OnInit {
           this.completedBooking = res;
           console.log(`Booking completed status for userId ${this.userId}, packageId ${this.packageId}: ${this.completedBooking}`);
           // Set message if not completed, otherwise clear it to allow form to show
-          if (!this.completedBooking) {
+          if (this.userId === 0) { // User not logged in (already caught in ngOnInit, but good for clarity)
+            this.message = "Please log in to view and leave reviews.";
+        } else if (!this.completedBooking) { // Trip not completed yet (status from backend)
             this.message = "You can only review this package after completing the trip.";
-          } else {
-            // Clear message if booking is completed, unless alreadyReviewed message needs to be shown
-            if (!this.alreadyReviewed) { // Only clear if not already reviewed
-              this.message = "";
-            }
-          }
+        } else if (this.completedBooking && this.alreadyReviewed) { // Trip completed AND user has reviewed
+            this.message = "You have already reviewed this package. You can edit your existing review below.";
+        } else if (this.completedBooking && !this.alreadyReviewed) { // Trip completed and user has NOT reviewed
+            // If we're here, the user IS eligible to write a review. Clear previous messages.
+            this.message = ""; // Clear message so the review form can appear
+        }
         },
         error: (err) => {
           console.error("Error checking completed booking status:", err);
-          this.message = "Could not validate booking status. Try again later.";
+          //this.message = "Could not validate booking status. Try again later.";
           this.completedBooking = false; // Assume not completed on error
         }
       });
@@ -127,7 +129,7 @@ export class ReviewDashboardComponent implements OnInit {
         },
         error: (err) => {
           console.error("Error in loadReviews subscription:", err);
-          this.message = "Failed to load reviews or agent responses.";
+         // this.message = "Failed to load reviews or agent responses.";
           this.alreadyReviewed = false; // Assume no reviews if loading fails
         }
       });
