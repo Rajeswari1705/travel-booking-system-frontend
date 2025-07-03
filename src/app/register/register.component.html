@@ -10,7 +10,17 @@
       
       <!-- Email -->
       <label>Email:</label>
-  <input type="email" name="email" required [(ngModel)]="user.email" />
+      <input
+      type="email"
+      name="email"
+      required
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+      [(ngModel)]="user.email"
+      #email="ngModel"
+    />
+    <div *ngIf="email.invalid && email.touched" style="color: red;">
+      Please enter a valid email address.
+    </div>
    
       <!-- Phone Number with Regex Validation -->
       <label>Phone Number:</label>
