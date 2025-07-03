@@ -6,35 +6,54 @@
       <!-- Basic Info -->
         
       <label>Title: </label>
-      <input type="text" placeholder="Title" [(ngModel)]="newPackage.title" name="title" required><br>
+      <input type="text" placeholder="Title" [(ngModel)]="newPackage.title" name="title" required #title="ngModel"><br>
+      <div *ngIf="title.invalid && title.touched" style="color:red">Title is required</div><br>
+
       <label>Description: </label><br>
-      <textarea placeholder="Description" [(ngModel)]="newPackage.description" name="description" required></textarea><br>
+      <textarea placeholder="Description" [(ngModel)]="newPackage.description" name="description" required #desc="ngModel"></textarea><br>
+      <div *ngIf="desc.invalid && desc.touched" style="color:red">Description is required</div><br>
+
       <label>Duration: </label>
-      <input type="number" placeholder="Duration (days)" [(ngModel)]="newPackage.duration" name="duration"><br>
+      <input type="number" placeholder="Duration (days)" [(ngModel)]="newPackage.duration" name="duration" required min="1" #duration="ngModel"><br>
+      <div *ngIf="duration.invalid && duration.touched" style="color:red">Duration must be atleast 1 day</div><br>
+
       <label>Price: </label>
-      <input type="number" placeholder="Price" [(ngModel)]="newPackage.price" name="price"><br>
+      <input type="number" placeholder="Price" [(ngModel)]="newPackage.price" name="price" required min="1" #price="ngModel"><br>
+      <div *ngIf="price.invalid && price.touched" style="color:red">Price is required</div><br>
+
       <label>Max Capacity: </label>
-      <input type="number" placeholder="Max Capacity" [(ngModel)]="newPackage.maxCapacity" name="maxCapacity"><br>
+      <input type="number" placeholder="Max Capacity" [(ngModel)]="newPackage.maxCapacity" name="maxCapacity" required min="1" #max="ngModel"><br>
+      <div *ngIf="max.invalid && max.touched" style="color:red">Max capacity is required</div><br>
+
       <label>Country: </label>
-      <input type="text" placeholder="Country" [(ngModel)]="newPackage.country" name="country"><br>
+      <input type="text" placeholder="Country" [(ngModel)]="newPackage.country" name="country" required  #country="ngModel"><br>
+      <div *ngIf="country.invalid && country.touched" style="color:red">Country is required</div><br>
+
       <label>Destination: </label>
-      <input type="text" placeholder="Destination" [(ngModel)]="newPackage.destination" name="destination"><br>
+      <input type="text" placeholder="Destination" [(ngModel)]="newPackage.destination" name="destination" required  #dest="ngModel"><br>
+      <div *ngIf="dest.invalid && dest.touched" style="color:red">Destination is required</div><br>
+
       <label>Trip Type: </label>
       
-       <select [(ngModel)]="newPackage.tripType" name="tripType" required>
+       <select [(ngModel)]="newPackage.tripType" name="tripType" required #tripType="ngModel">
         <option value="">-- Select Trip Type --</option>
         <option value="International Trip">International Trip</option>
         <option value="Domestic Trip">Domestic Trip</option>
        </select><br>
+       <div *ngIf="tripType.invalid && tripType.touched" style="color:red"></div><br>
+
       <label>Trip Start Date:</label>
-      <input type="date" [(ngModel)]="newPackage.tripStartDate" name="tripStartDate"><br>
+      <input type="date" [(ngModel)]="newPackage.tripStartDate" name="tripStartDate" required #tripStartDate="ngModel"><br>
+      <div *ngIf="tripStartDate.invalid && tripStartDate.touched" style="color:red"></div><br>
+
       <label>Trip End Date:</label>
-      <input type="date" [(ngModel)]="newPackage.tripEndDate" name="tripEndDate"><br>
+      <input type="date" [(ngModel)]="newPackage.tripEndDate" name="tripEndDate" required #tripEndDate="ngModel"><br>
+      <div *ngIf="tripEndDate.invalid && tripEndDate.touched" style="color:red"></div><br>
 
       <!--image url--> 
       <label>Package Image URL:</label>
-      <input type="text" placeholder="Enter image link" [(ngModel)]="newPackage.imageUrl" name="imageUrl"><br>
-
+      <input type="text" placeholder="Enter image link" [(ngModel)]="newPackage.imageUrl" name="imageUrl" required #imageUrl="ngModel"><br>
+      <div *ngIf="imageUrl.invalid && imageUrl.touched" style="color:red"></div><br>
 
       <label for="highlightInput">Highlights:</label>
       <div style="display: flex; gap: 10px;">
@@ -58,6 +77,7 @@
 
       <!--Offer Section-->
       <h3>Offer Details</h3>
+      
       <label>Offer Description: </label>
       <textarea placeholder="Offer Description" [(ngModel)]="newPackage.offer.description" name="offerDesc"></textarea><br>
       <label>Coupon Code: </label>
@@ -134,7 +154,7 @@
       <br />
 
       <div class="action-buttons">
-        <button type="submit">Submit Package</button>
+        <button type="submit" [disabled]="pkgForm.invalid">Submit Package</button>
         <button type="button" (click)="cancelForm()">Cancel</button>
       </div>
 
