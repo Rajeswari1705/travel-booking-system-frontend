@@ -2,24 +2,27 @@
   display: block;
   height: 100vh;
   overflow: hidden;
+  font-family: 'Open Sans', sans-serif; /* Modern, readable font */
 }
 
 /* Push content below navbar */
 .landing-container {
-  padding-top: 100px;
+  padding-top: 80px; /* Slightly adjust padding for a cleaner look */
   text-align: center;
-  height: calc(100vh - 100px); /* prevent scroll */
+  height: calc(100vh - 80px); /* Adjust height based on new padding-top */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #f0f8ff; /* Fallback color */
+  align-items: center; /* Center items horizontally */
+  background-color: #f0f8ff; /* Fallback color - consider a very light grey or off-white */
 
   /* Translucent Background Image Styles */
-  background-image: url('/assets/images/my-background-image.jpg'); /* <-- USE THIS PATH */
+  background-image: url('/assets/images/landingpage.png'); /* <-- USE THIS PATH */
   background-size: cover;
   background-position: center;
-  position: relative; /* Needed for the pseudo-element overlay */
-  z-index: 1; /* Ensures content is above the overlay */
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* Ensure no overflow issues with effects */
 }
 
 .landing-container::before {
@@ -29,36 +32,136 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0); /* White overlay with 70% opacity */
-  z-index: -1; /* Puts the overlay behind the content */
+  /* Darker overlay for better text readability */
+  background-color: rgba(0, 0, 0, 0); /* Darker overlay with 40% opacity */
+  z-index: -1;
+  /* Optional: Subtle gradient overlay for more depth */
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%); */
+}
+
+.CT-travels {
+  text-align: center;
 }
 
 h1 {
-  color: #ffff;
-  font-size: 36px;
+  color: #007bff; /* White text for better contrast against dark overlay */
+  background-color: #ffffff;
+  font-size: 3.5em; /* Larger, more impactful heading */
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0); /* Subtle text shadow for pop */
+  letter-spacing: 1px; /* Slightly increase letter spacing */
+}
+
+h2 {
+  font-family: 'Bebas Neue', sans-serif; /* This is correct for the desired look */
+  font-size: 6vw; /* Adjusted to be responsive and fit the long phrase*/
+  font-weight: normal; /* Bebas Neue is naturally bold */
+  color: transparent; /* Makes the fill transparent */
+  -webkit-text-stroke: 1.5px #f19800d3; /* Corrected: Blue color, increased thickness for visibility */
+  text-stroke: 2px #00BFFF; /* Corrected: Un-commented and applied blue color and thickness */
+  text-transform: uppercase;
+  white-space: nowrap; /* Added to keep the whole phrase on one line */
+  margin: 0; /* Remove default margin for h2 if present */
+  line-height: 1.2; /* Adjust line height for better vertical centering, if needed */
 }
 
 p {
-  color: #ffffff;
-  font-size: 18px;
+  color: #ffffff; /* Light grey for paragraph for good contrast */
+  font-size: 1.3em; /* Slightly larger paragraph text */
+  max-width: 600px; /* Limit paragraph width for readability */
+  margin-bottom: 40px;
+  /* align-content: center; REMOVED - This CSS property is for grid/flex alignment, not text. Use text-align if needed for inline text. */
+  line-height: 1.6; /* Improve line spacing for readability */
 }
 
 .landing-buttons {
-  margin-top: 30px;
+  margin-top: 20px; /* Adjust margin as needed */
+  display: flex; /* Use flexbox for button alignment */
+  gap: 20px; /* Space between buttons */
 }
 
-button {
-  background-color: #007bff;
+.landing-buttons button {
+  background-color: #007bff; /* Primary blue */
   color: white;
   border: none;
-  margin: 0 10px;
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 15px 30px; /* Larger padding for a more substantial button */
+  font-size: 1.1em; /* Slightly larger font size */
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  border-radius: 50px; /* Pill-shaped buttons for a modern look */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for hover effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-button:hover {
-  background-color: #0056b3;
+.landing-buttons button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-3px); /* Lift button on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+
+.serif-style {
+  font-family: 'Playfair Display', serif;
+}
+
+.sans-serif-style {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.script-style {
+  font-family: 'Pacifico', cursive; /* Use cursive as a generic fallback for script fonts */
+}
+
+.display-style {
+  font-family: 'Luckiest Guy', cursive; /* Or 'sans-serif' depending on the specific font */
+}
+
+.monospace-style {
+  font-family: 'Space Mono', monospace;
+}
+
+.high-cruiser {
+  font-family: 'High Cruiser', sans-serif;
+}
+
+/* Subtle animation to the background image for a more dynamic feel */
+@keyframes pan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.landing-container {
+  animation: pan 20s linear infinite alternate;
+} 
+
+/* Media queries for responsiveness of the h2 text */
+@media (max-width: 1200px) {
+  h2 {
+    font-size: 6vw;
+    -webkit-text-stroke: 1.8px #00BFFF;
+    text-stroke: 1.8px #00BFFF;
+  }
+}
+
+@media (max-width: 992px) {
+  h2 {
+    font-size: 7vw;
+    -webkit-text-stroke: 1.5px #00BFFF;
+    text-stroke: 1.5px #00BFFF;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 8vw;
+    -webkit-text-stroke: 1.2px #00BFFF;
+    text-stroke: 1.2px #00BFFF;
+  }
+}
+
+@media (max-width: 576px) {
+  h2 {
+    font-size: 9vw;
+    -webkit-text-stroke: 1px #00BFFF;
+    text-stroke: 1px #00BFFF;
+  }
 }
