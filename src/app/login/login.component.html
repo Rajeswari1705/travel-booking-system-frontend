@@ -3,7 +3,17 @@
    
     <form (ngSubmit)="login()">
       <label>Email:</label>
-  <input type="email" [(ngModel)]="credentials.email" name="email" required />
+      <input
+      type="email"
+      [(ngModel)]="credentials.email"
+      name="email"
+      required
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+      #email="ngModel"
+    />
+    <div *ngIf="email.invalid && email.touched" style="color: red;">
+      Please enter a valid email address.
+    </div>
    
       <label>Password:</label>
       <input type="password" [(ngModel)]="credentials.password" name="password" required />
